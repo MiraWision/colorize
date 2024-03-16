@@ -1,0 +1,23 @@
+{
+  "name": "colorize",
+  "version": "1.0.0",
+  "description": "A collection of TypeScript tools for color manipulation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "npm run build",
+    "start": "npm run build && node dist/index.js"
+  },
+  "keywords": ["color", "typescript"],
+  "author": "Yelysei Lukin <yelysei277@gmail.com>",
+  "contributors": [
+    "Dima Glovatskiy <dima.glovatskiy.gg@gmail.com>"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+  }
+}
