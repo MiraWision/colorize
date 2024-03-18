@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { RGB, HSL, HSV, CMYK, colorNameMap } from '../types';
+import { RGB, HSL, HSV, CMYK, colorNameMap } from '../types/internal';
 import ColorValidator from './color-validation';
 
 class ColorConversion {

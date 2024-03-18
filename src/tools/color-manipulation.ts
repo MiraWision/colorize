@@ -1,4 +1,4 @@
-import { RGB, HSL, RGBA, HSLA } from '../types';
+import { RGB, HSL, RGBA, HSLA } from '../types/internal';
 import ColorConversion from './color-conversion';
 
 class ColorManipulation {

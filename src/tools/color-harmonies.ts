@@ -1,4 +1,4 @@
-import { HSL, HarmonyType } from "../types";
+import { HSL, HarmonyType } from "../types/internal";
 
 class ColorHarmonies {
   private static adjustHue(hue: number): number {
