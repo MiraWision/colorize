@@ -1,60 +1,4 @@
-interface RGB {
-  r: number;
-  g: number;
-  b: number;
-}
-
-interface HSL {
-  h: number;
-  s: number;
-  l: number;
-}
-
-interface HSV {
-  h: number;
-  s: number;
-  v: number;
-}
-
-interface CMYK {
-  c: number;
-  m: number;
-  y: number;
-  k: number;
-}
-
-interface RGBA extends RGB {
-  a: number;
-}
-
-interface HSLA extends HSL {
-  a: number;
-}
-
-enum HarmonyType {
-  Complementary = 'complementary',
-  Analogous = 'analogous',
-  Triadic = 'triadic',
-  Tetradic = 'tetradic',
-  Monochromatic = 'monochromatic',
-  SplitComplementary = 'splitComplementary',
-  NeutralColors = 'neutralColors',
-  Random = 'random',
-}
-
-interface ColorFormats {
-  name: string;
-  rgb: string;
-  hex: string;
-  hsl: string;
-  cmyk: string;
-}
-
-interface ColorMap {
-  [key: string]: string;
-}
-
-const ColorNamesMap: ColorMap = {
+const ColorNamesMap = {
   '#000000': 'Black',
   '#FFFFFF': 'White',
   '#FF0000': 'Red',
@@ -125,6 +69,3 @@ const ColorNamesMap: ColorMap = {
   '#7FFF00': 'Chartreuse',
   '#00FF7F': 'Spring Green',
 };
-
-
-export { RGB, HSL, RGBA, HSLA, HSV, CMYK, ColorNamesMap as colorNameMap, ColorFormats, HarmonyType };

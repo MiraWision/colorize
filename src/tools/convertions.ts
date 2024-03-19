@@ -1,4 +1,4 @@
-import { getColorFormat } from './validate';
+import { getColorFormat } from './validations';
 
 import { BaseColorFormat, ColorFormat } from '../types';
 

@@ -1,4 +1,19 @@
-import { HSL, HarmonyType } from "../types/internal";
+interface HSL {
+  h: number;
+  s: number;
+  l: number;
+}
+
+enum HarmonyType {
+  Complementary = 'complementary',
+  Analogous = 'analogous',
+  Triadic = 'triadic',
+  Tetradic = 'tetradic',
+  Monochromatic = 'monochromatic',
+  SplitComplementary = 'splitComplementary',
+  NeutralColors = 'neutralColors',
+  Random = 'random',
+}
 
 class ColorHarmonies {
   private static adjustHue(hue: number): number {
