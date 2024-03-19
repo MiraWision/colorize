@@ -9,6 +9,9 @@ enum ColorFormat {
   HSV = 'hsv',
 }
 
+const BaseColorFormat = ColorFormat.RGBA;
+
 export {
   ColorFormat,
+  BaseColorFormat,
 };

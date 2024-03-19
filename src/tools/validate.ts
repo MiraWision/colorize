@@ -152,7 +152,7 @@ const isValidColor = (color: string): boolean => {
   return validators.some((validator) => validator(color));
 };
 
-const getColorType = (color: string): ColorFormat | null => {
+const getColorFormat = (color: string): ColorFormat | null => {
   const validators: { [key: string]: (color: string) => boolean } = {
     [ColorFormat.HEX]: isValidHEXColor,
     [ColorFormat.HEXA]: isValidHEXAColor,
@@ -174,7 +174,7 @@ const getColorType = (color: string): ColorFormat | null => {
 }
 
 export {
-  getColorType,
+  getColorFormat,
   isValidColor,
   isValidHEXColor,
   isValidHEXAColor,
