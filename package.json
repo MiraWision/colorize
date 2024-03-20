@@ -1,7 +1,7 @@
 {
-  "name": "colorize",
+  "name": "@mirawision/colorize",
   "version": "1.0.0",
-  "description": "A collection of TypeScript tools for color manipulation",
+  "description": "A comprehensive color manipulation library for TypeScript, providing functionalities for color conversion, validation, gradient generation, and various color adjustments.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,7 +9,31 @@
     "prepublish": "npm run build",
     "start": "npm run build && node dist/index.js"
   },
-  "keywords": ["color", "typescript"],
+  "keywords": [
+    "color",
+    "color manipulation",
+    "color conversion",
+    "color validation",
+    "gradient generator",
+    "color blender",
+    "brightness adjustment",
+    "saturation adjustment",
+    "invert color",
+    "sepia",
+    "opacity",
+    "color format",
+    "RGB",
+    "RGBA",
+    "HSL",
+    "HSLA",
+    "HEX",
+    "HEXA",
+    "HSV",
+    "CMYK",
+    "colorize",
+    "color utils",
+    "typescript"
+  ],
   "author": "Yelysei Lukin <yelysei277@gmail.com>",
   "contributors": [
     "Dima Glovatskiy <dima.glovatskiy.gg@gmail.com>"
