@@ -2,6 +2,25 @@ import { getColorFormat } from './validations';
 
 import { BaseColorFormat, ColorFormat } from '../types';
 
+/**
+ * Converts a color from its current format to a specified target format.
+ * The conversion process involves determining the color's current format,
+ * converting it to an RGBA (Red, Green, Blue, Alpha) format as an intermediate step,
+ * and then converting from RGBA to the desired target format.
+ * 
+ * @param {string} color - The color to be converted, represented as a string.
+ *   This color should be in a recognized color format (e.g., HEX, RGB, HSL).
+ * @param {ColorFormat} toFormat - The target format to which the color should be converted.
+ *   This should be one of the predefined formats in the ColorFormat enumeration.
+ * 
+ * @returns {string} - The converted color in the target format.
+ * 
+ * @throws {Error} - Throws an error if the input color is in an invalid or unrecognized format.
+ * 
+ * Usage Example:
+ *   let convertedColor = convertColor("#FF5733", ColorFormat.RGB);
+ *    //convertedColor would be something like "rgb(255, 87, 51)" if converting from HEX to RGB.
+ */
 const convertColor = (color: string, toFormat: ColorFormat): string => {
   const fromFormat = getColorFormat(color);
 
