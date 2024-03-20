@@ -194,6 +194,7 @@ const invertColor = (color: string): string => {
 const applySepia = (color: string): string => {
   const colorFormat = getColorFormat(color);
 
+  console.error('COLOR', color, colorFormat);
   if (!colorFormat) {
     throw new Error('Invalid color format');
   }
