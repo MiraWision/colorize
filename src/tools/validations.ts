@@ -2,23 +2,20 @@ import { ColorFormat } from '../types';
 
 /**
  * Determines whether a given string is a valid HEX color.
- * 
  * A valid HEX color must start with a '#' followed by exactly
- * three or six hexadecimal characters (0-9, a-f, or A-F). This function
- * uses a regular expression to check the format of the input string.
+ * three or six hexadecimal characters (0-9, a-f, or A-F).
  * 
- * Examples of valid HEX colors:
- * - "#fff"
- * - "#ffffff"
- * - "#123abc"
+ * @param {string} color - The color string to be validated.
  * 
- * Examples of invalid HEX colors:
- * - "#ggg"
- * - "123456"
- * - "#12345" (invalid length)
+ * @returns {boolean} - True if the string is a valid HEX color, false otherwise.
  * 
- * @param {string} color The color string to validate.
- * @returns {boolean} True if the input is a valid HEX color, false otherwise.
+ * Example usage:
+ * isValidHEXAColor('#FFF'); // returns true
+ * isValidHEXAColor('#FFFFFF'); // returns true
+ * isValidHEXAColor('#123ABC'); // returns true
+ * isValidHEXAColor('#GGG'); // returns false, contains incorrect characters
+ * isValidHEXAColor('123456'); // returns false, missing starting #
+ * isValidHEXAColor('#12345'); // returns false, invalid length
  */
 const isValidHEXColor = (color: string): boolean => {
   const regex = /^#(?:[0-9a-fA-F]{3}){1,2}$/;
@@ -34,16 +31,16 @@ const isValidHEXColor = (color: string): boolean => {
  * (or six) characters represent the RGB color, and the last character (or two)
  * represents the alpha (transparency) value.
  * 
- * @param {string} color - The string to be tested for validity as a HEXA color code.
+ * @param {string} color - The color string to be validated.
  * 
  * @returns {boolean} - True if the string is a valid HEXA color code, false otherwise.
  * 
  * Example usage:
- * isValidHEXAColor('#FA3E'); // Returns true
- * isValidHEXAColor('#FA3EF8'); // Returns true
- * isValidHEXAColor('#FA3EF812'); // Returns true
- * isValidHEXAColor('#FA3E12'); // Returns false, as it lacks the alpha value for a 6-character code
- * isValidHEXAColor('FA3EF8'); // Returns false, missing starting #
+ * isValidHEXAColor('#FA3E'); // returns true
+ * isValidHEXAColor('#FA3EF8'); // returns true
+ * isValidHEXAColor('#FA3EF812'); // returns true
+ * isValidHEXAColor('#FA3E12'); // returns false, as it lacks the alpha value for a 6-character code
+ * isValidHEXAColor('FA3EF8'); // returns false, missing starting #
  */
 const isValidHEXAColor = (color: string): boolean => {
   const regex = /^#(?:[0-9a-fA-F]{4}){1,2}$/;
@@ -63,15 +60,18 @@ const isValidHEXAColor = (color: string): boolean => {
  *                      are within the specified range; otherwise, false.
  * 
  * Example usage:
- * isValidRGBColor('rgb(255, 99, 71)'); // Returns true
- * isValidRGBColor('rgb(256, -1, 300)'); // Returns false, components are out of bounds
- * isValidRGBColor('rgb(25, 99, 71)'); // Returns true
- * isValidRGBColor('rgb(255,255,255)'); // Returns true
+ * isValidRGBColor('rgb(255, 99, 71)'); // returns true
+ * isValidRGBColor('rgb(256, -1, 300)'); // returns false, components are out of bounds
+ * isValidRGBColor('rgb(25, 99, 71)'); // returns true
+ * isValidRGBColor('rgb(255,255,255)'); // returns true
  */
 const isValidRGBColor = (color: string): boolean => {
   const regex = /^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/;
-  if (!regex.test(color)) return false;
 
+  if (!regex.test(color)) {
+    return false;
+  }
+  
   const match = color.match(regex)?.map(Number);
 
   if (!match) {
@@ -89,18 +89,17 @@ const isValidRGBColor = (color: string): boolean => {
  * representing the red, green, and blue components of the color, respectively,
  * each ranging from 0 to 255. The 'a' component is a floating-point number
  * representing the opacity, ranging from 0.0 (completely transparent) to 1.0 (fully opaque),
- * inclusive. The function uses a regular expression to validate the format and the numerical
- * range of the color components.
+ * inclusive.
  * 
- * @param {string} color - The RGBA color string to be validated.
+ * @param {string} color - The color string to be validated.
  * 
  * @returns {boolean} - True if the color string is a valid RGBA format and all components
  *                      (red, green, blue, alpha) are within their respective ranges; false otherwise.
  * 
  * Example usage:
- * isValidRGBAColor('rgba(255, 99, 71, 0.5)'); // Returns true
- * isValidRGBAColor('rgba(255, 99, 71, 1.1)'); // Returns false, alpha value is out of bounds
- * isValidRGBAColor('rgba(255, 99, 71, -0.1)'); // Returns false, negative alpha value
+ * isValidRGBAColor('rgba(255, 99, 71, 0.5)'); // returns true
+ * isValidRGBAColor('rgba(255, 99, 71, 1.1)'); // returns false, alpha value is out of bounds
+ * isValidRGBAColor('rgba(255, 99, 71, -0.1)'); // returns false, negative alpha value
  */
 const isValidRGBAColor = (color: string): boolean => {
   const regex = /^rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(0|1|0?\.\d+)\)$/;
@@ -124,19 +123,17 @@ const isValidRGBAColor = (color: string): boolean => {
  * Validates if a given string accurately represents a color in the HSL format.
  * HSL stands for Hue, Saturation, and Lightness, and colors in this format are
  * specified as 'hsl(h, s%, l%)', where h is the hue (0 to 360 degrees), s is the saturation
- * (0% to 100%), and l is the lightness (0% to 100%). This function uses a regular expression
- * to check the string format and then validates that the numerical values are within
- * their appropriate ranges.
+ * (0% to 100%), and l is the lightness (0% to 100%).
  * 
- * @param {string} color - The HSL color string to be validated.
+ * @param {string} color - The color string to be validated.
  * 
  * @returns {boolean} - True if the color string is a valid HSL format and all components
  *                      (hue, saturation, lightness) are within their respective ranges; false otherwise.
  * 
  * Example usage:
- * isValidHSLColor('hsl(120, 50%, 50%)'); // Returns true
- * isValidHSLColor('hsl(370, 50%, 50%)'); // Returns false, hue is out of bounds
- * isValidHSLColor('hsl(120, 101%, 50%)'); // Returns false, saturation is out of bounds
+ * isValidHSLColor('hsl(120, 50%, 50%)'); // returns true
+ * isValidHSLColor('hsl(370, 50%, 50%)'); // returns false, hue is out of bounds
+ * isValidHSLColor('hsl(120, 101%, 50%)'); // returns false, saturation is out of bounds
  */
 const isValidHSLColor = (color: string): boolean => {
   const regex = /^hsl\((\d{1,3}),\s*(\d{1,3})%,\s*(\d{1,3})%\)$/;
@@ -160,19 +157,17 @@ const isValidHSLColor = (color: string): boolean => {
  * Validates if a given string is a correct representation of an HSLA color.
  * HSLA color notation includes hue (0 to 360 degrees), saturation (0% to 100%),
  * lightness (0% to 100%), and alpha (0.0 to 1.0 for transparency level).
- * This function utilizes a regular expression to validate the string's format
- * and then checks to ensure each numerical component is within its valid range.
  * 
- * @param {string} color - The HSLA color string to be validated.
+ * @param {string} color - The color string to be validated.
  * 
  * @returns {boolean} - True if the color string matches the HSLA format and all
  *                      components (hue, saturation, lightness, alpha) fall within
  *                      their respective allowable ranges; false otherwise.
  * 
  * Example usage:
- * isValidHSLAColor('hsla(210, 100%, 50%, 0.5)'); // Returns true
- * isValidHSLAColor('hsla(210, 100%, 50%, 1.1)'); // Returns false, alpha value out of bounds
- * isValidHSLAColor('hsla(360, 50%, 50%, 0)'); // Returns true
+ * isValidHSLAColor('hsla(210, 100%, 50%, 0.5)'); // returns true
+ * isValidHSLAColor('hsla(210, 100%, 50%, 1.1)'); // returns false, alpha value out of bounds
+ * isValidHSLAColor('hsla(360, 50%, 50%, 0)'); // returns true
  */
 const isValidHSLAColor = (color: string): boolean => {
   const regex = /^hsla\((\d{1,3}),\s*(\d{1,3})%,\s*(\d{1,3})%,\s*(0|1|0?\.\d+)\)$/;
@@ -195,19 +190,17 @@ const isValidHSLAColor = (color: string): boolean => {
 /**
  * Validates if a given string is a correct representation of a CMYK color.
  * CMYK colors are defined with four components: Cyan, Magenta, Yellow, and Key (Black),
- * each represented as a percentage from 0% to 100%. This function uses a regular expression
- * to validate the string's format and then checks to ensure each component's value is within
- * the allowable range.
+ * each represented as a percentage from 0% to 100%.
  * 
- * @param {string} color - The CMYK color string to be validated.
+ * @param {string} color - The color string to be validated.
  * 
  * @returns {boolean} - True if the color string matches the CMYK format and all components
  *                      (Cyan, Magenta, Yellow, Key) are within the 0% to 100% range; false otherwise.
  * 
  * Example usage:
- * isValidCMYKColor('cmyk(0%, 100%, 0%, 0%)'); // Returns true for pure magenta
- * isValidCMYKColor('cmyk(101%, 0%, 0%, 0%)'); // Returns false, cyan value out of bounds
- * isValidCMYKColor('cmyk(50%, 50%, 50%, 50%)'); // Returns true for a mid-tone color
+ * isValidCMYKColor('cmyk(0%, 100%, 0%, 0%)'); // returns true for pure magenta
+ * isValidCMYKColor('cmyk(101%, 0%, 0%, 0%)'); // returns false, cyan value out of bounds
+ * isValidCMYKColor('cmyk(50%, 50%, 50%, 50%)'); // returns true for a mid-tone color
  */
 const isValidCMYKColor = (color: string): boolean => {
   const regex = /^cmyk\((\d{1,3})%,\s*(\d{1,3})%,\s*(\d{1,3})%,\s*(\d{1,3})%\)$/;
@@ -231,19 +224,16 @@ const isValidCMYKColor = (color: string): boolean => {
  * Validates whether a given string is a correct representation of an HSV color.
  * HSV stands for Hue, Saturation, and Value, where Hue is measured in degrees (0 to 360),
  * and both Saturation and Value are presented as percentages (0% to 100%).
- * This function employs a regular expression to check the string's format against
- * the expected HSV notation and then validates that the numerical components fall
- * within their correct ranges.
  * 
- * @param {string} color - The HSV color string to be validated.
+ * @param {string} color - The color string to be validated.
  * 
  * @returns {boolean} - True if the color string adheres to the HSV format and all components
  *                      (hue, saturation, value) are within their designated ranges; otherwise, false.
  * 
  * Example usage:
- * isValidHSVColor('hsv(120, 100%, 100%)'); // Returns true for pure green
- * isValidHSVColor('hsv(361, 50%, 50%)'); // Returns false, hue is out of bounds
- * isValidHSVColor('hsv(240, 100%, 50%)'); // Returns true for a medium blue
+ * isValidHSVColor('hsv(120, 100%, 100%)'); // returns true for pure green
+ * isValidHSVColor('hsv(361, 50%, 50%)'); // returns false, hue is out of bounds
+ * isValidHSVColor('hsv(240, 100%, 50%)'); // returns true for a medium blue
  */
 const isValidHSVColor = (color: string): boolean => {
   const regex = /^hsv\((\d{1,3}),\s*(\d{1,3})%,\s*(\d{1,3})%\)$/i;
@@ -275,10 +265,10 @@ const isValidHSVColor = (color: string): boolean => {
  *                      color formats; false otherwise.
  * 
  * Example usage:
- * isValidColor('#FF5733'); // Returns true for a valid HEX color.
- * isValidColor('rgb(255, 99, 71)'); // Returns true for a valid RGB color.
- * isValidColor('cmyk(0%, 100%, 100%, 0%)'); // Returns true for a valid CMYK color.
- * isValidColor('invalidColor'); // Returns false, does not match any supported format.
+ * isValidColor('#FF5733'); // returns true for a valid HEX color.
+ * isValidColor('rgb(255, 99, 71)'); // returns true for a valid RGB color.
+ * isValidColor('cmyk(0%, 100%, 100%, 0%)'); // returns true for a valid CMYK color.
+ * isValidColor('invalidColor'); // returns false, does not match any supported format.
  */
 const isValidColor = (color: string): boolean => {
   const validators = [
@@ -301,15 +291,15 @@ const isValidColor = (color: string): boolean => {
  * RGB, RGBA, HSL, HSLA, HSV, and CMYK. This approach allows for accurately determining the
  * color model of the input string, facilitating format-specific processing or conversions.
  * 
- * @param {string} color - The color string whose format is to be identified.
+ * @param {string} color - The color string to be identified.
  * 
  * @returns {ColorFormat | null} - The identified color format as a `ColorFormat` enum value,
  *                                 or `null` if the format does not match any of the supported types.
  * 
  * Example usage:
- * getColorFormat('#FF5733'); // Returns 'HEX'
- * getColorFormat('rgb(255, 99, 71)'); // Returns 'RGB'
- * getColorFormat('invalidColor'); // Returns null, as the format is not recognized
+ * getColorFormat('#FF5733'); // returns 'HEX'
+ * getColorFormat('rgb(255, 99, 71)'); // returns 'RGB'
+ * getColorFormat('invalidColor'); // returns null, as the format is not recognized
  */
 const getColorFormat = (color: string): ColorFormat | null => {
   const validators: { [key: string]: (color: string) => boolean } = {

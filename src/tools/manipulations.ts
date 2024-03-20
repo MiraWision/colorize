@@ -6,7 +6,7 @@ import { ColorFormat } from '../types';
 /**
  * Generates a stepped color gradient between two colors.
  * This function creates a series of intermediate colors that form a gradient
- * from a starting color to an ending color, with the number of steps specified by the user.
+ * from a starting color to an ending color, with the number of steps.
  * 
  * @param {string} fromColor - The color string representing the start color of the gradient.
  *   This color should be in a format recognized by the `getColorFormat` and `convertColor` functions.
@@ -21,8 +21,7 @@ import { ColorFormat } from '../types';
  * @throws {Error} Throws an error if either the starting or ending color is in an invalid format.
  * 
  * Example usage:
- * generateSteppedGradient('#FF0000', '#00FF00', 5);
- *  //Might return an array of 5 intermediate colors in hexadecimal format between red and green.
+ * generateSteppedGradient('#FF0000', '#00FF00', 5); // returns an array of 5 intermediate colors in hexadecimal format between red and green.
  */
 const generateSteppedGradient = (fromColor: string, toColor: string, count: number): string[] => {
   const fromColorFormat = getColorFormat(fromColor);
@@ -65,8 +64,7 @@ const generateSteppedGradient = (fromColor: string, toColor: string, count: numb
  * @throws {Error} - Throws an error if either the starting or ending color is in an invalid format.
  * 
  * Example usage:
- * blendColors('#FF0000', '#0000FF', 0.5);
- * // Returns a color string representing the color halfway between red and blue.
+ * blendColors('#FF0000', '#0000FF', 0.5); // returns a color string representing the color halfway between red and blue.
  */
 const blendColors = (fromColor: string, toColor: string, weight: number): string => {
   const fromColorFormat = getColorFormat(fromColor);
@@ -86,8 +84,6 @@ const blendColors = (fromColor: string, toColor: string, weight: number): string
 
 /**
  * Adjusts the brightness of a given color by a specified amount.
- * The function converts the color to its HSL (Hue, Saturation, Lightness) representation,
- * then adjusts the lightness component by the specified amount.
  * 
  * @param {string} color - The color to adjust, in a recognized color format.
  * @param {number} amount - The amount to adjust the brightness by. This value can be positive (to increase brightness)
@@ -98,8 +94,8 @@ const blendColors = (fromColor: string, toColor: string, weight: number): string
  * @throws {Error} - Throws an error if the color is in an invalid format, as determined by `getColorFormat`.
  * 
  * Example usage:
- * adjustBrightness('#00FF00', -20); // Makes a bright green color darker
- * adjustBrightness('rgb(255, 0, 0)', 10); // Makes a red color brighter
+ * adjustBrightness('#00FF00', -20); // makes a bright green color darker
+ * adjustBrightness('rgb(255, 0, 0)', 10); // makes a red color brighter
  */
 const adjustBrightness = (color: string, amount: number): string => {
   const colorFormat = getColorFormat(color);
@@ -119,12 +115,9 @@ const adjustBrightness = (color: string, amount: number): string => {
 
 /**
  * Adjusts the saturation of a given color by a specified amount.
- * This function works by converting the input color to the HSL (Hue, Saturation, Lightness)
- * color space, adjusting the saturation component, and then converting it back to the original
- * color format. This allows for precise control over the color's visual intensity.
  * 
  * @param {string} color - The color to be adjusted, provided in a format recognized by `getColorFormat`.
- *   This could be in formats like HEX, RGB, or named colors, among others.
+*                           This could be in formats like HEX, RGB, or named colors, among others.
  * @param {number} amount - The amount to adjust the saturation by. This value can be positive (to increase saturation)
  *                          or negative (to decrease saturation). The final saturation value is constrained
  *                          between 0% (completely desaturated) and 100% (fully saturated).
@@ -134,8 +127,8 @@ const adjustBrightness = (color: string, amount: number): string => {
  * @throws {Error} - If the input color's format is invalid or unrecognized, an error is thrown.
  * 
  * Example usage:
- * adjustSaturation('#00FF00', -20); // Decreases the saturation of a bright green color, making it more muted.
- * adjustSaturation('rgb(255, 0, 0)', 20); // Increases the saturation of a red color, making it more vivid.
+ * adjustSaturation('#00FF00', -20); // decreases the saturation of a bright green color, making it more muted.
+ * adjustSaturation('rgb(255, 0, 0)', 20); // increases the saturation of a red color, making it more vivid.
  */
 const adjustSaturation = (color: string, amount: number): string => {
   const colorFormat = getColorFormat(color);
@@ -155,9 +148,6 @@ const adjustSaturation = (color: string, amount: number): string => {
 
 /**
  * Inverts the given color, producing its opposite in the color spectrum.
- * The inversion is performed on the RGB representation of the color, where each
- * of the Red, Green, and Blue components is subtracted from 255 to find its inverse.
- * The resulting inverted color is then converted back to the original color's format.
  * 
  * @param {string} color - The color to be inverted, specified as a string in a recognized format.
  *   This could be a hexadecimal code, RGB(A) notation, or any other format supported by `getColorFormat`.
@@ -167,8 +157,8 @@ const adjustSaturation = (color: string, amount: number): string => {
  * @throws {Error} - Throws an error if the input color is in an unrecognized or invalid format.
  * 
  * Example usage:
- * invertColor('#FFFFFF'); // Returns '#000000', inverting white to black.
- * invertColor('rgb(255, 0, 0)'); // Returns 'rgb(0, 255, 255)', inverting red to cyan.
+ * invertColor('#FFFFFF'); // returns '#000000', inverting white to black.
+ * invertColor('rgb(255, 0, 0)'); // returns 'rgb(0, 255, 255)', inverting red to cyan.
  */
 const invertColor = (color: string): string => {
   const colorFormat = getColorFormat(color);
@@ -190,8 +180,6 @@ const invertColor = (color: string): string => {
  * Applies a sepia tone effect to the specified color.
  * The sepia effect is achieved by adjusting the Red, Green, and Blue components
  * of the color according to a set formula that simulates the look of sepia-toned photographs.
- * The function first converts the input color to RGB format, applies the sepia transformation,
- * and then converts it back to the original color format.
  * 
  * @param {string} color - The color to which the sepia effect will be applied, specified as a string
  *   in a recognized format (e.g., HEX, RGB, named colors).
@@ -201,8 +189,7 @@ const invertColor = (color: string): string => {
  * @throws {Error} - Throws an error if the input color is in an unrecognized or invalid format.
  * 
  * Example usage:
- * applySepia('#826C34'); // Returns a sepia-toned version of the original color.
- * applySepia('rgb(130, 108, 52)'); // Applies sepia toning to the given RGB color.
+ * applySepia('#826C34'); // returns a sepia-toned version of the original color.
  */
 const applySepia = (color: string): string => {
   const colorFormat = getColorFormat(color);
@@ -222,9 +209,6 @@ const applySepia = (color: string): string => {
 
 /**
  * Changes the opacity of a specified color to a new value.
- * The function works by converting the input color to the RGBA color format,
- * which includes an alpha channel for opacity, and then adjusting this alpha channel
- * to the specified opacity value. The color is then converted back to its original format.
  * 
  * @param {string} color - The color whose opacity will be changed, specified as a string
  *   in a recognized format (e.g., HEX, RGB, HSL, named colors).
