@@ -1,4 +1,4 @@
-const { 
+import { 
   generateSteppedGradient,
   blendColors,
   adjustBrightness,
@@ -6,14 +6,14 @@ const {
   invertColor,
   applySepia,
   changeOpacity,
-} = require('@mirawision/colorize');
+} from '../src/tools/manipulations';
 
 describe('Color manipulation tests', () => {
   describe('generateSteppedGradient', () => {
     it('should generate a stepped gradient with valid colors', () => {
       const gradient = generateSteppedGradient('rgb(255, 0, 0)', 'rgb(0, 0, 255)', 3);
       expect(gradient.length).toBe(3);
-      expect(gradient).toBe(['rgb(191, 0, 64)', 'rgb(128, 0, 128)', 'rgb(64, 0, 191)']);
+      expect(gradient.join(';')).toBe(['rgb(191, 0, 64)', 'rgb(128, 0, 128)', 'rgb(64, 0, 191)'].join(';'));
     });
 
     it('should throw an error for invalid color formats', () => {
@@ -48,13 +48,11 @@ describe('Color manipulation tests', () => {
 
   describe('adjustBrightness', () => {
     it('should increase the brightness of a color', () => {
-      // Assuming the initial lightness (l) is 50
       const brighter = adjustBrightness('hsl(120, 50%, 50%)', 20);
       expect(brighter).toBe('hsl(120, 50%, 70%)');
     });
 
     it('should decrease the brightness of a color', () => {
-      // Assuming the initial lightness (l) is 50
       const darker = adjustBrightness('hsl(120, 50%, 50%)', -20);
       expect(darker).toBe('hsl(120, 50%, 30%)');
     });
@@ -73,13 +71,11 @@ describe('Color manipulation tests', () => {
 
   describe('adjustSaturation', () => {
     it('should increase the saturation of a color', () => {
-      // Assuming the initial saturation (s) is 50
       const moreSaturated = adjustSaturation('hsl(120, 50%, 50%)', 20);
       expect(moreSaturated).toBe('hsl(120, 70%, 50%)');
     });
 
     it('should decrease the saturation of a color', () => {
-      // Assuming the initial saturation (s) is 50
       const lessSaturated = adjustSaturation('hsl(120, 50%, 50%)', -20);
       expect(lessSaturated).toBe('hsl(120, 30%, 50%)');
     });
@@ -115,9 +111,12 @@ describe('Color manipulation tests', () => {
   describe('applySepia', () => {
     it('should apply a sepia tone to a color', () => {
       const sepia = applySepia('rgb(255, 255, 255)');
-      // Specific sepia values should be calculated based on the algorithm provided in the function
-      // These are example checks, replace with actual expected values from your function
-      expect(sepia).toContain('rgb(');
+      expect(sepia).toBe('rgb(255, 255, 239)');
+    });
+
+    it('should apply a sepia tone to a color', () => {
+      const sepia = applySepia('rgb(255, 0, 0)');
+      expect(sepia).toBe('rgb(100, 35, 46)');
     });
 
     it('should throw an error for invalid color formats', () => {

@@ -32,7 +32,7 @@ const generateSteppedGradient = (fromColor: string, toColor: string, count: numb
   }
 
   const fromRGB = convertColor(fromColor, ColorFormat.RGB).match(/\d+/g)!.map(Number);
-  const toRGB = convertColor(fromColor, ColorFormat.RGB).match(/\d+/g)!.map(Number);
+  const toRGB = convertColor(toColor, ColorFormat.RGB).match(/\d+/g)!.map(Number);
   const step = 1 / (count + 1);
 
   let intermediateColors = [];
@@ -75,9 +75,9 @@ const blendColors = (fromColor: string, toColor: string, weight: number): string
   }
 
   const fromRGB = convertColor(fromColor, ColorFormat.RGB).match(/\d+/g)!.map(Number);
-  const toRGB = convertColor(fromColor, ColorFormat.RGB).match(/\d+/g)!.map(Number);
+  const toRGB = convertColor(toColor, ColorFormat.RGB).match(/\d+/g)!.map(Number);
 
-  const [r, g, b] = [0, 1, 2].map((i) => fromRGB[i] * (1 - weight) + toRGB[i] * weight);
+  const [r, g, b] = [0, 1, 2].map((i) => Math.round(fromRGB[i] * (1 - weight) + toRGB[i] * weight));
 
   return convertColor(`rgb(${[r, g, b].join(', ')})`, fromColorFormat);
 };
@@ -167,7 +167,7 @@ const invertColor = (color: string): string => {
     throw new Error('Invalid color format');
   }
 
-  let [r, g, b] = convertColor(colorFormat, ColorFormat.RGB).match(/\d+/g)!.map(Number);
+  let [r, g, b] = convertColor(color, ColorFormat.RGB).match(/\d+/g)!.map(Number);
 
   r = 255 - r;
   g = 255 - g;
@@ -194,16 +194,15 @@ const invertColor = (color: string): string => {
 const applySepia = (color: string): string => {
   const colorFormat = getColorFormat(color);
 
-  console.error('COLOR', color, colorFormat);
   if (!colorFormat) {
     throw new Error('Invalid color format');
   }
 
-  let [r, g, b] = convertColor(colorFormat, ColorFormat.RGB).match(/\d+/g)!.map(Number);
+  let [r, g, b] = convertColor(color, ColorFormat.RGB).match(/\d+/g)!.map(Number);
 
-  r = Math.min(255, (r * 0.393) + (g * 0.769) + (b * 0.189));
-  g = Math.min(255, (r * 0.349) + (g * 0.686) + (b * 0.168));
-  b = Math.min(255, (r * 0.272) + (g * 0.534) + (b * 0.131));
+  r = Math.round(Math.min(255, (r * 0.393) + (g * 0.769) + (b * 0.189)));
+  g = Math.round(Math.min(255, (r * 0.349) + (g * 0.686) + (b * 0.168)));
+  b = Math.round(Math.min(255, (r * 0.272) + (g * 0.534) + (b * 0.131)));
 
   return convertColor(`rgb(${[r, g, b].join(', ')})`, colorFormat);
 };
@@ -231,7 +230,7 @@ const changeOpacity = (color: string, opacity: number): string => {
     throw new Error('Invalid color format');
   }
 
-  let [r, g, b, a] = convertColor(colorFormat, ColorFormat.RGBA).match(/\d+(\.\d+)?/g)!.map(Number);
+  let [r, g, b, a] = convertColor(color, ColorFormat.RGBA).match(/\d+(\.\d+)?/g)!.map(Number);
 
   a = Math.max(0, Math.min(1, opacity));
 

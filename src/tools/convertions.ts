@@ -25,6 +25,10 @@ const convertColor = (color: string, toFormat: ColorFormat): string => {
     throw new Error('Invalid color format');
   }
 
+  if (fromFormat === toFormat) {
+    return color;
+  }
+
   const convertToBase = {
     [ColorFormat.HEX]: hexToRGBA,
     [ColorFormat.HEXA]: hexaToRGBA,
@@ -75,7 +79,7 @@ const hexaToRGBA = (color: string): string => {
     r = parseInt(color[1] + color[2], 16);
     g = parseInt(color[3] + color[4], 16);
     b = parseInt(color[5] + color[6], 16);
-    a = parseInt(color[7] + color[8], 16) / 255;
+    a = Math.round(parseInt(color[7] + color[8], 16) / 255 * 100) / 100;
   }
 
   return `rgba(${r}, ${g}, ${b}, ${a})`;
@@ -363,4 +367,20 @@ const rgbaToHSV = (rgba: string): string => {
   return `hsv(${Math.round(h)}, ${Math.round(s * 100)}%, ${Math.round(v * 100)}%)`;
 };
 
-export { convertColor };
+export { 
+  convertColor,
+  rgbToRGBA,
+  hexToRGBA,
+  hexaToRGBA,
+  hslToRGBA,
+  hslaToRGBA,
+  cmykToRGBA,
+  hsvToRGBA,
+  rgbaToRGB,
+  rgbaToHex,
+  rgbaToHexa,
+  rgbaToHSL,
+  rgbaToHSLA,
+  rgbaToCMYK,
+  rgbaToHSV,
+};

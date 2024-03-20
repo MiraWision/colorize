@@ -1,4 +1,5 @@
-const { 
+// @ts-nocheck
+import { 
   isValidHEXColor,
   isValidHEXAColor,
   isValidRGBColor,
@@ -9,8 +10,8 @@ const {
   isValidHSVColor,
   isValidColor,
   getColorFormat,
-  ColorFormat,
-} = require('@mirawision/colorize');
+} from '../src/tools/validations';
+import { ColorFormat } from '../src/types';
 
 describe('Color validation tests', () => {
   describe('isValidHEXColor', () => {
