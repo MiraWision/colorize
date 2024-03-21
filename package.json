@@ -6,10 +6,11 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "start": "npm run build && node dist/index.js",
     "test": "jest",
     "pack": "npm pack",
     "prepublish": "npm run build",
-    "start": "npm run build && node dist/index.js"
+    "publish": "npm publish --access public"
   },
   "keywords": [
     "color",
@@ -40,6 +41,14 @@
   "contributors": [
     "Dima Glovatskiy <dima.glovatskiy.gg@gmail.com>"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MiraWision/colorize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MiraWision/colorize/issues"
+  },
+  "homepage": "https://github.com/MiraWision/colorize#readme",  
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.5.12",
