@@ -1,6 +1,7 @@
+const content = `
 # Colorize
 
-A comprehensive color manipulation library for TypeScript, `@mirawision/colorize` offers a wide range of functionalities for working with colors. Easily convert between color formats, validate color strings, generate color gradients, blend colors, and perform various adjustments like brightness, saturation, inversion, and more.
+A comprehensive color manipulation library for TypeScript, \`@mirawision/colorize\` offers a wide range of functionalities for working with colors. Easily convert between color formats, validate color strings, generate color gradients, blend colors, and perform various adjustments like brightness, saturation, inversion, and more.
 
 ## Features
 
@@ -17,15 +18,15 @@ A comprehensive color manipulation library for TypeScript, `@mirawision/colorize
 
 ## Installation
 
-```bash
+\`\`\`bash
 npm install @mirawision/colorize
-```
+\`\`\`
 
 or 
 
-```bash
+\`\`\`bash
 yarn add @mirawision/colorize
-```
+\`\`\`
 
 ## Usage Example
 
@@ -33,18 +34,21 @@ Here's a quick overview of how to use some of the core functionalities of @miraw
 
 ### Convert Colors
 
-```javascript
+\`\`\`typescript
 import { convertColor } from '@mirawision/colorize';
 
 const rgb = convertColor('hsl(120, 100%, 50%)', 'rgb');
 console.log(rgb); // Output: 'rgb(0, 255, 0)'
-```
+\`\`\`
 
 ### Validate HEX Color
 
-```javascript
+\`\`\`typescript
 import { isValidHEXColor } from '@mirawision/colorize';
 
 const isValid = isValidHEXColor('#ff0000');
 console.log(isValid); // Output: true
-```
+\`\`\`
+`
+
+export { content };

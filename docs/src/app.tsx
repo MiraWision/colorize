@@ -1,19 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { Logo } from './components/common/logo';
 import { MenuList } from './components/menu/menu-list';
+import { IntroductionPage } from './pages/introduction';
+import { FunctionGetColorFormatPage } from './pages/function-get-color-format';
 
 const App: React.FC = () => (
-  <Container>
-    <Sidebar>
-      <Logo />
-      <MenuList />
-    </Sidebar>
-    <Content>
-      <h1>Hello, React with !</h1>
-    </Content>
-  </Container>
+  <Router>
+    <Container>
+      <Sidebar>
+        <Logo />
+        <MenuList />
+      </Sidebar>
+      <Content>
+        <Routes>
+          <Route path='/' element={(<IntroductionPage />)} />
+          <Route path='/functions/getColorFormat' element={(<FunctionGetColorFormatPage />)} />
+        </Routes>
+      </Content>
+    </Container>
+  </Router>
 );
 
 const Container = styled.div`

@@ -10,14 +10,51 @@ const MenuItems = [
     url: '/',
   },
   {
-    name: 'Methods',
-    url: '/methods',
+    name: 'Functions',
+    url: '/functions',
+    inactive: true,
     subitems: [
       {
-        name: 'getColorFormat',
-        url: '/methods/getColorFormat',
+        name: 'convertColor',
+        url: '/functions/convertColor',
       },
-    ]
+      {
+        name: 'getColorFormat',
+        url: '/functions/getColorFormat',
+      },
+      {
+        name: 'isValidColor & others',
+        url: '/functions/isValidColor',
+      },
+      {
+        name: 'generateSteppedGradient',
+        url: '/functions/generateSteppedGradient',
+      },
+      {
+        name: 'blendColors',
+        url: '/functions/blendColors',
+      },
+      {
+        name: 'adjustBrightness',
+        url: '/functions/adjustBrightness',
+      },
+      {
+        name: 'adjustSaturation',
+        url: '/functions/adjustSaturation',
+      },
+      {
+        name: 'invertColor',
+        url: '/functions/invertColor',
+      },
+      {
+        name: 'applySepia',
+        url: '/functions/applySepia',
+      },
+      {
+        name: 'changeOpacity',
+        url: '/functions/changeOpacity',
+      },
+    ],
   },
 ];
 
@@ -30,8 +67,9 @@ const MenuList: React.FC<Props> = ({}) => {
         <>
           <MenuItem 
             key={item.url} 
-            href={item.url}
+            href={item.inactive ? undefined : item.url}
             active={item.url === pathname}
+            inactive={item.inactive}
           >
             {item.name}
           </MenuItem>
@@ -55,7 +93,7 @@ const Container = styled.div`
   margin-top: 24px;
 `;
 
-const MenuItem = styled.a<{ active: boolean, subitem?: boolean }>`
+const MenuItem = styled.a<{ active: boolean, inactive?: boolean, subitem?: boolean }>`
   border-left: 1px solid var(--surface-border);
   font-weight: 450;
   display: flex;
@@ -82,6 +120,14 @@ const MenuItem = styled.a<{ active: boolean, subitem?: boolean }>`
 
   ${({ subitem }) => subitem && css`
     padding-left: 24px;
+  `}
+
+  ${({ inactive }) => inactive && css`
+    cursor: default;
+
+    &:hover {
+      border-left-color: var(--surface-border);
+    }
   `}
 
   div {
