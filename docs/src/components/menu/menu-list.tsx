@@ -13,7 +13,7 @@ const MenuItems = [
     url: Routes.Introduction,
   },
   {
-    name: 'Functions',
+    name: 'API Reference',
     url: '#',
     subitems: [
       {
@@ -25,7 +25,7 @@ const MenuItems = [
         url: Routes.FunctionGetColorFormat,
       },
       {
-        name: 'isValidColor & others',
+        name: 'isValidColor',
         url: Routes.FunctionIsValidColor,
       },
       {
@@ -55,6 +55,10 @@ const MenuItems = [
       {
         name: 'changeOpacity',
         url: Routes.FunctionChangeOpacity,
+      },
+      {
+        name: 'ColorFormat',
+        url: Routes.EnumColorFormat,
       },
     ],
   },

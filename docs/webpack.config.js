@@ -54,6 +54,7 @@ module.exports = {
       patterns: [
         { from: 'node_modules/primeicons/primeicons.css', to: 'assets/primeicons/primeicon.css' },
         { from: 'node_modules/primeicons/fonts', to: 'assets/primeicons/fonts' },
+        { from: './src/assets', to: 'assets' },
       ],
     }),
   ],

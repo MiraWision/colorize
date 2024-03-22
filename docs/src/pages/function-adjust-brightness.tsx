@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { adjustBrightness } from '@mirawision/colorize';
 
 import { content } from '../content/function-adjust-brightness';
+import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -12,7 +13,7 @@ interface Props {
 }
 
 const FunctionAdjustBrightnessPage: React.FC<Props> = ({}) => {
-  const [colorToAdjustBrightness, setColorToAdjustBrightness] = useState('#ABCDEF');
+  const [colorToAdjustBrightness, setColorToAdjustBrightness] = useState(getRandomHexColor());
   const [brightnessLevel, setBrightnessLevel] = useState(10);
   const adjustedBrightnessColor = useMemo(() => {
     try {
@@ -24,7 +25,7 @@ const FunctionAdjustBrightnessPage: React.FC<Props> = ({}) => {
   
   return (
     <div>
-      <h1>adjustBrightness</h1>
+      <h1>adjustBrightness function</h1>
 
       <Row>
         <ColorBox color={colorToAdjustBrightness} />

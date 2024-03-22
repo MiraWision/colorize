@@ -1,60 +1,67 @@
 const content = `
-A comprehensive color manipulation library for TypeScript, \`@mirawision/colorize\` offers a wide range of functionalities for working with colors. Easily convert between color formats, validate color strings, generate color gradients, blend colors, and perform various adjustments like brightness, saturation, inversion, and more.
+The \`isValidColor\` function checks if a given string is a valid color in any of the supported color formats. It utilizes a series of validator functions to determine the validity of the color across different color formats. These validator subfunctions can also be used independently to check specific color formats.
 
-## Features
+## Arguments
 
-- **Color Conversion**: Convert colors between different formats.
-- **Color Validation**: Check if color strings are valid for different formats.
-- **Format Detection**: Identify the format of a given color string.
-- **Gradient Generation**: Create stepped gradients between two colors.
-- **Color Blending**: Blend two colors together with a specified weight.
-- **Brightness Adjustment**: Increase or decrease the brightness of a color.
-- **Saturation Adjustment**: Modify the saturation of a color.
-- **Color Inversion**: Invert colors for striking visual effects.
-- **Sepia Effect**: Apply a sepia tone to your colors.
-- **Opacity Change**: Adjust the opacity of a color.
+- \`color\` (string): The color string to be validated.
 
-### Supported Color Formats:
+## Returns
 
-- RGB, RGBA
-- HSL, HSLA
-- HEX, HEXA
-- HSV
-- CMYK
+- (boolean): Returns \`true\` if the color is valid in any of the recognized formats, otherwise returns \`false\`.
 
-## Installation
+## Usage Examples
 
-\`\`\`bash
-npm install @mirawision/colorize
-\`\`\`
-
-or 
-
-\`\`\`bash
-yarn add @mirawision/colorize
-\`\`\`
-
-## Usage Example
-
-Here's a quick overview of how to use some of the core functionalities of \`@mirawision/colorize\`:
-
-### Convert Colors
+### Validating a HEX Color
 
 \`\`\`typescript
-import { convertColor } from '@mirawision/colorize';
-
-const rgb = convertColor('hsl(120, 100%, 50%)', 'rgb');
-console.log(rgb); // Output: 'rgb(0, 255, 0)'
-\`\`\`
-
-### Validate HEX Color
-
-\`\`\`typescript
-import { isValidHEXColor } from '@mirawision/colorize';
-
-const isValid = isValidHEXColor('#ff0000');
+const color = "#FF5733";
+const isValid = isValidColor(color);
 console.log(isValid); // Output: true
 \`\`\`
-`
+
+### Validating an Invalid Color
+
+\`\`\`typescript
+const color = "invalidColor";
+const isValid = isValidColor(color);
+console.log(isValid); // Output: false
+\`\`\`
+
+## Validator Subfunctions
+
+The \`isValidColor\` function relies on a series of subfunctions to validate different color formats:
+
+- \`isValidHEXColor\`
+- \`isValidHEXAColor\`
+- \`isValidRGBColor\`
+- \`isValidRGBAColor\`
+- \`isValidHSLColor\`
+- \`isValidHSLAColor\`
+- \`isValidHSVColor\`
+- \`isValidCMYKColor\`
+
+Each subfunction follows a similar approach and can be used independently to validate a specific color format.
+
+### General Approach for Validator Subfunctions
+
+Each validator subfunction, such as \`isValidHEXColor\`, checks if the input string conforms to the pattern expected for its specific color format. For instance, \`isValidHEXColor\` uses a regular expression to verify if the input string is a valid HEX color code.
+
+\`\`\`typescript
+const isValidHEXColor = (color: string): boolean => {
+  const regex = /^#(?:[0-9a-fA-F]{3}){1,2}$/;
+  return regex.test(color);
+};
+\`\`\`
+
+These validators return \`true\` if the input string matches the expected pattern for the color format, otherwise, they return \`false\`. They can be utilized individually to check the validity of a color string against a specific color format.
+
+\`\`\`typescript
+const hexColor = "#FF5733";
+console.log(isValidHEXColor(hexColor)); // Output: true
+
+const rgbColor = "rgb(255, 87, 51)";
+console.log(isValidRGBColor(rgbColor)); // Output: false (since it's checking against HEX format)
+\`\`\`
+`;
 
 export { content };

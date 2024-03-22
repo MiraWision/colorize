@@ -17,6 +17,7 @@ import { FunctionAdjustSaturationPage } from './pages/function-adjust-saturation
 import { FunctionInvertColorPage } from './pages/function-invert-color';
 import { FunctionApplySepiaPage } from './pages/function-apply-sepia';
 import { FunctionChangeOpacityPage } from './pages/function-change-opacity';
+import { EnumColorFormatPage } from './pages/enum-color-format';
 
 const App: React.FC = () => (
   <Router>
@@ -24,6 +25,12 @@ const App: React.FC = () => (
       <Sidebar>
         <Logo />
         <MenuList />
+        <GitHubLogo href='https://github.com/MiraWision/colorize' target='_blank'>
+          <img src='./assets/icons/github.svg' alt='github' />
+        </GitHubLogo>
+        <NPMLogo href='https://www.npmjs.com/package/@mirawision/colorize' target='_blank'>
+          <img src='./assets/icons/npm.png' alt='npm' />
+        </NPMLogo>
       </Sidebar>
       <Content>
         <Switch>
@@ -38,6 +45,8 @@ const App: React.FC = () => (
           <Route path={Routes.FunctionInvertColor} component={FunctionInvertColorPage} />
           <Route path={Routes.FunctionApplySepia} component={FunctionApplySepiaPage} />
           <Route path={Routes.FunctionChangeOpacity} component={FunctionChangeOpacityPage} />
+          <Route path={Routes.FunctionChangeOpacity} component={FunctionChangeOpacityPage} />
+          <Route path={Routes.EnumColorFormat} component={EnumColorFormatPage} />
         </Switch>
       </Content>
     </Container>
@@ -69,6 +78,32 @@ const Content = styled.div`
   flex-direction: column;
   width: 750px;
   margin: auto;
+`;
+
+const BaseLogo = styled.a`
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.5s;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    transform: scale(1.35);
+  }
+`;
+
+const GitHubLogo = styled(BaseLogo)`
+  left: 16px;
+`;
+
+const NPMLogo = styled(BaseLogo)`
+  left: 56px;
 `;
 
 export default App;

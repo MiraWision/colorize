@@ -21,7 +21,7 @@ const ColorBox = styled.div<{ color: string }>`
   width: 24px;
   height: 24px;
   border-radius: 4px;
-  background-color: ${({ color }) => color};
+  background-color: ${({ color }) => (color && color.length) ? color : 'transparent'};
 `;
 
 export {

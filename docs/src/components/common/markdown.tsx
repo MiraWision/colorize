@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import * as marked from 'marked';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -43,7 +44,17 @@ const Markdown: React.FC<Props> = ({ markdownText }) => {
 
 const Container = styled.div`
   pre {
+    max-width: 700px;
     border-radius: 8px;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--primary-color);
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 

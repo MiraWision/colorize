@@ -1,19 +1,18 @@
 import React, { useMemo, useState } from 'react';
-import styled from 'styled-components';
 import { invertColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-invert-color';
+import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
-import { InputNumber } from 'primereact/inputnumber';
 import { ColorBox, Result, Row } from '../components/styles';
 
 interface Props {
 }
 
 const FunctionInvertColorPage: React.FC<Props> = ({}) => {
-  const [colorToInvert, setColorToInvert] = useState('#ABCDEF');
+  const [colorToInvert, setColorToInvert] = useState(getRandomHexColor());
   const invertedColor = useMemo(() => {
     try {
       return invertColor(colorToInvert);
@@ -24,7 +23,7 @@ const FunctionInvertColorPage: React.FC<Props> = ({}) => {
 
   return (
     <div>
-      FunctionInvertColorPage
+      <h1>invertColor function</h1>
    
       <Row>
         <ColorBox color={colorToInvert} />

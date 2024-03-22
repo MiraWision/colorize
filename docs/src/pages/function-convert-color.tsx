@@ -1,12 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import styled from 'styled-components';
 import { ColorFormat, convertColor } from '@mirawision/colorize';
 
+import { getRandomHexColor } from '../utils/get-random-color';
 import { content } from '../content/function-convert-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
-import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
 import { ColorBox, Result, Row } from '../components/styles';
 
@@ -25,11 +24,11 @@ const colorFormats = [
 ];
 
 const FunctionConvertColorPage: React.FC<Props> = ({}) => {
-  const [colorToConvert, setColorToConvert] = useState('#963246');
-  const [colorFormatToConvert, setColorFormatToConvert] = useState<ColorFormat>(ColorFormat.RGB);
+  const [colorToConvert, setColorToConvert] = useState(getRandomHexColor());
+  const [colorFormatToConvert, setColorFormatToConvert] = useState<{ name: string; code: ColorFormat}>({ name: 'RGB', code: ColorFormat.RGB });
   const convertedColor = useMemo(() => {
     try {
-      return convertColor(colorToConvert, colorFormatToConvert);
+      return convertColor(colorToConvert, colorFormatToConvert.code);
     } catch (e) {
       return 'Invalid color format';
     }
@@ -37,7 +36,7 @@ const FunctionConvertColorPage: React.FC<Props> = ({}) => {
 
   return (
     <div>
-      FunctionConvertColorPage
+      <h1>convertColor function</h1>
     
       <Row>
         <ColorBox color={colorToConvert} />
@@ -49,7 +48,7 @@ const FunctionConvertColorPage: React.FC<Props> = ({}) => {
 
         <Dropdown 
           value={colorFormatToConvert}
-          onChange={(e) => setColorFormatToConvert(e.value.code)}
+          onChange={(e) => setColorFormatToConvert(e.value)}
           options={colorFormats}
           optionLabel='name'
           placeholder='Select Color Format'

@@ -1,60 +1,42 @@
 const content = `
-A comprehensive color manipulation library for TypeScript, \`@mirawision/colorize\` offers a wide range of functionalities for working with colors. Easily convert between color formats, validate color strings, generate color gradients, blend colors, and perform various adjustments like brightness, saturation, inversion, and more.
+The \`changeOpacity\` function modifies the opacity of a given color. It allows you to adjust the alpha value of a color, effectively changing its transparency. This function is useful for creating semi-transparent colors for overlays, shadows, or any graphical elements requiring translucency.
 
-## Features
+## Arguments
 
-- **Color Conversion**: Convert colors between different formats.
-- **Color Validation**: Check if color strings are valid for different formats.
-- **Format Detection**: Identify the format of a given color string.
-- **Gradient Generation**: Create stepped gradients between two colors.
-- **Color Blending**: Blend two colors together with a specified weight.
-- **Brightness Adjustment**: Increase or decrease the brightness of a color.
-- **Saturation Adjustment**: Modify the saturation of a color.
-- **Color Inversion**: Invert colors for striking visual effects.
-- **Sepia Effect**: Apply a sepia tone to your colors.
-- **Opacity Change**: Adjust the opacity of a color.
+- \`color\` (string): The color whose opacity is to be adjusted, provided in a valid color format.
+- \`opacity\` (number): The new opacity value, a number between 0 (completely transparent) and 1 (completely opaque).
 
-### Supported Color Formats:
+## Returns
 
-- RGB, RGBA
-- HSL, HSLA
-- HEX, HEXA
-- HSV
-- CMYK
+- (string): The color with adjusted opacity, returned in the same format as the input color.
 
-## Installation
+## Usage Examples
 
-\`\`\`bash
-npm install @mirawision/colorize
-\`\`\`
-
-or 
-
-\`\`\`bash
-yarn add @mirawision/colorize
-\`\`\`
-
-## Usage Example
-
-Here's a quick overview of how to use some of the core functionalities of \`@mirawision/colorize\`:
-
-### Convert Colors
+### Changing Opacity
 
 \`\`\`typescript
-import { convertColor } from '@mirawision/colorize';
+const color = "rgb(255, 0, 0)"; // A solid red color
+const opacity = 0.5; // Set opacity to 50%
 
-const rgb = convertColor('hsl(120, 100%, 50%)', 'rgb');
-console.log(rgb); // Output: 'rgb(0, 255, 0)'
+const translucentColor = changeOpacity(color, opacity);
+console.log(translucentColor);
+// Output: "rgba(255, 0, 0, 0.5)" - a semi-transparent red
 \`\`\`
 
-### Validate HEX Color
+### Error Handling
+
+The function throws an error if the input color is in an invalid format.
 
 \`\`\`typescript
-import { isValidHEXColor } from '@mirawision/colorize';
-
-const isValid = isValidHEXColor('#ff0000');
-console.log(isValid); // Output: true
+try {
+  const color = "invalidColor";
+  const opacity = 0.5;
+  
+  const translucentColor = changeOpacity(color, opacity);
+} catch (error) {
+  console.error(error); // Output: Error: Invalid color format
+}
 \`\`\`
-`
+`;
 
 export { content };

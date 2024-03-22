@@ -1,60 +1,53 @@
 const content = `
-A comprehensive color manipulation library for TypeScript, \`@mirawision/colorize\` offers a wide range of functionalities for working with colors. Easily convert between color formats, validate color strings, generate color gradients, blend colors, and perform various adjustments like brightness, saturation, inversion, and more.
+The \`adjustBrightness\` function adjusts the brightness of a given color by a specified amount. It operates on the luminance value in the HSL color space, increasing or decreasing it to make the color brighter or darker.
 
-## Features
+## Arguments
 
-- **Color Conversion**: Convert colors between different formats.
-- **Color Validation**: Check if color strings are valid for different formats.
-- **Format Detection**: Identify the format of a given color string.
-- **Gradient Generation**: Create stepped gradients between two colors.
-- **Color Blending**: Blend two colors together with a specified weight.
-- **Brightness Adjustment**: Increase or decrease the brightness of a color.
-- **Saturation Adjustment**: Modify the saturation of a color.
-- **Color Inversion**: Invert colors for striking visual effects.
-- **Sepia Effect**: Apply a sepia tone to your colors.
-- **Opacity Change**: Adjust the opacity of a color.
+- \`color\` (string): The color to be adjusted, in a valid color format.
+- \`amount\` (number): The amount by which to adjust the brightness. Positive values increase brightness, while negative values decrease it.
 
-### Supported Color Formats:
+## Returns
 
-- RGB, RGBA
-- HSL, HSLA
-- HEX, HEXA
-- HSV
-- CMYK
+- (string): The color with adjusted brightness, returned in the same format as the input color.
 
-## Installation
+## Usage Examples
 
-\`\`\`bash
-npm install @mirawision/colorize
-\`\`\`
-
-or 
-
-\`\`\`bash
-yarn add @mirawision/colorize
-\`\`\`
-
-## Usage Example
-
-Here's a quick overview of how to use some of the core functionalities of \`@mirawision/colorize\`:
-
-### Convert Colors
+### Increasing Brightness
 
 \`\`\`typescript
-import { convertColor } from '@mirawision/colorize';
+const color = "hsl(100, 50%, 50%)"; // A medium light green
+const amount = 20; // Increase brightness by 20%
 
-const rgb = convertColor('hsl(120, 100%, 50%)', 'rgb');
-console.log(rgb); // Output: 'rgb(0, 255, 0)'
+const brighterColor = adjustBrightness(color, amount);
+console.log(brighterColor);
+// Output: "hsl(100, 50%, 70%)" - a lighter green
 \`\`\`
 
-### Validate HEX Color
+### Decreasing Brightness
 
 \`\`\`typescript
-import { isValidHEXColor } from '@mirawision/colorize';
+const color = "rgb(130, 200, 100)"; // A bright green
+const amount = -30; // Decrease brightness by 30%
 
-const isValid = isValidHEXColor('#ff0000');
-console.log(isValid); // Output: true
+const darkerColor = adjustBrightness(color, amount);
+console.log(darkerColor);
+// Output: "rgb(91, 140, 70)" - a darker green
 \`\`\`
-`
+
+### Error Handling
+
+The function throws an error if the input color is in an invalid format.
+
+\`\`\`typescript
+try {
+  const color = "invalidColor";
+  const amount = 20;
+  
+  const adjustedColor = adjustBrightness(color, amount);
+} catch (error) {
+  console.error(error); // Output: Error: Invalid color format
+}
+\`\`\`
+`;
 
 export { content };

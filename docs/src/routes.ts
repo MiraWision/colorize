@@ -10,6 +10,7 @@ enum Routes {
   FunctionInvertColor = '/function-invert-color',
   FunctionApplySepia = '/function-apply-sepia',
   FunctionChangeOpacity = '/function-change-opacity',
+  EnumColorFormat = '/enum-color-format',
 }
 
 export { Routes };

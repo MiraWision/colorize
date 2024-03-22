@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import { blendColors } from '@mirawision/colorize';
 
 import { content } from '../content/function-blend-colors';
+import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -13,8 +14,8 @@ interface Props {
 }
 
 const FunctionBlendColorsPage: React.FC<Props> = ({}) => {
-  const [baseColorForBlend, setBaseColorForBlend] = useState('#ABCDEF');
-  const [blendColor, setBlendColor] = useState('#FFFFFF');
+  const [baseColorForBlend, setBaseColorForBlend] = useState(getRandomHexColor());
+  const [blendColor, setBlendColor] = useState(getRandomHexColor());
   const [blendFactor, setBlendFactor] = useState(0.5);
 
   const blendedColor = useMemo(() => {
@@ -27,7 +28,7 @@ const FunctionBlendColorsPage: React.FC<Props> = ({}) => {
 
   return (
     <div>
-      FunctionBlendColorsPage
+      <h1>blendColors function</h1>
 
       <Row>
         <ColorBox color={baseColorForBlend} />
@@ -44,7 +45,7 @@ const FunctionBlendColorsPage: React.FC<Props> = ({}) => {
           onChange={(e) => setBlendColor(e.target.value)}
         />
 
-        <InputNumber
+        <InputNumberMini
           min={0}
           max={1}
           step={0.1}
@@ -62,5 +63,11 @@ const FunctionBlendColorsPage: React.FC<Props> = ({}) => {
     </div>
   );
 }
+
+const InputNumberMini = styled(InputNumber)`
+  input {
+    width: 75px;
+  }
+`;
 
 export { FunctionBlendColorsPage };

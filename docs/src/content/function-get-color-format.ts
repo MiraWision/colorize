@@ -1,59 +1,38 @@
 const content = `
-A comprehensive color manipulation library for TypeScript, \`@mirawision/colorize\` offers a wide range of functionalities for working with colors. Easily convert between color formats, validate color strings, generate color gradients, blend colors, and perform various adjustments like brightness, saturation, inversion, and more.
+The \`getColorFormat\` function is designed to identify the format of a given color string. It supports various color formats, including HEX, HEXA, RGB, RGBA, HSL, HSLA, HSV, and CMYK. The function utilizes a series of validators to determine the color format by testing the input color against known format patterns.
 
-## Features
+## Arguments
 
-- **Color Conversion**: Convert colors between different formats.
-- **Color Validation**: Check if color strings are valid for different formats.
-- **Format Detection**: Identify the format of a given color string.
-- **Gradient Generation**: Create stepped gradients between two colors.
-- **Color Blending**: Blend two colors together with a specified weight.
-- **Brightness Adjustment**: Increase or decrease the brightness of a color.
-- **Saturation Adjustment**: Modify the saturation of a color.
-- **Color Inversion**: Invert colors for striking visual effects.
-- **Sepia Effect**: Apply a sepia tone to your colors.
-- **Opacity Change**: Adjust the opacity of a color.
+- \`color\` (string): The color string whose format needs to be identified.
 
-### Supported Color Formats:
+## Returns
 
-- RGB, RGBA
-- HSL, HSLA
-- HEX, HEXA
-- HSV
-- CMYK
+- ([ColorFormat](/enum-color-format) | null): The function returns the identified color format as a \`ColorFormat\` enumeration value. If the color format is not recognized, the function returns \`null\`.
 
-## Installation
+## Usage Examples
 
-\`\`\`bash
-npm install @mirawision/colorize
-\`\`\`
-
-or 
-
-\`\`\`bash
-yarn add @mirawision/colorize
-\`\`\`
-
-## Usage Example
-
-Here's a quick overview of how to use some of the core functionalities of \`@mirawision/colorize\`:
-
-### Convert Colors
+### Identifying HEX Color Format
 
 \`\`\`typescript
-import { convertColor } from '@mirawision/colorize';
-
-const rgb = convertColor('hsl(120, 100%, 50%)', 'rgb');
-console.log(rgb); // Output: 'rgb(0, 255, 0)'
+const color = "#FF5733";
+const format = getColorFormat(color);
+console.log(format); // Output: "hex"
 \`\`\`
 
-### Validate HEX Color
+### Identifying RGB Color Format
 
 \`\`\`typescript
-import { isValidHEXColor } from '@mirawision/colorize';
+const color = "rgb(255, 87, 51)";
+const format = getColorFormat(color);
+console.log(format); // Output: "rgb"
+\`\`\`
 
-const isValid = isValidHEXColor('#ff0000');
-console.log(isValid); // Output: true
+### Handling an Unrecognized Color Format
+
+\`\`\`typescript
+const color = "unknown(255, 87, 51)";
+const format = getColorFormat(color);
+console.log(format); // Output: null
 \`\`\`
 `
 

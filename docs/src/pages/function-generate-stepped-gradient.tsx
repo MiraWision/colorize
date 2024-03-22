@@ -1,21 +1,22 @@
 import React, { useMemo, useState } from 'react';
-import styled from 'styled-components';
+import { styled } from 'styled-components';
 import { generateSteppedGradient } from '@mirawision/colorize';
 
 import { content } from '../content/function-generate-stepped-gradient';
+import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ColorBox, Column, Result, Row } from '../components/styles';
+import { ColorBox, Result, Row } from '../components/styles';
 
 interface Props {
 }
 
 const FunctionGenerateSteppedGradientPage: React.FC<Props> = ({}) => {
-  const [colorToGradientOne, setColorToGradientOne] = useState('#903060');
-  const [colorToGradientTwo, setColorToGradientTwo] = useState('#206080');
-  const [stepsForGradient, setStepsForGradient] = useState(3);
+  const [colorToGradientOne, setColorToGradientOne] = useState(getRandomHexColor());
+  const [colorToGradientTwo, setColorToGradientTwo] = useState(getRandomHexColor());
+  const [stepsForGradient, setStepsForGradient] = useState(6);
   const steppedGradient = useMemo<string[]>(() => {
     try {
       return generateSteppedGradient(colorToGradientOne, colorToGradientTwo, stepsForGradient);
@@ -26,7 +27,7 @@ const FunctionGenerateSteppedGradientPage: React.FC<Props> = ({}) => {
   
   return (
     <div>
-      FunctionGenerateSteppedGradientPage
+      <h1>generateSteppedGradient function</h1>
 
       <Row>
         <ColorBox color={colorToGradientOne} />
@@ -36,13 +37,6 @@ const FunctionGenerateSteppedGradientPage: React.FC<Props> = ({}) => {
           onChange={(e) => setColorToGradientOne(e.target.value)}
         />
 
-        <ColorBox color={colorToGradientTwo} />
-          
-        <InputText 
-          value={colorToGradientTwo}
-          onChange={(e) => setColorToGradientTwo(e.target.value)}
-        />
-
         <InputNumber 
           value={stepsForGradient} 
           onChange={(e) => setStepsForGradient(e.value ?? 3)} 
@@ -50,9 +44,16 @@ const FunctionGenerateSteppedGradientPage: React.FC<Props> = ({}) => {
           min={1}
           max={25} 
         />
+
+        <InputText 
+          value={colorToGradientTwo}
+          onChange={(e) => setColorToGradientTwo(e.target.value)}
+        />
+
+        <ColorBox color={colorToGradientTwo} />
       </Row>
     
-      <Column>
+      <Grid>
         {steppedGradient.map((color) => (
           <Row key={color}>
             <ColorBox color={color} />
@@ -60,11 +61,18 @@ const FunctionGenerateSteppedGradientPage: React.FC<Props> = ({}) => {
             <Result>{color}</Result>
           </Row>
         ))}
-      </Column>
+      </Grid>
 
       <Markdown markdownText={content} />
     </div>
   );
 }
+
+const Grid = styled.div`
+  display: grid;
+  gap: 12px 0;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  margin-top: 12px;
+`;
 
 export { FunctionGenerateSteppedGradientPage };

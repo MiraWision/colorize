@@ -23,7 +23,7 @@ const FunctionApplySepiaPage: React.FC<Props> = ({}) => {
   
   return (
     <div>
-      FunctionApplySepiaPage
+      <h1>applySepia function</h1>
    
       <Row>
         <ColorBox color={colorToApplySepia} />

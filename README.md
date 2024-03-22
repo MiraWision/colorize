@@ -63,7 +63,7 @@ console.log(isValid); // Output: true
 import { getColorFormat } from '@mirawision/colorize';
 
 const format = getColorFormat('rgba(255, 0, 0, 0.5)');
-console.log(format); // Output: 'RGBA'
+console.log(format); // Output: 'rgba'
 ```
 
 ### Generate Gradient
