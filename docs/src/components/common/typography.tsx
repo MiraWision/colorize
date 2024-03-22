@@ -5,7 +5,7 @@ const Header1 = styled.h1<{ centered?: boolean }>`
   font-size: 32px;
   font-weight: 600;
   line-height: 1.2;
-  color: var(--surface-900);
+  color: var(--surface-600);
 
   ${({ centered }) => centered && css`
     text-align: center;

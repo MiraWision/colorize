@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-
-import Markdown from '../components/common/markdown';
 
 import { content } from '../content/introduction';
+
+import Markdown from '../components/common/markdown';
 
 interface Props {
 }
@@ -11,6 +10,8 @@ interface Props {
 const IntroductionPage: React.FC<Props> = ({}) => {
   return (
     <div>
+      <h1>Colorize</h1>
+
       <Markdown markdownText={content} />
     </div>
   );

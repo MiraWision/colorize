@@ -1,5 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { useLocation, Link } from 'react-router-dom';
+
+import { Routes } from '../../routes';
 
 interface Props {
 }
@@ -7,83 +10,81 @@ interface Props {
 const MenuItems = [
   {
     name: 'Introduction',
-    url: '/',
+    url: Routes.Introduction,
   },
   {
     name: 'Functions',
-    url: '/functions',
-    inactive: true,
+    url: '#',
     subitems: [
       {
         name: 'convertColor',
-        url: '/functions/convertColor',
+        url: Routes.FunctionConvertColor,
       },
       {
         name: 'getColorFormat',
-        url: '/functions/getColorFormat',
+        url: Routes.FunctionGetColorFormat,
       },
       {
         name: 'isValidColor & others',
-        url: '/functions/isValidColor',
+        url: Routes.FunctionIsValidColor,
       },
       {
         name: 'generateSteppedGradient',
-        url: '/functions/generateSteppedGradient',
+        url: Routes.FunctionGenerateSteppedGradient,
       },
       {
         name: 'blendColors',
-        url: '/functions/blendColors',
+        url: Routes.FunctionBlendColors,
       },
       {
         name: 'adjustBrightness',
-        url: '/functions/adjustBrightness',
+        url: Routes.FunctionAdjustBrightness,
       },
       {
         name: 'adjustSaturation',
-        url: '/functions/adjustSaturation',
+        url: Routes.FunctionAdjustSaturation,
       },
       {
         name: 'invertColor',
-        url: '/functions/invertColor',
+        url: Routes.FunctionInvertColor,
       },
       {
         name: 'applySepia',
-        url: '/functions/applySepia',
+        url: Routes.FunctionApplySepia,
       },
       {
         name: 'changeOpacity',
-        url: '/functions/changeOpacity',
+        url: Routes.FunctionChangeOpacity,
       },
     ],
   },
 ];
 
 const MenuList: React.FC<Props> = ({}) => {
-  const pathname = '';
+  const location = useLocation();
 
   return (
     <Container>
       {MenuItems.map((item) => (
-        <>
+        <React.Fragment key={item.url}>
           <MenuItem 
-            key={item.url} 
-            href={item.inactive ? undefined : item.url}
-            active={item.url === pathname}
-            inactive={item.inactive}
+            to={item.url}
+            isActive={item.url === location?.pathname}
+            isInactive={item.url === '#'}
           >
             {item.name}
           </MenuItem>
           {item.subitems?.map((subitem) => (
             <MenuItem 
               key={subitem.url} 
-              href={subitem.url}
-              active={subitem.url === pathname}
-              subitem
+              to={subitem.url}
+              isActive={subitem.url === location?.pathname}
+              isSubitem
             >
               {subitem.name}
             </MenuItem>
           ))}
-        </>
+        </React.Fragment>
       ))}
     </Container>
   );
@@ -93,7 +94,7 @@ const Container = styled.div`
   margin-top: 24px;
 `;
 
-const MenuItem = styled.a<{ active: boolean, inactive?: boolean, subitem?: boolean }>`
+const MenuItem = styled(Link)<{ isActive: boolean, isInactive?: boolean, isSubitem?: boolean }>`
   border-left: 1px solid var(--surface-border);
   font-weight: 450;
   display: flex;
@@ -108,7 +109,7 @@ const MenuItem = styled.a<{ active: boolean, inactive?: boolean, subitem?: boole
     border-left-color: var(--surface-500);
   }
 
-  ${({ active }) => active && css`
+  ${({ isActive }) => isActive && css`
     color: var(--primary-color);
     border-left-color: var(--primary-color);
 
@@ -118,11 +119,11 @@ const MenuItem = styled.a<{ active: boolean, inactive?: boolean, subitem?: boole
     }
   `}
 
-  ${({ subitem }) => subitem && css`
+  ${({ isSubitem }) => isSubitem && css`
     padding-left: 24px;
   `}
 
-  ${({ inactive }) => inactive && css`
+  ${({ isInactive }) => isInactive && css`
     cursor: default;
 
     &:hover {

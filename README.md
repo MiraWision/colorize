@@ -4,7 +4,7 @@ A comprehensive color manipulation library for TypeScript, `@mirawision/colorize
 
 ## Features
 
-- **Color Conversion**: Convert colors between RGB, RGBA, HSL, HSLA, HEX, HEXA, HSV, and CMYK formats.
+- **Color Conversion**: Convert colors between different formats.
 - **Color Validation**: Check if color strings are valid for different formats.
 - **Format Detection**: Identify the format of a given color string.
 - **Gradient Generation**: Create stepped gradients between two colors.
@@ -14,6 +14,14 @@ A comprehensive color manipulation library for TypeScript, `@mirawision/colorize
 - **Color Inversion**: Invert colors for striking visual effects.
 - **Sepia Effect**: Apply a sepia tone to your colors.
 - **Opacity Change**: Adjust the opacity of a color.
+
+### Supported Color Formats:
+
+- RGB, RGBA
+- HSL, HSLA
+- HEX, HEXA
+- HSV
+- CMYK
 
 ## Installation
 
@@ -32,6 +40,7 @@ yarn add @mirawision/colorize
 Here's a quick overview of how to use some of the core functionalities of @mirawision/colorize:
 
 ### Convert Colors
+
 ```javascript
 import { convertColor } from '@mirawision/colorize';
 
@@ -49,6 +58,7 @@ console.log(isValid); // Output: true
 ```
 
 ### Get Color Format
+
 ```javascript
 import { getColorFormat } from '@mirawision/colorize';
 
@@ -57,6 +67,7 @@ console.log(format); // Output: 'RGBA'
 ```
 
 ### Generate Gradient
+
 ```javascript
 import { generateSteppedGradient } from '@mirawision/colorize';
 
@@ -65,6 +76,7 @@ console.log(gradient); // Output: ['rgb(191, 0, 64)', 'rgb(128, 0, 128)', 'rgb(6
 ```
 
 ### Adjust Brightness
+
 ```javascript
 import { adjustBrightness } from '@mirawision/colorize';
 
@@ -73,7 +85,9 @@ console.log(brighter); // Output: 'hsl(120, 50%, 60%)'
 ```
 
 ## Contributing
+
 Contributions are always welcome! Feel free to open issues or submit pull requests.
 
 ## License
+
 This project is licensed under the MIT License.

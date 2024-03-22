@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { styled } from 'styled-components';
 import * as marked from 'marked';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -10,7 +10,6 @@ import { CopyButton } from './copy-button';
 const renderer = new marked.Renderer();
 
 renderer.code = (code, language) => {
-  console.error('CODE', language);
   return `<div class="code-block" data-language="${language}" data-code="${encodeURIComponent(code)}"></div>`;
 };
 
@@ -24,14 +23,15 @@ const Markdown: React.FC<Props> = ({ markdownText }) => {
       const language = block.getAttribute('data-language');
       const code = decodeURIComponent(block.getAttribute('data-code'));
 
-      ReactDOM.render(
+      const root = createRoot(block);
+
+      root.render(
         <CodeContainer>
           <SyntaxHighlighter style={materialOceanic} language={language}>
             {code}
           </SyntaxHighlighter>
           <CopyButtonStyled text={code} />
-        </CodeContainer>,
-        block
+        </CodeContainer>
       );
     });
   }, [markdownText]);
@@ -42,12 +42,6 @@ const Markdown: React.FC<Props> = ({ markdownText }) => {
 };
 
 const Container = styled.div`
-  color: var(--surface-600);
-
-  p, li {
-    line-height: 1.6;
-  }
-
   pre {
     border-radius: 8px;
   }
