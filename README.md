@@ -2,7 +2,7 @@
 
 A comprehensive color manipulation library for TypeScript, `@mirawision/colorize` offers a wide range of functionalities for working with colors. Easily convert between color formats, validate color strings, generate color gradients, blend colors, and perform various adjustments like brightness, saturation, inversion, and more.
 
-[Demo and advanced Documentation can be found here!](https://mirawision.github.io/colorize/introduction)
+[Demo and advanced Documentation can be found here!](https://mirawision.github.io/colorize)
 
 ## Features
 

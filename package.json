@@ -48,7 +48,7 @@
   "bugs": {
     "url": "https://github.com/MiraWision/colorize/issues"
   },
-  "homepage": "https://mirawision.github.io/colorize/introduction",
+  "homepage": "https://mirawision.github.io/colorize",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^29.5.12",
