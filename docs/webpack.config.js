@@ -30,7 +30,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 8192, // This limit can be adjusted based on your needs
+              limit: 8192,
               name: 'assets/[name].[ext]',
             },
           },
@@ -59,8 +59,8 @@ module.exports = {
     }),
   ],
   devServer: {
+    historyApiFallback: true,
     static: './build',
     hot: true,
-    historyApiFallback: true,
   },
 };

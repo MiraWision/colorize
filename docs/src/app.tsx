@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import { Routes } from './routes';
 
@@ -34,7 +34,10 @@ const App: React.FC = () => (
       </Sidebar>
       <Content>
         <Switch>
-          <Route exact path={Routes.Introduction} component={IntroductionPage} />
+          <Redirect exact from='/' to={Routes.Introduction} />
+          <Redirect exact from='/colorize' to={Routes.Introduction} />
+          <Redirect exact from='/colorize/' to={Routes.Introduction} />
+          <Route path={Routes.Introduction} component={IntroductionPage} />
           <Route path={Routes.FunctionConvertColor} component={FunctionConvertColorPage} />
           <Route path={Routes.FunctionGetColorFormat} component={FunctionGetColorFormatPage} />
           <Route path={Routes.FunctionIsValidColor} component={FunctionIsValidColorPage} />

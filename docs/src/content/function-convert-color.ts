@@ -1,10 +1,12 @@
+import { Routes } from '../routes';
+
 const content = `
 The \`convertColor\` function is designed to convert color values between different formats. It supports a range of color formats including HEX, HEXA, RGB, HSL, HSLA, CMYK, and HSV. This function first determines the input color's format, then converts it to an intermediate RGBA format before finally converting it to the desired output format.
 
 ## Arguments
 
 - \`color\` (string): The color value to be converted. The color must be in a recognized format.
-- \`toFormat\` ([ColorFormat](/enum-color-format)): The target color format to which the input color will be converted. This should be one of the supported \`ColorFormat\` enumeration values.
+- \`toFormat\` ([ColorFormat](${Routes.EnumColorFormat})): The target color format to which the input color will be converted. This should be one of the supported \`ColorFormat\` enumeration values.
 
 ## Returns
 

@@ -1,3 +1,5 @@
+import { Routes } from '../routes';
+
 const content = `
 The \`getColorFormat\` function is designed to identify the format of a given color string. It supports various color formats, including HEX, HEXA, RGB, RGBA, HSL, HSLA, HSV, and CMYK. The function utilizes a series of validators to determine the color format by testing the input color against known format patterns.
 
@@ -7,7 +9,7 @@ The \`getColorFormat\` function is designed to identify the format of a given co
 
 ## Returns
 
-- ([ColorFormat](/enum-color-format) | null): The function returns the identified color format as a \`ColorFormat\` enumeration value. If the color format is not recognized, the function returns \`null\`.
+- ([ColorFormat](${Routes.EnumColorFormat}) | null): The function returns the identified color format as a \`ColorFormat\` enumeration value. If the color format is not recognized, the function returns \`null\`.
 
 ## Usage Examples
 
