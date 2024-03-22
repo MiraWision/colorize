@@ -43,7 +43,7 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -59,7 +59,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: './dist',
+    static: './build',
     hot: true,
     historyApiFallback: true,
   },
