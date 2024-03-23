@@ -1,9 +1,21 @@
 {
   "name": "@mirawision/colorize",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A comprehensive color manipulation library for TypeScript, providing functionalities for color conversion, validation, gradient generation, and various color adjustments.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./convert-color": "./dist/convert-color.js",
+    "./is-valid-color": "./dist/is-valid-color.js",
+    "./adjust-brightness": "./dist/adjust-brightness.js",
+    "./adjust-saturation": "./dist/adjust-saturation.js",
+    "./apply-sepia": "./dist/apply-sepia.js",
+    "./blend-colors": "./dist/blend-colors.js",
+    "./change-opacity": "./dist/change-opacity.js",
+    "./generate-stepped-gradient": "./dist/generate-stepped-gradient.js",
+    "./invert-color": "./dist/invert-color.js"
+  },
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node dist/index.js",

@@ -1,0 +1,8 @@
+node_modules
+tests
+docs
+mirawision-colorize-*.tgz
+backlog
+src
+jest.config.js
+tsconfig.json
