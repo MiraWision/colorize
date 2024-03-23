@@ -1,7 +1,7 @@
 import { convertColor } from './convertions';
 import { getColorFormat } from './validations';
 
-import { ColorFormat } from '../types';
+import { ColorFormat, HSL, HSLA, RGB, RGBA } from '../types';
 
 /**
  * Generates a stepped color gradient between two colors.
@@ -47,6 +47,50 @@ const generateSteppedGradient = (fromColor: string, toColor: string, count: numb
   }
 
   return intermediateColors;
+};
+
+/**
+ * Generates a complex stepped color gradient between multiple colors.
+ * This function creates a series of intermediate colors forming a gradient
+ * between each pair of colors in the argument list, with specified steps between each pair.
+ * 
+ * @param args - A list of colors and steps where each color (except the last one) is followed by a number 
+ *   indicating the steps to the next color. For example, the call might look like:
+ *   generateComplexGradient("#ff0000", 3, "#ffff00", 4, "#0000ff").
+ * 
+ * @returns An array of color strings representing the complex gradient including all intermediate colors.
+ *   The format of each color in the array is the same as the format of the first color in the input list.
+ * 
+ * @throws Will throw an error if the arguments don't follow the pattern [color, steps, color, ..., color].
+ * 
+ * Example usage:
+ * generateComplexGradient("#ff0000", 3, "#ffff00", 4, "#0000ff");
+ * // Returns an array including "#ff0000", three intermediate colors to "#ffff00",
+ * // "#ffff00" itself, four intermediate colors to "#0000ff", and "#0000ff".
+ */
+const generateComplexGradient = (...args: (string | number)[]): string[] => {
+  if (args.length < 3 || args.length % 2 === 0) {
+    throw new Error('Function must be called with at least one color and one step count, in an interleaved manner.');
+  }
+
+  let gradientColors: string[] = [];
+
+  for (let i = 0; i < args.length - 2; i += 2) {
+    const fromColor = args[i];
+    const steps = args[i + 1];
+    const toColor = args[i + 2];
+
+    if (typeof fromColor !== 'string' || typeof steps !== 'number' || typeof toColor !== 'string') {
+      throw new Error('Arguments must follow the pattern [color, steps, color, ..., color].');
+    }
+
+    const gradientSegment = generateSteppedGradient(fromColor, toColor, steps as number);
+    gradientColors = gradientColors.concat(gradientSegment.slice(0, -1));
+  }
+
+  gradientColors.push(args[args.length - 1] as string);
+
+  return gradientColors;
 };
 
 /**
@@ -237,12 +281,103 @@ const changeOpacity = (color: string, opacity: number): string => {
   return convertColor(`rgba(${[r, g, b, a].join(', ')})`, colorFormat);
 };
 
+/**
+ * Extracts the color and opacity from a given color string.
+ * If the color format does not include an alpha channel, the opacity is returned as 1.
+ * Supports HEXA, RGBA, and HSLA color formats.
+ * 
+ * @param {string} color - The color string to extract opacity from.
+ * 
+ * @returns {{ color: string, opacity: number }} An object containing the color without opacity and the opacity value.
+ * 
+ * @throws {Error} - If the input color is in an unrecognized or invalid format, an error is thrown.
+ * 
+ * Example usage:
+ * extractOpacity('#ff000080'); // Returns { color: "#ff0000", opacity: 0.5 }.
+ */
+const extractOpacity = (color: string): { color: string; opacity: number } => {
+  const colorFormat = getColorFormat(color);
+  let opacity = 1;
+
+  if (!colorFormat) {
+    throw new Error('Invalid color format');
+  }
+
+  switch (colorFormat) {
+    case ColorFormat.HEXA:
+      opacity = parseInt(color.slice(-2), 16) / 255;
+      color = color.slice(0, -2);
+      break;
+    case ColorFormat.RGBA:
+      [, , , opacity] = color.match(/\d+(\.\d+)?/g)!.map(Number);
+      color = `rgb(${color.match(/\d+/g)!.slice(0, 3).join(', ')})`;
+      break;
+    case ColorFormat.HSLA:
+      [, , , opacity] = color.match(/\d+(\.\d+)?/g)!.map(Number);
+      color = `hsl(${color.match(/\d+/g)!.slice(0, 3).join(', ')})`;
+      break;
+  }
+
+  return { color, opacity };
+};
+
+/**
+ * Converts a given color to an object containing the numerical values of its components.
+ * The function supports conversion to RGB, RGBA, HSL, or HSLA format.
+ * 
+ * @param {string} color - The color string to parse.
+ * 
+ * @param {ColorFormat.RGB | ColorFormat.RGBA | ColorFormat.HSL | ColorFormat.HSLA} format - The desired format for the output.
+ * 
+ * @returns {RGB | RGBA | HSL | HSLA} An object containing the numerical values of the color components.
+ */
+const parseColorNumbers = (color: string, format: ColorFormat.RGB | ColorFormat.RGBA | ColorFormat.HSL | ColorFormat.HSLA): RGB | RGBA | HSL | HSLA => {
+  const colorFormat = getColorFormat(color);
+
+  if (!colorFormat) {
+    throw new Error('Invalid color format');
+  }
+
+  let convertedColor = convertColor(color, ColorFormat[format.toUpperCase() as keyof typeof ColorFormat]);
+  let matches = convertedColor.match(/\d+(\.\d+)?/g);
+
+  if (!matches) {
+    throw new Error('Color conversion failed');
+  }
+
+  let values = matches.map(Number);
+
+  switch (format) {
+    case 'rgb':
+    case 'rgba':
+      return {
+        r: values[0],
+        g: values[1],
+        b: values[2],
+        ...(values.length > 3 && { a: values[3] }),
+      };
+    case 'hsl':
+    case 'hsla':
+      return {
+        h: values[0],
+        s: values[1],
+        l: values[2],
+        ...(values.length > 3 && { a: values[3] }),
+      };
+    default:
+      throw new Error('Invalid format specified');
+  }
+};
+
 export { 
   generateSteppedGradient,
+  generateComplexGradient,
   blendColors,
   adjustBrightness,
   adjustSaturation,
   invertColor,
   applySepia,
   changeOpacity,
+  extractOpacity,
+  parseColorNumbers,
 };

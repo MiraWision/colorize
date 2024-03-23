@@ -6,7 +6,11 @@ import {
   invertColor,
   applySepia,
   changeOpacity,
+  extractOpacity,
+  parseColorNumbers,
+  generateComplexGradient,
 } from '../src/tools/manipulations';
+import { ColorFormat } from '../src/types';
 
 describe('Color manipulation tests', () => {
   describe('generateSteppedGradient', () => {
@@ -139,6 +143,102 @@ describe('Color manipulation tests', () => {
       expect(() => {
         changeOpacity('not a color', 0.5);
       }).toThrow('Invalid color format');
+    });
+  });
+
+  describe('extractOpacity', () => {
+    it('should extract color and opacity from HEXA', () => {
+      const { color, opacity } = extractOpacity('#FF573380');
+      expect(color).toBe('#FF5733');
+      expect(opacity).toBeCloseTo(0.5, 1);
+    });
+
+    it('should return opacity 1 for HEX color', () => {
+      const { color, opacity } = extractOpacity('#FF5733');
+      expect(color).toBe('#FF5733');
+      expect(opacity).toBe(1);
+    });
+
+    it('should extract color and opacity from RGBA', () => {
+      const { color, opacity } = extractOpacity('rgba(255, 87, 51, 0.5)');
+      expect(color).toBe('rgb(255, 87, 51)');
+      expect(opacity).toBe(0.5);
+    });
+
+    it('should throw an error for invalid color format', () => {
+      expect(() => {
+        extractOpacity('invalidColor');
+      }).toThrow('Invalid color format');
+    });
+  });
+
+  describe('parseNumbers', () => {
+    it('should parse RGB color', () => {
+      const result = parseColorNumbers('rgb(255, 87, 51)', ColorFormat.RGB);
+      expect(result).toEqual({ r: 255, g: 87, b: 51 });
+    });
+  
+    it('should parse RGBA color and include alpha', () => {
+      const result = parseColorNumbers('rgba(255, 87, 51, 0.5)', ColorFormat.RGBA);
+      expect(result).toEqual({ r: 255, g: 87, b: 51, a: 0.5 });
+    });
+  
+    it('should parse HSL color', () => {
+      const result = parseColorNumbers('hsl(30, 100%, 50%)', ColorFormat.HSL);
+      expect(result).toEqual({ h: 30, s: 100, l: 50 });
+    });
+  
+    it('should parse HSLA color and include alpha', () => {
+      const result = parseColorNumbers('hsla(30, 100%, 50%, 0.5)', ColorFormat.HSLA);
+      expect(result).toEqual({ h: 30, s: 100, l: 50, a: 0.5 });
+    });
+  
+    it('should throw an error for invalid color format', () => {
+      expect(() => {
+        parseColorNumbers('invalidColor', ColorFormat.RGB);
+      }).toThrow('Invalid color format');
+    });
+  
+    it('should throw an error for invalid format specified', () => {
+      expect(() => {
+        // @ts-ignore
+        parseColorNumbers('rgb(255, 87, 51)', 'invalid');
+      }).toThrow('Invalid format specified');
+    });
+  });
+
+  describe('generateComplexGradientFromArgs', () => {
+    it('generates a complex gradient with given colors and steps', () => {
+      const gradient = generateComplexGradient("#ff0000", 3, "#ffff00", 2, "#00ff00");
+      expect(gradient.length).toBe(8);
+      expect(gradient).toEqual(expect.arrayContaining(["#ff0000", "#ffff00", "#00ff00"]));
+    });
+  
+    it('throws an error if the number of arguments is incorrect', () => {
+      expect(() => {
+        generateComplexGradient("#ff0000");
+      }).toThrow();
+  
+      expect(() => {
+        generateComplexGradient("#ff0000", 3);
+      }).toThrow();
+    });
+  
+    it('throws an error if colors and steps are not in the correct format', () => {
+      expect(() => {
+        generateComplexGradient("#ff0000", "#00ff00", 3);
+      }).toThrow();
+  
+      expect(() => {
+        generateComplexGradient(3, "#ff0000", "#00ff00");
+      }).toThrow();
+    });
+  
+    it('includes all specified colors in the output', () => {
+      const gradient = generateComplexGradient("#ff0000", 1, "#00ff00", 1, "#0000ff");
+      expect(gradient).toContain("#ff0000");
+      expect(gradient).toContain("#00ff00");
+      expect(gradient).toContain("#0000ff");
     });
   });
 });
