@@ -16,7 +16,8 @@
     "./generate-gradient": "./dist/generate-gradient.js",
     "./invert-color": "./dist/invert-color.js",
     "./extract-opacity": "./dist/extract-opacity.js",
-    "./parse-color-numbers": "./dist/parse-color-numbers.js"
+    "./parse-color-numbers": "./dist/parse-color-numbers.js",
+    "./get-luminance": "./dist/get-luminance.js"
   },
   "scripts": {
     "build": "tsc",

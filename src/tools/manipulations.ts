@@ -85,10 +85,12 @@ const generateComplexGradient = (...args: (string | number)[]): string[] => {
     }
 
     const gradientSegment = generateSteppedGradient(fromColor, toColor, steps as number);
-    gradientColors = gradientColors.concat(gradientSegment.slice(0, -1));
+    if (i === 0) {
+      gradientColors.push(fromColor);
+    }
+    gradientColors.push(...gradientSegment);
+    gradientColors.push(toColor);
   }
-
-  gradientColors.push(args[args.length - 1] as string);
 
   return gradientColors;
 };
@@ -332,13 +334,18 @@ const extractOpacity = (color: string): { color: string; opacity: number } => {
  * @returns {RGB | RGBA | HSL | HSLA} An object containing the numerical values of the color components.
  */
 const parseColorNumbers = (color: string, format: ColorFormat.RGB | ColorFormat.RGBA | ColorFormat.HSL | ColorFormat.HSLA): RGB | RGBA | HSL | HSLA => {
+  if (![ColorFormat.RGB, ColorFormat.RGBA, ColorFormat.HSL, ColorFormat.HSLA].some((colorFormat) => colorFormat === format)) {
+    throw new Error('Invalid format specified');
+  }
+  
   const colorFormat = getColorFormat(color);
 
   if (!colorFormat) {
     throw new Error('Invalid color format');
   }
 
-  let convertedColor = convertColor(color, ColorFormat[format.toUpperCase() as keyof typeof ColorFormat]);
+  
+  let convertedColor = convertColor(color, format);
   let matches = convertedColor.match(/\d+(\.\d+)?/g);
 
   if (!matches) {
@@ -369,6 +376,56 @@ const parseColorNumbers = (color: string, format: ColorFormat.RGB | ColorFormat.
   }
 };
 
+/**
+ * Calculates the luminance of a given color.
+ * 
+ * @param {string} color - The color in any supported format.
+ * 
+ * @returns {number} The luminance of the color, a value between 0 and 1.
+ * 
+ * Example usage:
+ * getLuminance('#ff0000'); // Returns the luminance of red.
+ */
+const getLuminance = (color: string): number => {
+  const rgbColor = convertColor(color, ColorFormat.RGB);
+
+  const [r, g, b] = rgbColor.match(/\d+/g)!.map(Number).map((v) => {
+    v /= 255;
+
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  });
+
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+
+/**
+ * Determines if a given color is considered light.
+ * 
+ * @param {string} color - The color in any supported format.
+ * 
+ * @returns {boolean} True if the color is light, false otherwise.
+ * 
+ * Example usage:
+ * isLight('#ff0000'); // Returns false as red is not considered a light color.
+ */
+const isLight = (color: string): boolean => {
+  return getLuminance(color) > 0.5;
+};
+
+/**
+ * Determines if a given color is considered dark.
+ * 
+ * @param {string} color - The color in any supported format.
+ * @returns {boolean} True if the color is dark, false otherwise.
+ * 
+ * Example usage:
+ * isDark('#ff0000'); // Returns true as red is considered a dark color.
+ */
+const isDark = (color: string): boolean => {
+  return getLuminance(color) <= 0.5;
+};
+
+
 export { 
   generateSteppedGradient,
   generateComplexGradient,
@@ -380,4 +437,7 @@ export {
   changeOpacity,
   extractOpacity,
   parseColorNumbers,
+  getLuminance,
+  isLight,
+  isDark,
 };

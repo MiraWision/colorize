@@ -9,6 +9,9 @@ import {
   extractOpacity,
   parseColorNumbers,
   generateComplexGradient,
+  getLuminance,
+  isLight,
+  isDark,
 } from '../src/tools/manipulations';
 import { ColorFormat } from '../src/types';
 
@@ -172,7 +175,7 @@ describe('Color manipulation tests', () => {
     });
   });
 
-  describe('parseNumbers', () => {
+  describe('parseColorNumbers', () => {
     it('should parse RGB color', () => {
       const result = parseColorNumbers('rgb(255, 87, 51)', ColorFormat.RGB);
       expect(result).toEqual({ r: 255, g: 87, b: 51 });
@@ -207,7 +210,7 @@ describe('Color manipulation tests', () => {
     });
   });
 
-  describe('generateComplexGradientFromArgs', () => {
+  describe('generateComplexGradient', () => {
     it('generates a complex gradient with given colors and steps', () => {
       const gradient = generateComplexGradient("#ff0000", 3, "#ffff00", 2, "#00ff00");
       expect(gradient.length).toBe(8);
@@ -241,4 +244,45 @@ describe('Color manipulation tests', () => {
       expect(gradient).toContain("#0000ff");
     });
   });
+
+  describe('getLuminance', () => {
+    it('calculates the luminance of white', () => {
+      expect(getLuminance('#FFFFFF')).toBeCloseTo(1, 5);
+    });
+
+    it('calculates the luminance of black', () => {
+      expect(getLuminance('#000000')).toBeCloseTo(0, 5);
+    });
+
+    it('calculates the luminance of mid-gray', () => {
+      expect(getLuminance('#808080')).toBeCloseTo(0.21586, 5);
+    });
+
+    // Add more tests for different colors
+  });
+
+  describe('isLight', () => {
+    it('returns true for a light color', () => {
+      expect(isLight('#FFFFFF')).toBe(true);
+    });
+
+    it('returns false for a dark color', () => {
+      expect(isLight('#000000')).toBe(false);
+    });
+
+    // Add more tests for different colors
+  });
+
+  describe('isDark', () => {
+    it('returns true for a dark color', () => {
+      expect(isDark('#000000')).toBe(true);
+    });
+
+    it('returns false for a light color', () => {
+      expect(isDark('#FFFFFF')).toBe(false);
+    });
+
+    // Add more tests for different colors
+  });
+
 });

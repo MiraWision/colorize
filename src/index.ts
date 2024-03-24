@@ -9,4 +9,5 @@ export * from './generate-gradient';
 export * from './invert-color';
 export * from './extract-opacity';
 export * from './parse-color-numbers';
+export * from './get-luminance';
 export * from './types/index';
