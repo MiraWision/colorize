@@ -13,8 +13,10 @@
     "./apply-sepia": "./dist/apply-sepia.js",
     "./blend-colors": "./dist/blend-colors.js",
     "./change-opacity": "./dist/change-opacity.js",
-    "./generate-stepped-gradient": "./dist/generate-stepped-gradient.js",
-    "./invert-color": "./dist/invert-color.js"
+    "./generate-gradient": "./dist/generate-gradient.js",
+    "./invert-color": "./dist/invert-color.js",
+    "./extract-opacity": "./dist/extract-opacity.js",
+    "./parse-color-numbers": "./dist/parse-color-numbers.js"
   },
   "scripts": {
     "build": "tsc",
