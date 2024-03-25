@@ -18,6 +18,15 @@ import { FunctionInvertColorPage } from './pages/function-invert-color';
 import { FunctionApplySepiaPage } from './pages/function-apply-sepia';
 import { FunctionChangeOpacityPage } from './pages/function-change-opacity';
 import { EnumColorFormatPage } from './pages/enum-color-format';
+import { FunctionExtractOpacityPage } from './pages/function-extract-opacity';
+import { FunctionParseColorNumbersPage } from './pages/function-parse-color-numbers';
+import { FunctionGenerateMultiSteppedGradientPage } from './pages/function-generate-multi-stepped-gradient';
+import { FunctionTintPage } from './pages/function-tint';
+import { FunctionShadePage } from './pages/function-shade';
+import { FunctionGetLuminancePage } from './pages/function-get-luminance';
+import { FunctionIsLightPage } from './pages/function-is-light';
+import { FunctionIsDarkPage } from './pages/function-is-dark';
+import { FunctionCalculateContrastPage } from './pages/function-calculate-contrast';
 
 const App: React.FC = () => (
   <Router>
@@ -25,30 +34,46 @@ const App: React.FC = () => (
       <Sidebar>
         <Logo />
         <MenuList />
+      </Sidebar>
+      <Content>
         <GitHubLogo href='https://github.com/MiraWision/colorize' target='_blank'>
           <img src='./assets/icons/github.svg' alt='github' />
         </GitHubLogo>
         <NPMLogo href='https://www.npmjs.com/package/@mirawision/colorize' target='_blank'>
           <img src='./assets/icons/npm.png' alt='npm' />
         </NPMLogo>
-      </Sidebar>
-      <Content>
         <Switch>
           <Redirect exact from='/' to={Routes.Introduction} />
           <Redirect exact from='/colorize' to={Routes.Introduction} />
           <Redirect exact from='/colorize/' to={Routes.Introduction} />
+
           <Route path={Routes.Introduction} component={IntroductionPage} />
-          <Route path={Routes.FunctionConvertColor} component={FunctionConvertColorPage} />
-          <Route path={Routes.FunctionGetColorFormat} component={FunctionGetColorFormatPage} />
+
           <Route path={Routes.FunctionIsValidColor} component={FunctionIsValidColorPage} />
+          <Route path={Routes.FunctionGetColorFormat} component={FunctionGetColorFormatPage} />
+
+          <Route path={Routes.FunctionConvertColor} component={FunctionConvertColorPage} />
+          <Route path={Routes.FunctionExtractOpacity} component={FunctionExtractOpacityPage} />
+          <Route path={Routes.FunctionParseColorNumbers} component={FunctionParseColorNumbersPage} />
+
           <Route path={Routes.FunctionGenerateSteppedGradient} component={FunctionGenerateSteppedGradientPage} />
+          <Route path={Routes.FunctionGenerateMultiSteppedGradient} component={FunctionGenerateMultiSteppedGradientPage} />
+          
           <Route path={Routes.FunctionBlendColors} component={FunctionBlendColorsPage} />
+          <Route path={Routes.FunctionTint} component={FunctionTintPage} />
+          <Route path={Routes.FunctionShade} component={FunctionShadePage} />
           <Route path={Routes.FunctionAdjustBrightness} component={FunctionAdjustBrightnessPage} />
           <Route path={Routes.FunctionAdjustSaturation} component={FunctionAdjustSaturationPage} />
           <Route path={Routes.FunctionInvertColor} component={FunctionInvertColorPage} />
           <Route path={Routes.FunctionApplySepia} component={FunctionApplySepiaPage} />
+          <Route path={Routes.FunctionApplyGreyscale} component={FunctionApplySepiaPage} />
           <Route path={Routes.FunctionChangeOpacity} component={FunctionChangeOpacityPage} />
-          <Route path={Routes.FunctionChangeOpacity} component={FunctionChangeOpacityPage} />
+          
+          <Route path={Routes.FunctionGetLuminance} component={FunctionGetLuminancePage} />
+          <Route path={Routes.FunctionIsLight} component={FunctionIsLightPage} />
+          <Route path={Routes.FunctionIsDark} component={FunctionIsDarkPage} />
+          <Route path={Routes.FunctionCalculateContrast} component={FunctionCalculateContrastPage} />
+          
           <Route path={Routes.EnumColorFormat} component={EnumColorFormatPage} />
         </Switch>
       </Content>
@@ -59,7 +84,8 @@ const App: React.FC = () => (
 const Container = styled.div`
   width: 100vw;
   display: grid;
-  grid-template-columns: 240px calc(100vw - 240px);
+  grid-template-columns: 270px calc(100vw - 270px);
+  grid-template-rows: 100vh;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -67,15 +93,20 @@ const Container = styled.div`
 `;
 
 const Sidebar = styled.div`
-  min-height: 600px;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: scroll;
   padding: 24px;
   display: flex;
   flex-direction: column;
   position: relative;
-  padding-bottom: 40px;
 `;
 
 const Content = styled.div`
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow: scroll;
+  position: relative;
   padding: 24px;
   display: flex;
   align-items: center;
@@ -86,8 +117,7 @@ const Content = styled.div`
 
 const BaseLogo = styled.a`
   position: fixed;
-  bottom: 16px;
-  left: 16px;
+  top: 16px;
   width: 24px;
   height: 24px;
   transition: transform 0.5s;
@@ -103,11 +133,11 @@ const BaseLogo = styled.a`
 `;
 
 const GitHubLogo = styled(BaseLogo)`
-  left: 16px;
+  right: 16px;
 `;
 
 const NPMLogo = styled(BaseLogo)`
-  left: 56px;
+  right: 56px;
 `;
 
 export default App;

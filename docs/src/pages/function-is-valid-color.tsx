@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { ColorFormat, convertColor, isValidCMYKColor, isValidColor, isValidHEXAColor, isValidHEXColor, isValidHSLAColor, isValidHSLColor, isValidHSVColor, isValidRGBAColor, isValidRGBColor } from '@mirawision/colorize';
+import { ColorFormat, isValidCMYKColor, isValidColor, isValidHEXAColor, isValidHEXColor, isValidHSLAColor, isValidHSLColor, isValidHSVColor, isValidRGBAColor, isValidRGBColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-is-valid-color';
 import { getRandomHexColor } from '../utils/get-random-color';
@@ -12,7 +12,12 @@ import { ColorBox, Result, Row } from '../components/styles';
 interface Props {
 }
 
-const colorFormats = [
+interface ColorFormatItem { 
+  name: string; 
+  code: ColorFormat | 'any';
+}
+
+const colorFormats: ColorFormatItem[] = [
   { name: 'Any', code: 'any' },
   { name: 'Hex', code: ColorFormat.HEX },
   { name: 'Hexa', code: ColorFormat.HEXA },
@@ -26,7 +31,7 @@ const colorFormats = [
 
 const FunctionIsValidColorPage: React.FC<Props> = ({}) => {
   const [colorToValidate, setColorToConvert] = useState(getRandomHexColor());
-  const [colorFormatToValidate, setColorFormatToValidate] = useState<{ name: string; code: ColorFormat | 'any'}>({ name: 'Any', code: 'any' });
+  const [colorFormatToValidate, setColorFormatToValidate] = useState<ColorFormatItem>(colorFormats[0]);
   const isValid = useMemo(() => {
     const validators = {
       'any': isValidColor,

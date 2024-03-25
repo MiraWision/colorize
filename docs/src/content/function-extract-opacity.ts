@@ -1,35 +1,32 @@
 const content = `
-The \`extractOpacity\` function separates the color and opacity from a given color string. It supports HEXA, RGBA, and HSLA formats. For color formats that do not include an alpha channel, the function defaults the opacity to 1.
+The \`extractOpacity\` function parses a color string and extracts its opacity value. It supports color formats that include opacity, such as Hexa, RGBA, and HSLA.
 
 ## Arguments
 
-- \`color\` (string): The color string from which to extract the color and opacity.
+- \`color\` (string): The color in a format that includes opacity (Hexa, RGBA, or HSLA).
 
 ## Returns
 
-- Object: An object containing the extracted color and opacity. The color is returned without the alpha channel, and the opacity is a number between 0 and 1.
+- An object containing two properties:
+  - \`color\`: The color string without the opacity component.
+  - \`opacity\`: The extracted opacity as a number.
 
 ## Usage Examples
 
-### Extracting from HEXA
+### Extracting opacity from an RGBA color
 
 \`\`\`typescript
-const result = extractOpacity('#FF573380');
-console.log(result); // { color: '#FF5733', opacity: 0.5 }
+const rgbaResult = extractOpacity('rgba(255, 99, 71, 0.5)');
+console.log(rgbaResult.opacity); // Outputs: 0.5
+console.log(rgbaResult.color); // Outputs: 'rgb(255, 99, 71)'
 \`\`\`
 
-### Extracting from RGBA
+### Extracting opacity from an HSLA color
 
 \`\`\`typescript
-const result = extractOpacity('rgba(255, 87, 51, 0.5)');
-console.log(result); // { color: 'rgb(255, 87, 51)', opacity: 0.5 }
-\`\`\`
-
-### Default Opacity for HEX
-
-\`\`\`typescript
-const result = extractOpacity('#FF5733');
-console.log(result); // { color: '#FF5733', opacity: 1 }
+const hslaResult = extractOpacity('hsla(9, 100%, 64%, 0.75)');
+console.log(hslaResult.opacity); // Outputs: 0.75
+console.log(hslaResult.color); // Outputs: 'hsl(9, 100%, 64%)'
 \`\`\`
 `;
 

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { styled } from 'styled-components';
 import { generateSteppedGradient } from '@mirawision/colorize';
 
-import { content } from '../content/function-generate-complex-gradient';
+import { content } from '../content/function-generate-stepped-gradient';
 import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';

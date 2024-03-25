@@ -9,7 +9,7 @@ The \`getColorFormat\` function is designed to identify the format of a given co
 
 ## Returns
 
-- ([ColorFormat](${Routes.EnumColorFormat}) | null): The function returns the identified color format as a \`ColorFormat\` enumeration value. If the color format is not recognized, the function returns \`null\`.
+- ([ColorFormat](${Routes.EnumColorFormat}) | \`null\`): The function returns the identified color format as a \`ColorFormat\` enumeration value. If the color format is not recognized, the function returns \`null\`.
 
 ## Usage Examples
 
