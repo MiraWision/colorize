@@ -212,7 +212,7 @@ const MenuItem = styled(Link)<{ isActive: boolean, isInactive?: boolean, isSubit
 
 const MenuGroup = styled.div`
   padding: 12px 16px 4px;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 12px;
   font-family: "Rajdhani", sans-serif;
   text-transform: uppercase;

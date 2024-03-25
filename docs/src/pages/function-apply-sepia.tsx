@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import styled from 'styled-components';
 import { applySepia } from '@mirawision/colorize';
 
 import { content } from '../content/function-apply-sepia';
+import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const FunctionApplySepiaPage: React.FC<Props> = ({}) => {
-  const [colorToApplySepia, setColorToApplySepia] = useState('#ABCDEF');
+  const [colorToApplySepia, setColorToApplySepia] = useState(getRandomHexColor());
   const sepiaColor = useMemo(() => {
     try {
       return applySepia(colorToApplySepia);

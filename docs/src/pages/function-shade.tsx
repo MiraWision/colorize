@@ -3,6 +3,7 @@ import { shade } from '@mirawision/colorize';
 
 import { content } from '../content/function-shade';
 import { getRandomHexColor } from '../utils/get-random-color';
+import { getRandomNumber } from '../utils/get-random-numer';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -14,7 +15,7 @@ interface Props {
 
 const FunctionShadePage: React.FC<Props> = ({}) => {
   const [colorToShade, setColorToShade] = useState(getRandomHexColor());
-  const [shadePercentage, setShadePercentage] = useState(0.5);
+  const [shadePercentage, setShadePercentage] = useState(getRandomNumber(0.05, 0.95, 0.05));
   const shadedColor = useMemo(() => {
     try {
       return shade(colorToShade, shadePercentage);

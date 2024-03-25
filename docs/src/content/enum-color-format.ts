@@ -12,7 +12,7 @@ The \`ColorFormat\` enum is used to define the various color formats supported b
 - \`CMYK\` ("cmyk"): Represents the CMYK color format (e.g., "cmyk(0%, 0%, 0%, 0%)").
 - \`HSV\` ("hsv"): Represents the HSV color format (e.g., "hsv(0, 100%, 100%)").
 
-## Usage
+## Usage Example
 
 The \`ColorFormat\` enum can be used to specify the expected color format in various functions and components throughout the application. For example, when converting colors from one format to another, the target format can be specified using this enum.
 

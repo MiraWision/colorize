@@ -3,6 +3,7 @@ import { changeOpacity } from '@mirawision/colorize';
 
 import { content } from '../content/function-change-opacity';
 import { getRandomHexaColor } from '../utils/get-random-color';
+import { getRandomNumber } from '../utils/get-random-numer';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -14,7 +15,7 @@ interface Props {
 
 const FunctionChangeOpacityPage: React.FC<Props> = ({}) => {
   const [colorToChangeOpacity, setColorToChangeOpacity] = useState(getRandomHexaColor());
-  const [opacity, setOpacity] = useState(1);
+  const [opacity, setOpacity] = useState(getRandomNumber(0.05, 0.95, 0.05));
   const opacityAdjustedColor = useMemo(() => {
     try {
       return changeOpacity(colorToChangeOpacity, opacity);

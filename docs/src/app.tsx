@@ -27,6 +27,7 @@ import { FunctionGetLuminancePage } from './pages/function-get-luminance';
 import { FunctionIsLightPage } from './pages/function-is-light';
 import { FunctionIsDarkPage } from './pages/function-is-dark';
 import { FunctionCalculateContrastPage } from './pages/function-calculate-contrast';
+import { FunctionApplyGreyscalePage } from './pages/function-apply-greyscale';
 
 const App: React.FC = () => (
   <Router>
@@ -66,7 +67,7 @@ const App: React.FC = () => (
           <Route path={Routes.FunctionAdjustSaturation} component={FunctionAdjustSaturationPage} />
           <Route path={Routes.FunctionInvertColor} component={FunctionInvertColorPage} />
           <Route path={Routes.FunctionApplySepia} component={FunctionApplySepiaPage} />
-          <Route path={Routes.FunctionApplyGreyscale} component={FunctionApplySepiaPage} />
+          <Route path={Routes.FunctionApplyGreyscale} component={FunctionApplyGreyscalePage} />
           <Route path={Routes.FunctionChangeOpacity} component={FunctionChangeOpacityPage} />
           
           <Route path={Routes.FunctionGetLuminance} component={FunctionGetLuminancePage} />
