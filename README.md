@@ -12,6 +12,12 @@ A comprehensive color manipulation library for TypeScript, `@mirawision/colorize
 
 ### Conversion
 - **Color Conversion**: Convert colors between different formats, supporting a wide range of color models.
+- **Opacity Extraction**: Extract the opacity value from a color, useful for understanding and manipulating alpha channels.
+- **Color Number Parsing**: Parse color components into numeric values, allowing for detailed color manipulations and analyses.
+
+### Gradient Generations
+- **Stepped Gradient**: Create stepped gradients between two colors, perfect for heatmaps and visual effects.
+- **Advanced Multi-Stepped Gradient**: Generate complex gradients with multiple colors and steps, offering detailed control over color transitions.
 
 ### Manipulations
 - **Brightness Adjustment**: Increase or decrease the brightness of a color to fit your design needs.
@@ -27,13 +33,6 @@ A comprehensive color manipulation library for TypeScript, `@mirawision/colorize
 - **Luminance Calculation**: Get the luminance of a color, understanding its perceived brightness.
 - **Color Lightness Detection**: Determine if a color is considered light or dark, aiding in accessibility and readability decisions.
 - **Contrast Calculation**: Calculate the contrast ratio between two colors, essential for designing accessible and legible interfaces.
-- **Opacity Extraction**: Extract the opacity value from a color, useful for understanding and manipulating alpha channels.
-- **Color Number Parsing**: Parse color components into numeric values, allowing for detailed color manipulations and analyses.
-
-### Gradient Generations
-- **Stepped Gradient**: Create stepped gradients between two colors, perfect for heatmaps and visual effects.
-- **Advanced Multi-Stepped Gradient**: Generate complex gradients with multiple colors and steps, offering detailed control over color transitions.
-
 
 ### Supported Color Formats:
 

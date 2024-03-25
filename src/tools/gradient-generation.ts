@@ -1,5 +1,5 @@
 import { convertColor } from './convertions';
-import { getColorFormat } from './format-detection';
+import { getColorFormat } from './validations';
 
 import { ColorFormat } from '../types';
 

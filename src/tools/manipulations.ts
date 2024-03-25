@@ -1,7 +1,7 @@
 import { convertColor } from './convertions';
+import { getColorFormat } from './validations';
 
 import { ColorFormat } from '../types';
-import { getColorFormat } from './format-detection';
 
 /**
  * Blends two colors together based on a specified weight, producing a new color.

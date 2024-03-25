@@ -1,1 +1,1 @@
-export { getColorFormat } from './tools/format-detection';
+export { getColorFormat } from './tools/validations';

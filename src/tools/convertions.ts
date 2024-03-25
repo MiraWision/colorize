@@ -1,6 +1,6 @@
-import { getColorFormat } from './format-detection';
+import { getColorFormat } from './validations';
 
-import { BaseColorFormat, ColorFormat } from '../types';
+import { BaseColorFormat, ColorFormat, HSL, HSLA, RGB, RGBA } from '../types';
 
 /**
  * Converts a color from its current format to a specified target format.
@@ -54,6 +54,98 @@ const convertColor = (color: string, toFormat: ColorFormat): string => {
   const outputColor = toFormat === BaseColorFormat ? baseColor : convertFromBase[toFormat](baseColor);
 
   return outputColor;
+};
+
+/**
+ * Extracts the color and opacity from a given color string.
+ * If the color format does not include an alpha channel, the opacity is returned as 1.
+ * Supports HEXA, RGBA, and HSLA color formats.
+ * 
+ * @param {string} color - The color string to extract opacity from.
+ * 
+ * @returns {{ color: string, opacity: number }} An object containing the color without opacity and the opacity value.
+ * 
+ * @throws {Error} - If the input color is in an unrecognized or invalid format, an error is thrown.
+ * 
+ * Example usage:
+ * extractOpacity('#ff000080'); // Returns { color: "#ff0000", opacity: 0.5 }.
+ */
+const extractOpacity = (color: string): { color: string; opacity: number } => {
+  const colorFormat = getColorFormat(color);
+  let opacity = 1;
+
+  if (!colorFormat) {
+    throw new Error('Invalid color format');
+  }
+
+  switch (colorFormat) {
+    case ColorFormat.HEXA:
+      opacity = parseInt(color.slice(-2), 16) / 255;
+      color = color.slice(0, -2);
+      break;
+    case ColorFormat.RGBA:
+      [, , , opacity] = color.match(/\d+(\.\d+)?/g)!.map(Number);
+      color = `rgb(${color.match(/\d+/g)!.slice(0, 3).join(', ')})`;
+      break;
+    case ColorFormat.HSLA:
+      [, , , opacity] = color.match(/\d+(\.\d+)?/g)!.map(Number);
+      color = `hsl(${color.match(/\d+/g)!.slice(0, 3).join(', ')})`;
+      break;
+  }
+
+  return { color, opacity };
+};
+
+/**
+ * Converts a given color to an object containing the numerical values of its components.
+ * The function supports conversion to RGB, RGBA, HSL, or HSLA format.
+ * 
+ * @param {string} color - The color string to parse.
+ * @param {ColorFormat.RGB | ColorFormat.RGBA | ColorFormat.HSL | ColorFormat.HSLA} format - The desired format for the output.
+ * 
+ * @returns {RGB | RGBA | HSL | HSLA} An object containing the numerical values of the color components.
+ */
+const parseColorNumbers = (color: string, format: ColorFormat.RGB | ColorFormat.RGBA | ColorFormat.HSL | ColorFormat.HSLA): RGB | RGBA | HSL | HSLA => {
+  if (![ColorFormat.RGB, ColorFormat.RGBA, ColorFormat.HSL, ColorFormat.HSLA].some((colorFormat) => colorFormat === format)) {
+    throw new Error('Invalid format specified');
+  }
+  
+  const colorFormat = getColorFormat(color);
+
+  if (!colorFormat) {
+    throw new Error('Invalid color format');
+  }
+
+  
+  let convertedColor = convertColor(color, format);
+  let matches = convertedColor.match(/\d+(\.\d+)?/g);
+
+  if (!matches) {
+    throw new Error('Color conversion failed');
+  }
+
+  let values = matches.map(Number);
+
+  switch (format) {
+    case 'rgb':
+    case 'rgba':
+      return {
+        r: values[0],
+        g: values[1],
+        b: values[2],
+        ...(values.length > 3 && { a: values[3] }),
+      };
+    case 'hsl':
+    case 'hsla':
+      return {
+        h: values[0],
+        s: values[1],
+        l: values[2],
+        ...(values.length > 3 && { a: values[3] }),
+      };
+    default:
+      throw new Error('Invalid format specified');
+  }
 };
 
 const hexToRGBA = (color: string): string => {
@@ -369,6 +461,8 @@ const rgbaToHSV = (rgba: string): string => {
 
 export { 
   convertColor,
+  extractOpacity,
+  parseColorNumbers,
   rgbToRGBA,
   hexToRGBA,
   hexaToRGBA,

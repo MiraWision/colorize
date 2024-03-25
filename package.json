@@ -1,6 +1,6 @@
 {
   "name": "@mirawision/colorize",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A comprehensive color manipulation library for TypeScript, providing functionalities for color conversion, validation, gradient generation, and various color adjustments.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
