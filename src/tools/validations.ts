@@ -100,7 +100,7 @@ const isValidRGBColor = (color: string): boolean => {
  * isValidRGBAColor('rgba(255, 99, 71, -0.1)'); // returns false, negative alpha value
  */
 const isValidRGBAColor = (color: string): boolean => {
-  const regex = /^rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(0|1|0?\.\d+)\)$/;
+  const regex = /^rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(0|1|0?\.\d+|1?\.\d+)\)$/;
   
   if (!regex.test(color)) {
     return false;

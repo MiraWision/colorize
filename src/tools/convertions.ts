@@ -1,6 +1,6 @@
 import { getColorFormat } from './format-detection';
 
-wimport { BaseColorFormat, ColorFormat } from '../types';
+import { BaseColorFormat, ColorFormat } from '../types';
 
 /**
  * Converts a color from its current format to a specified target format.

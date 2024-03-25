@@ -113,7 +113,7 @@ describe('analysis', () => {
   
     it('calculates correct contrast between two arbitrary colors', () => {
       const contrast = calculateContrast('#123456', '#654321');
-      const expectedContrast = 8.23;
+      const expectedContrast = 1.44;
       expect(contrast).toBeCloseTo(expectedContrast, 2);
     });
   });

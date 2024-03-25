@@ -128,29 +128,29 @@ describe('manipulations', () => {
 
   describe('tint', () => {
     it('returns white when the weight is 100%', () => {
-      expect(tint('#ff0000', 100)).toBe('#ffffff');
+      expect(tint('#FF0000', 1)).toBe('#FFFFFF');
     });
   
     it('returns the same color when the weight is 0%', () => {
-      expect(tint('#ff0000', 0)).toBe('#ff0000');
+      expect(tint('#FF0000', 0)).toBe('#FF0000');
     });
   
     it('returns a lighter color when the weight is 50%', () => {
-      expect(tint('#0000ff', 50)).toBe('#8080ff');
+      expect(tint('#0000FF', 0.5)).toBe('#8080FF');
     });
   });
   
   describe('shade', () => {
     it('returns black when the weight is 100%', () => {
-      expect(shade('#00ff00', 100)).toBe('#000000');
+      expect(shade('#00FF00', 1)).toBe('#000000');
     });
   
     it('returns the same color when the weight is 0%', () => {
-      expect(shade('#00ff00', 0)).toBe('#00ff00');
+      expect(shade('#00FF00', 0)).toBe('#00FF00');
     });
   
     it('returns a darker color when the weight is 50%', () => {
-      expect(shade('#00ff00', 50)).toBe('#008000');
+      expect(shade('#00FF00', 0.5)).toBe('#008000');
     });
   });
 

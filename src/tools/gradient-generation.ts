@@ -31,19 +31,22 @@ const generateSteppedGradient = (fromColor: string, toColor: string, count: numb
     throw new Error('Invalid color format');
   }
 
-  const fromRGB = convertColor(fromColor, ColorFormat.RGB).match(/\d+/g)!.map(Number);
-  const toRGB = convertColor(toColor, ColorFormat.RGB).match(/\d+/g)!.map(Number);
+  const fromRGBA = convertColor(fromColor, ColorFormat.RGBA).match(/\d+(\.\d+)?/g)!.map(Number);
+  const toRGBA = convertColor(toColor, ColorFormat.RGBA).match(/\d+(\.\d+)?/g)!.map(Number);
   const step = 1 / (count + 1);
 
   let intermediateColors = [];
 
   for (let i = 1; i <= count; i++) {
-    const interpolatedColor = fromRGB.map((start, index) => {
-      const end = toRGB[index];
-      return Math.round(start + (end - start) * step * i);
+    const interpolatedColor = fromRGBA.map((start, index) => {
+      const end = toRGBA[index];
+
+      return index !== 3
+        ? Math.round(start + (end - start) * step * i) 
+        : (start + (end - start) * step * i).toFixed(2);
     });
 
-    intermediateColors.push(convertColor(`rgb(${interpolatedColor.join(', ')})`, fromColorFormat));
+    intermediateColors.push(convertColor(`rgba(${interpolatedColor.join(', ')})`, fromColorFormat));
   }
 
   return intermediateColors;
