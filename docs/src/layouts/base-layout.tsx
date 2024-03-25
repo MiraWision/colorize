@@ -28,6 +28,7 @@ const Container = styled.div`
   width: 100vw;
   display: grid;
   grid-template-columns: 240px calc(100vw - 240px);
+  grid-template-rows: 100vh;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;

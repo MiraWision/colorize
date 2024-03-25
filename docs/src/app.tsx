@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import { Routes } from './routes';
 
@@ -71,7 +71,8 @@ const Sidebar = styled.div`
   padding: 24px;
   display: flex;
   flex-direction: column;
-  position: relative; 
+  position: relative;
+  padding-bottom: 40px;
 `;
 
 const Content = styled.div`
