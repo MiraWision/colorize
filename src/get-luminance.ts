@@ -1,1 +1,1 @@
-export { getLuminance, isLight, isDark } from './tools/manipulations';
+export { getLuminance } from './tools/analysis';

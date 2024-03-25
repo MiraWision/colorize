@@ -17,7 +17,7 @@ import {
 } from '../src/tools/convertions';
 import { ColorFormat } from '../src/types';
 
-describe('Color conversion tests', () => {
+describe('convertions', () => {
   describe('hexToRGBA', () => {
     it('should convert 3-digit HEX color to RGBA', () => {
       expect(hexToRGBA('#fff')).toBe('rgba(255, 255, 255, 1)');

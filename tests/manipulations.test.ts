@@ -1,39 +1,16 @@
 import { 
-  generateSteppedGradient,
   blendColors,
   adjustBrightness,
   adjustSaturation,
   invertColor,
   applySepia,
   changeOpacity,
-  extractOpacity,
-  parseColorNumbers,
-  generateComplexGradient,
-  getLuminance,
-  isLight,
-  isDark,
+  tint,
+  shade,
+  applyGreyscale,
 } from '../src/tools/manipulations';
-import { ColorFormat } from '../src/types';
 
-describe('Color manipulation tests', () => {
-  describe('generateSteppedGradient', () => {
-    it('should generate a stepped gradient with valid colors', () => {
-      const gradient = generateSteppedGradient('rgb(255, 0, 0)', 'rgb(0, 0, 255)', 3);
-      expect(gradient.length).toBe(3);
-      expect(gradient.join(';')).toBe(['rgb(191, 0, 64)', 'rgb(128, 0, 128)', 'rgb(64, 0, 191)'].join(';'));
-    });
-
-    it('should throw an error for invalid color formats', () => {
-      expect(() => {
-        generateSteppedGradient('not a color', 'rgb(0, 0, 255)', 3);
-      }).toThrow('Invalid color format');
-
-      expect(() => {
-        generateSteppedGradient('rgb(255, 0, 0)', 'not a color', 3);
-      }).toThrow('Invalid color format');
-    });
-  });
-
+describe('manipulations', () => {
   describe('blendColors', () => {
     it('should correctly blend two colors', () => {
       // Simple blend check with a 50% weight
@@ -149,140 +126,50 @@ describe('Color manipulation tests', () => {
     });
   });
 
-  describe('extractOpacity', () => {
-    it('should extract color and opacity from HEXA', () => {
-      const { color, opacity } = extractOpacity('#FF573380');
-      expect(color).toBe('#FF5733');
-      expect(opacity).toBeCloseTo(0.5, 1);
+  describe('tint', () => {
+    it('returns white when the weight is 100%', () => {
+      expect(tint('#ff0000', 100)).toBe('#ffffff');
     });
-
-    it('should return opacity 1 for HEX color', () => {
-      const { color, opacity } = extractOpacity('#FF5733');
-      expect(color).toBe('#FF5733');
-      expect(opacity).toBe(1);
+  
+    it('returns the same color when the weight is 0%', () => {
+      expect(tint('#ff0000', 0)).toBe('#ff0000');
     });
-
-    it('should extract color and opacity from RGBA', () => {
-      const { color, opacity } = extractOpacity('rgba(255, 87, 51, 0.5)');
-      expect(color).toBe('rgb(255, 87, 51)');
-      expect(opacity).toBe(0.5);
+  
+    it('returns a lighter color when the weight is 50%', () => {
+      expect(tint('#0000ff', 50)).toBe('#8080ff');
     });
-
-    it('should throw an error for invalid color format', () => {
-      expect(() => {
-        extractOpacity('invalidColor');
-      }).toThrow('Invalid color format');
+  });
+  
+  describe('shade', () => {
+    it('returns black when the weight is 100%', () => {
+      expect(shade('#00ff00', 100)).toBe('#000000');
+    });
+  
+    it('returns the same color when the weight is 0%', () => {
+      expect(shade('#00ff00', 0)).toBe('#00ff00');
+    });
+  
+    it('returns a darker color when the weight is 50%', () => {
+      expect(shade('#00ff00', 50)).toBe('#008000');
     });
   });
 
-  describe('parseColorNumbers', () => {
-    it('should parse RGB color', () => {
-      const result = parseColorNumbers('rgb(255, 87, 51)', ColorFormat.RGB);
-      expect(result).toEqual({ r: 255, g: 87, b: 51 });
+  describe('applyGreyscale', () => {
+    it('converts pure red to its grayscale equivalent', () => {
+      expect(applyGreyscale('#ff0000')).toBe('rgb(54, 54, 54)');
     });
   
-    it('should parse RGBA color and include alpha', () => {
-      const result = parseColorNumbers('rgba(255, 87, 51, 0.5)', ColorFormat.RGBA);
-      expect(result).toEqual({ r: 255, g: 87, b: 51, a: 0.5 });
+    it('converts pure green to its grayscale equivalent', () => {
+      expect(applyGreyscale('#00ff00')).toBe('rgb(182, 182, 182)');
     });
   
-    it('should parse HSL color', () => {
-      const result = parseColorNumbers('hsl(30, 100%, 50%)', ColorFormat.HSL);
-      expect(result).toEqual({ h: 30, s: 100, l: 50 });
+    it('converts pure blue to its grayscale equivalent', () => {
+      expect(applyGreyscale('#0000ff')).toBe('rgb(18, 18, 18)');
     });
   
-    it('should parse HSLA color and include alpha', () => {
-      const result = parseColorNumbers('hsla(30, 100%, 50%, 0.5)', ColorFormat.HSLA);
-      expect(result).toEqual({ h: 30, s: 100, l: 50, a: 0.5 });
-    });
-  
-    it('should throw an error for invalid color format', () => {
-      expect(() => {
-        parseColorNumbers('invalidColor', ColorFormat.RGB);
-      }).toThrow('Invalid color format');
-    });
-  
-    it('should throw an error for invalid format specified', () => {
-      expect(() => {
-        // @ts-ignore
-        parseColorNumbers('rgb(255, 87, 51)', 'invalid');
-      }).toThrow('Invalid format specified');
+    it('retains a gray color as is', () => {
+      const greyColor = 'rgb(128, 128, 128)';
+      expect(applyGreyscale(greyColor)).toBe(greyColor);
     });
   });
-
-  describe('generateComplexGradient', () => {
-    it('generates a complex gradient with given colors and steps', () => {
-      const gradient = generateComplexGradient("#ff0000", 3, "#ffff00", 2, "#00ff00");
-      expect(gradient.length).toBe(8);
-      expect(gradient).toEqual(expect.arrayContaining(["#ff0000", "#ffff00", "#00ff00"]));
-    });
-  
-    it('throws an error if the number of arguments is incorrect', () => {
-      expect(() => {
-        generateComplexGradient("#ff0000");
-      }).toThrow();
-  
-      expect(() => {
-        generateComplexGradient("#ff0000", 3);
-      }).toThrow();
-    });
-  
-    it('throws an error if colors and steps are not in the correct format', () => {
-      expect(() => {
-        generateComplexGradient("#ff0000", "#00ff00", 3);
-      }).toThrow();
-  
-      expect(() => {
-        generateComplexGradient(3, "#ff0000", "#00ff00");
-      }).toThrow();
-    });
-  
-    it('includes all specified colors in the output', () => {
-      const gradient = generateComplexGradient("#ff0000", 1, "#00ff00", 1, "#0000ff");
-      expect(gradient).toContain("#ff0000");
-      expect(gradient).toContain("#00ff00");
-      expect(gradient).toContain("#0000ff");
-    });
-  });
-
-  describe('getLuminance', () => {
-    it('calculates the luminance of white', () => {
-      expect(getLuminance('#FFFFFF')).toBeCloseTo(1, 5);
-    });
-
-    it('calculates the luminance of black', () => {
-      expect(getLuminance('#000000')).toBeCloseTo(0, 5);
-    });
-
-    it('calculates the luminance of mid-gray', () => {
-      expect(getLuminance('#808080')).toBeCloseTo(0.21586, 5);
-    });
-
-    // Add more tests for different colors
-  });
-
-  describe('isLight', () => {
-    it('returns true for a light color', () => {
-      expect(isLight('#FFFFFF')).toBe(true);
-    });
-
-    it('returns false for a dark color', () => {
-      expect(isLight('#000000')).toBe(false);
-    });
-
-    // Add more tests for different colors
-  });
-
-  describe('isDark', () => {
-    it('returns true for a dark color', () => {
-      expect(isDark('#000000')).toBe(true);
-    });
-
-    it('returns false for a light color', () => {
-      expect(isDark('#FFFFFF')).toBe(false);
-    });
-
-    // Add more tests for different colors
-  });
-
 });

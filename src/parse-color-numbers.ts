@@ -1,1 +1,1 @@
-export { parseColorNumbers } from './tools/manipulations';
+export { parseColorNumbers } from './tools/analysis';

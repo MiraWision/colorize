@@ -1,1 +1,1 @@
-export { extractOpacity } from './tools/manipulations';
+export { extractOpacity } from './tools/analysis';
