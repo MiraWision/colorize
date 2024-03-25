@@ -1,7 +1,6 @@
 node_modules/
 .DS_Store
-mirawision-colorize-*.tgz
-tools
-types
-*.d.ts
-*.js
+/mirawision-colorize-*.tgz
+/utils
+/*.d.ts
+/*.js

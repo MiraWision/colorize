@@ -1,4 +1,7 @@
-import { calculateContrast, getLuminance, isDark, isLight } from '../src/tools/analysis'
+import { getLuminance } from '../src/get-luminance';
+import { isLight } from '../src/is-light';
+import { isDark } from '../src/is-dark';
+import { calculateContrast } from '../src/calculate-contrast';
 
 describe('analysis', () => {
   describe('getLuminance', () => {

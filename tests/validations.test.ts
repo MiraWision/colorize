@@ -9,8 +9,9 @@ import {
   isValidCMYKColor,
   isValidHSVColor,
   isValidColor,
-  getColorFormat,
-} from '../src/tools/validations';
+} from '../src/is-valid-color';
+import { getColorFormat } from '../src/get-color-format';
+import { ColorFormat } from '../src/types';
 
 describe('validations', () => {
   describe('isValidHEXColor', () => {

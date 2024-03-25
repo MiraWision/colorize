@@ -1,14 +1,12 @@
-import { 
-  blendColors,
-  adjustBrightness,
-  adjustSaturation,
-  invertColor,
-  applySepia,
-  changeOpacity,
-  tint,
-  shade,
-  applyGreyscale,
-} from '../src/tools/manipulations';
+import { blendColors } from '../src/blend-colors';
+import { adjustBrightness } from '../src/adjust-brightness';
+import { adjustSaturation } from '../src/adjust-saturation';
+import { invertColor } from '../src/invert-color';
+import { applySepia } from '../src/apply-sepia';
+import { applyGreyscale } from '../src/apply-greyscale';
+import { changeOpacity } from '../src/change-opacity';
+import { tint } from '../src/tint';
+import { shade } from '../src/shade';
 
 describe('manipulations', () => {
   describe('blendColors', () => {

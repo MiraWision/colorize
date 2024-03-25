@@ -1,5 +1,7 @@
+import { convertColor } from '../src/convert-color';
+import { extractOpacity } from '../src/extract-opacity';
+import { parseColorNumbers } from '../src/parse-color-numbers';
 import { 
-  convertColor,
   rgbToRGBA,
   hexToRGBA,
   hexaToRGBA,
@@ -14,9 +16,7 @@ import {
   rgbaToHSLA,
   rgbaToCMYK,
   rgbaToHSV,
-  extractOpacity,
-  parseColorNumbers,
-} from '../src/tools/convertions';
+} from '../src/utils/convert-utils';
 import { ColorFormat } from '../src/types';
 
 describe('convertions', () => {

@@ -1,4 +1,5 @@
-import { generateSteppedGradient, generateMultiSteppedGradient } from '../src/tools/gradient-generation';
+import { generateSteppedGradient } from '../src/generate-stepped-gradient';
+import { generateMultiSteppedGradient } from '../src/generate-multi-stepped-gradient';
 
 describe('gradient-generation', () => {
   describe('generateSteppedGradient', () => {

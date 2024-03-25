@@ -18,4 +18,4 @@ export * from './is-valid-color';
 export * from './parse-color-numbers';
 export * from './shade';
 export * from './tint';
-export * from './types/index';
+export * from './types';
