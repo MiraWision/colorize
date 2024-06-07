@@ -30,6 +30,7 @@ import { FunctionIsLightPage } from './pages/function-is-light';
 import { FunctionIsDarkPage } from './pages/function-is-dark';
 import { FunctionCalculateContrastPage } from './pages/function-calculate-contrast';
 import { FunctionApplyGreyscalePage } from './pages/function-apply-greyscale';
+import { FunctionBlendMultipleColorsPage } from './pages/function-blend-multiple-colors';
 
 const App: React.FC = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
@@ -99,6 +100,7 @@ const App: React.FC = () => {
             <Route path={Routes.FunctionGenerateMultiSteppedGradient} component={FunctionGenerateMultiSteppedGradientPage} />
             
             <Route path={Routes.FunctionBlendColors} component={FunctionBlendColorsPage} />
+            <Route path={Routes.FunctionBlendMultipleColors} component={FunctionBlendMultipleColorsPage} />
             <Route path={Routes.FunctionTint} component={FunctionTintPage} />
             <Route path={Routes.FunctionShade} component={FunctionShadePage} />
             <Route path={Routes.FunctionAdjustBrightness} component={FunctionAdjustBrightnessPage} />

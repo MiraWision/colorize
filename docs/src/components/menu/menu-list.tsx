@@ -65,6 +65,10 @@ const MenuItems = [
         url: Routes.FunctionBlendColors,
       },
       {
+        name: 'blendMultipleColors',
+        url: Routes.FunctionBlendMultipleColors,
+      },
+      {
         name: 'tint',
         url: Routes.FunctionTint,
       },

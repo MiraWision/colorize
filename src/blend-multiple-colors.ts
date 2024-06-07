@@ -26,20 +26,17 @@ const blendMultipleColors = (colorWeights: ColorWeight[]): string => {
     throw new Error('The array of color weights must not be empty.');
   }
 
-  // Get the format of the first color for output consistency
   const firstColorFormat = getColorFormat(colorWeights[0].color);
   if (!firstColorFormat) {
     throw new Error('Invalid color format in the first color.');
   }
 
-  // Normalize weights
   const totalWeight = colorWeights.reduce((sum, cw) => sum + cw.weight, 0);
 
   if (totalWeight <= 0) {
     throw new Error('Total weight must be greater than zero.');
   }
 
-  // Convert all colors to RGB format and blend them
   const blendedRGB = [0, 0, 0];
 
   colorWeights.forEach(({ color, weight }) => {
@@ -58,7 +55,6 @@ const blendMultipleColors = (colorWeights: ColorWeight[]): string => {
 
   const [r, g, b] = blendedRGB.map(Math.round);
 
-  // Convert the blended RGB back to the original format of the first color
   return convertColor(`rgb(${[r, g, b].join(', ')})`, firstColorFormat);
 };
 

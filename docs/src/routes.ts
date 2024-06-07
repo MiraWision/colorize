@@ -12,6 +12,7 @@ enum Routes {
   FunctionGenerateMultiSteppedGradient = '/function-generate-multi-stepped-gradient',
   
   FunctionBlendColors = '/function-blend-colors',
+  FunctionBlendMultipleColors = '/function-blend-multiple-colors',
   FunctionTint = '/function-tint',
   FunctionShade = '/function-shade',
   FunctionAdjustBrightness = '/function-adjust-brightness',
