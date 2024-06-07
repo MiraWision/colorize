@@ -12,9 +12,7 @@ import { shade } from '../src/shade';
 describe('manipulations', () => {
   describe('blendColors', () => {
     it('should correctly blend two colors', () => {
-      // Simple blend check with a 50% weight
       const blend = blendColors('rgb(255, 0, 0)', 'rgb(0, 0, 255)', 0.5);
-      // Expecting a perfect blend of red and blue -> purple
       expect(blend).toBe('rgb(128, 0, 128)');
     });
 
@@ -31,13 +29,13 @@ describe('manipulations', () => {
 
   describe('blendMultipleColors', () => {
     it('should blend two colors with equal weights', () => {
-      const result = blendMultipleColors([{ color: '#FF0000', weight: 1 }, { color: '#0000FF', weight: 1 }]);
+      const result = blendMultipleColors([{ color: '#ff0000', weight: 1 }, { color: '#0000ff', weight: 1 }]);
       expect(result).toBe('#800080');
     });
   
     it('should blend three colors with different weights', () => {
-      const result = blendMultipleColors([{ color: '#FF0000', weight: 1 }, { color: '#00FF00', weight: 2 }, { color: '#0000FF', weight: 3 }]);
-      expect(result).toBe('#2B5580'); // Adjust this to match the expected blended result
+      const result = blendMultipleColors([{ color: '#ff0000', weight: 1 }, { color: '#00ff00', weight: 2 }, { color: '#0000ff', weight: 3 }]);
+      expect(result).toBe('#2b5580');
     });
   
     it('should throw an error for an empty array', () => {
@@ -147,29 +145,29 @@ describe('manipulations', () => {
 
   describe('tint', () => {
     it('returns white when the weight is 100%', () => {
-      expect(tint('#FF0000', 1)).toBe('#FFFFFF');
+      expect(tint('#ff0000', 1)).toBe('#ffffff');
     });
   
     it('returns the same color when the weight is 0%', () => {
-      expect(tint('#FF0000', 0)).toBe('#FF0000');
+      expect(tint('#ff0000', 0)).toBe('#ff0000');
     });
   
     it('returns a lighter color when the weight is 50%', () => {
-      expect(tint('#0000FF', 0.5)).toBe('#8080FF');
+      expect(tint('#0000ff', 0.5)).toBe('#8080ff');
     });
   });
   
   describe('shade', () => {
     it('returns black when the weight is 100%', () => {
-      expect(shade('#00FF00', 1)).toBe('#000000');
+      expect(shade('#00ff00', 1)).toBe('#000000');
     });
   
     it('returns the same color when the weight is 0%', () => {
-      expect(shade('#00FF00', 0)).toBe('#00FF00');
+      expect(shade('#00ff00', 0)).toBe('#00ff00');
     });
   
     it('returns a darker color when the weight is 50%', () => {
-      expect(shade('#00FF00', 0.5)).toBe('#008000');
+      expect(shade('#00ff00', 0.5)).toBe('#008000');
     });
   });
 

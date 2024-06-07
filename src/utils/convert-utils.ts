@@ -178,7 +178,7 @@ const rgbaToHex = (rgba: string): string => {
   const gHex = g.toString(16).padStart(2, '0');
   const bHex = b.toString(16).padStart(2, '0');
 
-  return `#${rHex}${gHex}${bHex}`.toUpperCase();
+  return `#${rHex}${gHex}${bHex}`.toLowerCase();
 };
 
 const rgbaToHexa = (rgba: string): string => {
@@ -189,7 +189,7 @@ const rgbaToHexa = (rgba: string): string => {
   const gHex = g.toString(16).padStart(2, '0');
   const bHex = b.toString(16).padStart(2, '0');
   
-  return `#${rHex}${gHex}${bHex}${alphaHex}`.toUpperCase();
+  return `#${rHex}${gHex}${bHex}${alphaHex}`.toLowerCase();
 };
 
 const rgbaToRGB = (rgba: string): string => {

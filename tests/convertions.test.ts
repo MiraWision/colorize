@@ -22,14 +22,14 @@ import { ColorFormat } from '../src/types';
 describe('convertions', () => {
   describe('extractOpacity', () => {
     it('should extract color and opacity from HEXA', () => {
-      const { color, opacity } = extractOpacity('#FF573380');
-      expect(color).toBe('#FF5733');
+      const { color, opacity } = extractOpacity('#ff573380');
+      expect(color).toBe('#ff5733');
       expect(opacity).toBeCloseTo(0.5, 1);
     });
 
     it('should return opacity 1 for HEX color', () => {
-      const { color, opacity } = extractOpacity('#FF5733');
-      expect(color).toBe('#FF5733');
+      const { color, opacity } = extractOpacity('#ff5733');
+      expect(color).toBe('#ff5733');
       expect(opacity).toBe(1);
     });
 
@@ -146,17 +146,17 @@ describe('convertions', () => {
 
   describe('rgbaToHex', () => {
     it('should convert RGBA to HEX', () => {
-      expect(rgbaToHex('rgba(255, 0, 0, 1)')).toBe('#FF0000');
-      expect(rgbaToHex('rgba(0, 255, 0, 1)')).toBe('#00FF00');
-      expect(rgbaToHex('rgba(0, 0, 255, 1)')).toBe('#0000FF');
+      expect(rgbaToHex('rgba(255, 0, 0, 1)')).toBe('#ff0000');
+      expect(rgbaToHex('rgba(0, 255, 0, 1)')).toBe('#00ff00');
+      expect(rgbaToHex('rgba(0, 0, 255, 1)')).toBe('#0000ff');
     });
   });
 
   describe('rgbaToHexa', () => {
     it('should convert RGBA to HEXA', () => {
-      expect(rgbaToHexa('rgba(255, 0, 0, 1)')).toBe('#FF0000FF');
-      expect(rgbaToHexa('rgba(0, 255, 0, 0.5)')).toBe('#00FF0080');
-      expect(rgbaToHexa('rgba(0, 0, 255, 0)')).toBe('#0000FF00');
+      expect(rgbaToHexa('rgba(255, 0, 0, 1)')).toBe('#ff0000ff');
+      expect(rgbaToHexa('rgba(0, 255, 0, 0.5)')).toBe('#00ff0080');
+      expect(rgbaToHexa('rgba(0, 0, 255, 0)')).toBe('#0000ff00');
     });
   });
 
@@ -206,13 +206,13 @@ describe('convertions', () => {
 
   describe('convertColor', () => {
     it('should correctly convert HEX to RGBA', () => {
-      const result = convertColor('#FFFFFF', ColorFormat.RGBA);
+      const result = convertColor('#ffffff', ColorFormat.RGBA);
       expect(result).toBe('rgba(255, 255, 255, 1)');
     });
   
     it('should correctly convert RGBA to HEX', () => {
       const result = convertColor('rgba(255, 255, 255, 1)', ColorFormat.HEX);
-      expect(result).toBe('#FFFFFF');
+      expect(result).toBe('#ffffff');
     });
   
     it('should correctly convert HEX to RGB', () => {
@@ -252,7 +252,7 @@ describe('convertions', () => {
   
     it('should correctly convert RGB to HEXA', () => {
       const result = convertColor('rgb(255, 0, 0)', ColorFormat.HEXA);
-      expect(result).toBe('#FF0000FF');
+      expect(result).toBe('#ff0000ff');
     });
   
     it('should correctly convert HEXA to HSL', () => {
@@ -262,11 +262,11 @@ describe('convertions', () => {
   
     it('should correctly convert CMYK to HEX', () => {
       const result = convertColor('cmyk(0%, 100%, 0%, 0%)', ColorFormat.HEX);
-      expect(result).toBe('#FF00FF');
+      expect(result).toBe('#ff00ff');
     });
   
     it('should return the same color when converting to the same format', () => {
-      const color = '#FFFFFF';
+      const color = '#ffffff';
       const result = convertColor(color, ColorFormat.HEX);
       expect(result).toBe(color);
     });
