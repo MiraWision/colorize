@@ -44,7 +44,7 @@ const Markdown: React.FC<Props> = ({ markdownText }) => {
 
 const Container = styled.div`
   pre {
-    max-width: 700px;
+    max-width: 100vw;
     border-radius: 8px;
   }
 
