@@ -3,6 +3,7 @@ export * from './adjust-saturation';
 export * from './apply-greyscale';
 export * from './apply-sepia';
 export * from './blend-colors';
+export * from './blend-multiple-colors';
 export * from './calculate-contrast';
 export * from './change-opacity';
 export * from './convert-color';

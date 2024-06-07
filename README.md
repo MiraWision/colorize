@@ -25,7 +25,7 @@ A comprehensive color manipulation library for TypeScript, `@mirawision/colorize
 - **Opacity Change**: Adjust the opacity of a color, useful for transparency effects and layering.
 - **Color Inversion**: Invert colors to create striking visual effects or highlight contrasts.
 - **Tinting and Shading**: Create tints by mixing colors with white and shades by mixing with black, ideal for theme generation and UI design.
-- **Color Blending**: Blend two colors together with a specified weight for nuanced color mixing.
+- **Color Blending**: Blend two or more colors together with specified weights for nuanced color mixing.
 - **Sepia Effect**: Apply a sepia tone to give colors a warm, vintage feel.
 - **Greyscale Application**: Apply greyscale, maintaining luminance while removing hue and saturation.
 

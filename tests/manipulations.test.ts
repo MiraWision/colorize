@@ -1,4 +1,5 @@
 import { blendColors } from '../src/blend-colors';
+import { blendMultipleColors } from '../src/blend-multiple-colors';
 import { adjustBrightness } from '../src/adjust-brightness';
 import { adjustSaturation } from '../src/adjust-saturation';
 import { invertColor } from '../src/invert-color';
@@ -25,6 +26,26 @@ describe('manipulations', () => {
       expect(() => {
         blendColors('rgb(255, 0, 0)', 'not a color', 0.5);
       }).toThrow('Invalid color format');
+    });
+  });
+
+  describe('blendMultipleColors', () => {
+    it('should blend two colors with equal weights', () => {
+      const result = blendMultipleColors([{ color: '#FF0000', weight: 1 }, { color: '#0000FF', weight: 1 }]);
+      expect(result).toBe('#800080');
+    });
+  
+    it('should blend three colors with different weights', () => {
+      const result = blendMultipleColors([{ color: '#FF0000', weight: 1 }, { color: '#00FF00', weight: 2 }, { color: '#0000FF', weight: 3 }]);
+      expect(result).toBe('#2B5580'); // Adjust this to match the expected blended result
+    });
+  
+    it('should throw an error for an empty array', () => {
+      expect(() => blendMultipleColors([])).toThrow('The array of color weights must not be empty.');
+    });
+  
+    it('should throw an error for invalid color formats', () => {
+      expect(() => blendMultipleColors([{ color: 'invalidColor', weight: 1 }])).toThrow('Invalid color format in the first color.');
     });
   });
 
