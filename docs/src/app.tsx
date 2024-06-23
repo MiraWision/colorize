@@ -31,6 +31,10 @@ import { FunctionIsDarkPage } from './pages/function-is-dark';
 import { FunctionCalculateContrastPage } from './pages/function-calculate-contrast';
 import { FunctionApplyGreyscalePage } from './pages/function-apply-greyscale';
 import { FunctionBlendMultipleColorsPage } from './pages/function-blend-multiple-colors';
+import { FunctionAdjustHuePage } from './pages/function-adjust-hue';
+import { FunctionRandomColorPage } from './pages/function-random-color';
+import { FunctionOppositeColorPage } from './pages/function-opposite-color';
+import { ClassColorPage } from './pages/class-color';
 
 const App: React.FC = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
@@ -77,9 +81,11 @@ const App: React.FC = () => {
         </Sidebar>
         <Content>
           <GitHubLogo href='https://github.com/MiraWision/colorize' target='_blank'>
+            {/* @ts-ignore */}
             <img src='./assets/icons/github.svg' alt='github' />
           </GitHubLogo>
           <NPMLogo href='https://www.npmjs.com/package/@mirawision/colorize' target='_blank'>
+            {/* @ts-ignore */}
             <img src='./assets/icons/npm.png' alt='npm' />
           </NPMLogo>
           <StyledSwitch>
@@ -89,12 +95,15 @@ const App: React.FC = () => {
 
             <Route path={Routes.Introduction} component={IntroductionPage} />
 
+            <Route path={Routes.ClassColor} component={ClassColorPage} />
+
             <Route path={Routes.FunctionIsValidColor} component={FunctionIsValidColorPage} />
             <Route path={Routes.FunctionGetColorFormat} component={FunctionGetColorFormatPage} />
 
             <Route path={Routes.FunctionConvertColor} component={FunctionConvertColorPage} />
             <Route path={Routes.FunctionExtractOpacity} component={FunctionExtractOpacityPage} />
             <Route path={Routes.FunctionParseColorNumbers} component={FunctionParseColorNumbersPage} />
+            <Route path={Routes.FunctionRandomColor} component={FunctionRandomColorPage} />
 
             <Route path={Routes.FunctionGenerateSteppedGradient} component={FunctionGenerateSteppedGradientPage} />
             <Route path={Routes.FunctionGenerateMultiSteppedGradient} component={FunctionGenerateMultiSteppedGradientPage} />
@@ -103,6 +112,8 @@ const App: React.FC = () => {
             <Route path={Routes.FunctionBlendMultipleColors} component={FunctionBlendMultipleColorsPage} />
             <Route path={Routes.FunctionTint} component={FunctionTintPage} />
             <Route path={Routes.FunctionShade} component={FunctionShadePage} />
+            <Route path={Routes.FunctionAdjustHue} component={FunctionAdjustHuePage} />
+            <Route path={Routes.FunctionOppositeColor} component={FunctionOppositeColorPage} />
             <Route path={Routes.FunctionAdjustBrightness} component={FunctionAdjustBrightnessPage} />
             <Route path={Routes.FunctionAdjustSaturation} component={FunctionAdjustSaturationPage} />
             <Route path={Routes.FunctionInvertColor} component={FunctionInvertColorPage} />

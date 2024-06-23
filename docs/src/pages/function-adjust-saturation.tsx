@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { adjustSaturation } from '@mirawision/colorize';
+import { adjustSaturation, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-adjust-saturation';
-import { getRandomHexColor } from '../utils/get-random-color';
-import { getRandomNumber } from '../utils/get-random-numer';
+import { getRandomNumber } from '../utils/get-random-number';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -14,7 +13,7 @@ interface Props {
 }
 
 const FunctionAdjustSaturationPage: React.FC<Props> = ({}) => {
-  const [colorToAdjustSaturation, setColorToAdjustSaturation] = useState(getRandomHexColor());
+  const [colorToAdjustSaturation, setColorToAdjustSaturation] = useState(randomColor());
   const [saturationLevel, setSaturationLevel] = useState(getRandomNumber(-50, 50, 1));
   const adjustedSaturationColor = useMemo(() => {
     try {

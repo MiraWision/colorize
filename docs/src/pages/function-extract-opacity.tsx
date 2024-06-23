@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { extractOpacity } from '@mirawision/colorize';
+import { ColorFormat, extractOpacity, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-extract-opacity';
-import { getRandomHexaColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -12,7 +11,8 @@ interface Props {
 }
 
 const FunctionExtractOpacityPage: React.FC<Props> = ({}) => {
-  const [colorToExtractOpacity, setColorToExtractOpacity] = useState(getRandomHexaColor());
+  const [colorToExtractOpacity, setColorToExtractOpacity] = useState(randomColor(ColorFormat.HEXA));
+
   const result = useMemo(() => {
     try {
       return extractOpacity(colorToExtractOpacity);

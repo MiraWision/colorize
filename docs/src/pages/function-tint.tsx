@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { tint } from '@mirawision/colorize';
+import { randomColor, tint } from '@mirawision/colorize';
 
 import { content } from '../content/function-tint';
-import { getRandomHexColor } from '../utils/get-random-color';
-import { getRandomNumber } from '../utils/get-random-numer';
+import { getRandomNumber } from '../utils/get-random-number';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -14,7 +13,7 @@ interface Props {
 }
 
 const FunctionTintPage: React.FC<Props> = ({}) => {
-  const [colorToTint, setColorToTint] = useState(getRandomHexColor());
+  const [colorToTint, setColorToTint] = useState(randomColor());
   const [tintPercentage, setTintPercentage] = useState(getRandomNumber(0.05, 0.95, 0.05));
   const tintedColor = useMemo(() => {
     try {

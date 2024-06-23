@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { isDark } from '@mirawision/colorize';
+import { isDark, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-is-dark';
-import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const FunctionIsDarkPage: React.FC<Props> = ({}) => {
-  const [colorToCalculate, setColorToCalculate] = useState(getRandomHexColor());
+  const [colorToCalculate, setColorToCalculate] = useState(randomColor());
   const results = useMemo(() => {
     try {
       return isDark(colorToCalculate);

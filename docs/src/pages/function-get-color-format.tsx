@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { getColorFormat } from '@mirawision/colorize';
+import { getColorFormat, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-get-color-format';
-import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const FunctionGetColorFormatPage: React.FC<Props> = ({}) => {
-  const [colorToValidate, setColorToValidate] = useState(getRandomHexColor());
+  const [colorToValidate, setColorToValidate] = useState(randomColor());
   const validatedColorFormat = useMemo(() => {
     return getColorFormat(colorToValidate) ?? 'Invalid color format';
   }, [colorToValidate]);

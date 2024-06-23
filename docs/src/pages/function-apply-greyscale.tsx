@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { applyGreyscale } from '@mirawision/colorize';
+import { applyGreyscale, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-apply-greyscale';
-import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const FunctionApplyGreyscalePage: React.FC<Props> = ({}) => {
-  const [colorToApplyGreyscale, setColorToApplyGreyscale] = useState(getRandomHexColor());
+  const [colorToApplyGreyscale, setColorToApplyGreyscale] = useState(randomColor());
   const greyscaleColor = useMemo(() => {
     try {
       return applyGreyscale(colorToApplyGreyscale);

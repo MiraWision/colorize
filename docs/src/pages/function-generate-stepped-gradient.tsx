@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { styled } from 'styled-components';
-import { generateSteppedGradient } from '@mirawision/colorize';
+import { generateSteppedGradient, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-generate-stepped-gradient';
-import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -14,8 +13,8 @@ interface Props {
 }
 
 const FunctionGenerateSteppedGradientPage: React.FC<Props> = ({}) => {
-  const [colorToGradientOne, setColorToGradientOne] = useState(getRandomHexColor());
-  const [colorToGradientTwo, setColorToGradientTwo] = useState(getRandomHexColor());
+  const [colorToGradientOne, setColorToGradientOne] = useState(randomColor());
+  const [colorToGradientTwo, setColorToGradientTwo] = useState(randomColor());
   const [stepsForGradient, setStepsForGradient] = useState(6);
   const steppedGradient = useMemo<string[]>(() => {
     try {

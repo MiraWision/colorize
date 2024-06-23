@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { getLuminance } from '@mirawision/colorize';
+import { getLuminance, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-get-luminance';
-import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const FunctionGetLuminancePage: React.FC<Props> = ({}) => {
-  const [colorToCalculate, setColorToCalculate] = useState(getRandomHexColor());
+  const [colorToCalculate, setColorToCalculate] = useState(randomColor());
   const luminance = useMemo(() => {
     try {
       return Math.round(getLuminance(colorToCalculate) * 10000) / 10000;

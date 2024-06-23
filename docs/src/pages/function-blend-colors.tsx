@@ -1,10 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { styled } from 'styled-components';
-import { blendColors } from '@mirawision/colorize';
+import { blendColors, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-blend-colors';
-import { getRandomHexColor } from '../utils/get-random-color';
-import { getRandomNumber } from '../utils/get-random-numer';
+import { getRandomNumber } from '../utils/get-random-number';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -15,8 +14,8 @@ interface Props {
 }
 
 const FunctionBlendColorsPage: React.FC<Props> = ({}) => {
-  const [baseColorForBlend, setBaseColorForBlend] = useState(getRandomHexColor());
-  const [blendColor, setBlendColor] = useState(getRandomHexColor());
+  const [baseColorForBlend, setBaseColorForBlend] = useState(randomColor());
+  const [blendColor, setBlendColor] = useState(randomColor());
   const [blendFactor, setBlendFactor] = useState(getRandomNumber(0.05, 0.95, 0.05));
 
   const blendedColor = useMemo(() => {

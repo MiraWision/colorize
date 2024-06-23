@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { isLight } from '@mirawision/colorize';
+import { isLight, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-is-light';
-import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const FunctionIsLightPage: React.FC<Props> = ({}) => {
-  const [colorToCalculate, setColorToCalculate] = useState(getRandomHexColor());
+  const [colorToCalculate, setColorToCalculate] = useState(randomColor());
   const results = useMemo(() => {
     try {
       return isLight(colorToCalculate);

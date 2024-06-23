@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { invertColor } from '@mirawision/colorize';
+import { invertColor, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-invert-color';
-import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const FunctionInvertColorPage: React.FC<Props> = ({}) => {
-  const [colorToInvert, setColorToInvert] = useState(getRandomHexColor());
+  const [colorToInvert, setColorToInvert] = useState(randomColor());
   const invertedColor = useMemo(() => {
     try {
       return invertColor(colorToInvert);

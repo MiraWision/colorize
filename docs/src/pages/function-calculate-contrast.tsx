@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { calculateContrast } from '@mirawision/colorize';
+import { calculateContrast, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-calculate-contrast';
-import { getRandomHexColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -12,8 +11,8 @@ interface Props {
 }
 
 const FunctionCalculateContrastPage: React.FC<Props> = ({}) => {
-  const [colorToCalculateContrast1, setColorToCalculateContrast1] = useState(getRandomHexColor());
-  const [colorToCalculateContrast2, setColorToCalculateContrast2] = useState(getRandomHexColor());
+  const [colorToCalculateContrast1, setColorToCalculateContrast1] = useState(randomColor());
+  const [colorToCalculateContrast2, setColorToCalculateContrast2] = useState(randomColor());
   const contrast = useMemo(() => {
     try {
       return Math.round(calculateContrast(colorToCalculateContrast1, colorToCalculateContrast2) * 100) / 100;

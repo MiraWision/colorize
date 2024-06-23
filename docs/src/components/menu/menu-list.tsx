@@ -17,6 +17,14 @@ const MenuItems = [
     url: '#',
     subitems: [
       {
+        name: 'Core',
+        isGroup: true,
+      },
+      {
+        name: 'Color',
+        url: Routes.ClassColor,
+      },
+      {
         name: 'Validation & Detection',
         isGroup: true,
       },
@@ -29,7 +37,7 @@ const MenuItems = [
         url: Routes.FunctionGetColorFormat,
       },
       {
-        name: 'Conversion',
+        name: 'Conversion & Generation',
         isGroup: true,
       },
       {
@@ -44,6 +52,10 @@ const MenuItems = [
         name: 'parseColorNumbers',
         url: Routes.FunctionParseColorNumbers,
       },
+      {
+        name: 'randomColor',
+        url: Routes.FunctionRandomColor,
+      },  
       {
         name: 'Gradients',
         isGroup: true,
@@ -75,6 +87,14 @@ const MenuItems = [
       {
         name: 'shade',
         url: Routes.FunctionShade,
+      },
+      {
+        name: 'adjustHue',
+        url: Routes.FunctionAdjustHue,
+      },
+      {
+        name: 'oppositeColor',
+        url: Routes.FunctionOppositeColor,
       },
       {
         name: 'adjustBrightness',

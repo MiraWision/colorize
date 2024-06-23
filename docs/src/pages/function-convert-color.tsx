@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { ColorFormat, convertColor } from '@mirawision/colorize';
+import { ColorFormat, convertColor, randomColor } from '@mirawision/colorize';
 
-import { getRandomHexColor } from '../utils/get-random-color';
 import { content } from '../content/function-convert-color';
 
 import Markdown from '../components/common/markdown';
@@ -24,7 +23,7 @@ const colorFormats = [
 ];
 
 const FunctionConvertColorPage: React.FC<Props> = ({}) => {
-  const [colorToConvert, setColorToConvert] = useState(getRandomHexColor());
+  const [colorToConvert, setColorToConvert] = useState(randomColor());
   const [colorFormatToConvert, setColorFormatToConvert] = useState<{ name: string; code: ColorFormat}>({ name: 'RGB', code: ColorFormat.RGB });
   const convertedColor = useMemo(() => {
     try {

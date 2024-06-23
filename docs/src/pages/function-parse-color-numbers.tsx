@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { ColorFormat, parseColorNumbers } from '@mirawision/colorize';
+import { ColorFormat, parseColorNumbers, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-parse-color-numbers';
-import { getRandomRgbaColor } from '../utils/get-random-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -25,8 +24,10 @@ const colorFormats: ColorFormatItem[] = [
 ];
 
 const FunctionParseColorNumbersPage: React.FC<Props> = ({}) => {
-  const [colorToParseNumbers, setColorToParseNumbers] = useState(getRandomRgbaColor());
+  const [colorToParseNumbers, setColorToParseNumbers] = useState(randomColor(ColorFormat.RGBA));
+
   const [colorFormatToParse, setColorFormatToParse] = useState<ColorFormatItem>(colorFormats[0]);
+  
   const result = useMemo(() => {
     try {
       return parseColorNumbers(colorToParseNumbers, colorFormatToParse.code);

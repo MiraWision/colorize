@@ -1,10 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { styled } from 'styled-components';
-import { blendMultipleColors } from '@mirawision/colorize';
+import { blendMultipleColors, randomColor } from '@mirawision/colorize';
 
 import { content } from '../content/function-blend-multiple-colors';
-import { getRandomHexColor } from '../utils/get-random-color';
-import { getRandomNumber } from '../utils/get-random-numer';
+import { getRandomNumber } from '../utils/get-random-number';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
@@ -17,8 +16,8 @@ interface Props {
 
 const FunctionBlendMultipleColorsPage: React.FC<Props> = ({}) => {
   const [colors, setColors] = useState([
-    { color: getRandomHexColor(), weight: getRandomNumber(1, 3, 1) },
-    { color: getRandomHexColor(), weight: getRandomNumber(1, 3, 1) },
+    { color: randomColor(), weight: getRandomNumber(1, 3, 1) },
+    { color: randomColor(), weight: getRandomNumber(1, 3, 1) },
   ]);
 
   const blendedColor = useMemo(() => {
@@ -30,7 +29,7 @@ const FunctionBlendMultipleColorsPage: React.FC<Props> = ({}) => {
   }, [colors]);
 
   const addColor = () => {
-    setColors([...colors, { color: getRandomHexColor(), weight: getRandomNumber(1, 3, 1) }]);
+    setColors([...colors, { color: randomColor(), weight: getRandomNumber(1, 3, 1) }]);
   };
 
   const removeColor = (index: number) => {
