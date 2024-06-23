@@ -13,6 +13,10 @@
       "types": "./adjust-brightness.d.ts",
       "default": "./adjust-brightness.js"
     },
+    "./adjust-hue": {
+      "types": "./adjust-hue.d.ts",
+      "default": "./adjust-hue.js"
+    },
     "./adjust-saturation": {
       "types": "./adjust-saturation.d.ts",
       "default": "./adjust-saturation.js"
@@ -40,6 +44,10 @@
     "./change-opacity": {
       "types": "./change-opacity.d.ts",
       "default": "./change-opacity.js"
+    },
+    "./color": {
+      "types": "./color.d.ts",
+      "default": "./color.js"
     },
     "./convert-color": {
       "types": "./convert-color.d.ts",
@@ -80,6 +88,10 @@
     "./is-valid-color": {
       "types": "./is-valid-color.d.ts",
       "default": "./is-valid-color.js"
+    },
+    "./opposite-color": {
+      "types": "./opposite-color.d.ts",
+      "default": "./opposite-color.js"
     },
     "./parse-color-numbers": {
       "types": "./parse-color-numbers.d.ts",
