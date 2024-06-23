@@ -97,6 +97,10 @@
       "types": "./parse-color-numbers.d.ts",
       "default": "./parse-color-numbers.js"
     },
+    "./random-color": {
+      "types": "./random-color.d.ts",
+      "default": "./random-color.js"
+    },
     "./shade": {
       "types": "./shade.d.ts",
       "default": "./shade.js"

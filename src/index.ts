@@ -20,6 +20,7 @@ export * from './is-light';
 export * from './is-valid-color';
 export * from './opposite-color';
 export * from './parse-color-numbers';
+export * from './random-color';
 export * from './shade';
 export * from './tint';
 export * from './types';

@@ -1,3 +1,4 @@
+import { randomColor } from '../src/random-color';
 import { convertColor } from '../src/convert-color';
 import { extractOpacity } from '../src/extract-opacity';
 import { parseColorNumbers } from '../src/parse-color-numbers';
@@ -20,6 +21,113 @@ import {
 import { ColorFormat } from '../src/types';
 
 describe('convertions', () => {
+  describe('randomColor', () => {
+    test('should generate a random color in HEX format by default', () => {
+      const color = randomColor();
+      expect(color).toMatch(/^#([0-9a-fA-F]{6})$/);
+    });
+  
+    test('should generate a random color in HEX format when specified', () => {
+      const color = randomColor(ColorFormat.HEX);
+      expect(color).toMatch(/^#([0-9a-fA-F]{6})$/);
+    });
+  
+    test('should generate a random color in HEXA format', () => {
+      const color = randomColor(ColorFormat.HEXA);
+      expect(color).toMatch(/^#([0-9a-fA-F]{8})$/);
+    });
+  
+    test('should generate a random color in RGB format', () => {
+      const color = randomColor(ColorFormat.RGB);
+      expect(color).toMatch(/^rgb\(\d{1,3}, \d{1,3}, \d{1,3}\)$/);
+      
+      // @ts-ignore
+      const [r, g, b] = color.match(/\d+/g).map(Number);
+      expect(r).toBeGreaterThanOrEqual(0);
+      expect(r).toBeLessThanOrEqual(255);
+      expect(g).toBeGreaterThanOrEqual(0);
+      expect(g).toBeLessThanOrEqual(255);
+      expect(b).toBeGreaterThanOrEqual(0);
+      expect(b).toBeLessThanOrEqual(255);
+    });
+  
+    test('should generate a random color in RGBA format', () => {
+      const color = randomColor(ColorFormat.RGBA);
+      expect(color).toMatch(/^rgba\(\d{1,3}, \d{1,3}, \d{1,3}, (\d|0?\.\d+)\)$/);
+  
+      // @ts-ignore
+      const [r, g, b, a] = color.match(/(\d+(\.\d+)?)/g).map(Number);
+      expect(r).toBeGreaterThanOrEqual(0);
+      expect(r).toBeLessThanOrEqual(255);
+      expect(g).toBeGreaterThanOrEqual(0);
+      expect(g).toBeLessThanOrEqual(255);
+      expect(b).toBeGreaterThanOrEqual(0);
+      expect(b).toBeLessThanOrEqual(255);
+      expect(a).toBeGreaterThanOrEqual(0);
+      expect(a).toBeLessThanOrEqual(1);
+    });
+  
+    test('should generate a random color in HSL format', () => {
+      const color = randomColor(ColorFormat.HSL);
+      expect(color).toMatch(/^hsl\(\d{1,3}, \d{1,3}%, \d{1,3}%\)$/);
+  
+      // @ts-ignore
+      const [h, s, l] = color.match(/\d+/g).map(Number);
+      expect(h).toBeGreaterThanOrEqual(0);
+      expect(h).toBeLessThanOrEqual(360);
+      expect(s).toBeGreaterThanOrEqual(0);
+      expect(s).toBeLessThanOrEqual(100);
+      expect(l).toBeGreaterThanOrEqual(0);
+      expect(l).toBeLessThanOrEqual(100);
+    });
+  
+    test('should generate a random color in HSLA format', () => {
+      const color = randomColor(ColorFormat.HSLA);
+      expect(color).toMatch(/^hsla\(\d{1,3}, \d{1,3}%, \d{1,3}%, (\d|0?\.\d+)\)$/);
+  
+      // @ts-ignore
+      const [h, s, l, a] = color.match(/(\d+(\.\d+)?)/g).map(Number);
+      expect(h).toBeGreaterThanOrEqual(0);
+      expect(h).toBeLessThanOrEqual(360);
+      expect(s).toBeGreaterThanOrEqual(0);
+      expect(s).toBeLessThanOrEqual(100);
+      expect(l).toBeGreaterThanOrEqual(0);
+      expect(l).toBeLessThanOrEqual(100);
+      expect(a).toBeGreaterThanOrEqual(0);
+      expect(a).toBeLessThanOrEqual(1);
+    });
+  
+    test('should generate a random color in HSV format', () => {
+      const color = randomColor(ColorFormat.HSV);
+      expect(color).toMatch(/^hsv\(\d{1,3}, \d{1,3}%, \d{1,3}%\)$/);
+  
+      // @ts-ignore
+      const [h, s, v] = color.match(/\d+/g).map(Number);
+      expect(h).toBeGreaterThanOrEqual(0);
+      expect(h).toBeLessThanOrEqual(360);
+      expect(s).toBeGreaterThanOrEqual(0);
+      expect(s).toBeLessThanOrEqual(100);
+      expect(v).toBeGreaterThanOrEqual(0);
+      expect(v).toBeLessThanOrEqual(100);
+    });
+  
+    test('should generate a random color in CMYK format', () => {
+      const color = randomColor(ColorFormat.CMYK);
+      expect(color).toMatch(/^cmyk\(\d{1,3}%, \d{1,3}%, \d{1,3}%, \d{1,3}%\)$/);
+  
+      // @ts-ignore
+      const [c, m, y, k] = color.match(/\d+/g).map(Number);
+      expect(c).toBeGreaterThanOrEqual(0);
+      expect(c).toBeLessThanOrEqual(100);
+      expect(m).toBeGreaterThanOrEqual(0);
+      expect(m).toBeLessThanOrEqual(100);
+      expect(y).toBeGreaterThanOrEqual(0);
+      expect(y).toBeLessThanOrEqual(100);
+      expect(k).toBeGreaterThanOrEqual(0);
+      expect(k).toBeLessThanOrEqual(100);
+    });
+  });
+
   describe('extractOpacity', () => {
     it('should extract color and opacity from HEXA', () => {
       const { color, opacity } = extractOpacity('#ff573380');
