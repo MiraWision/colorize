@@ -173,15 +173,15 @@ describe('manipulations', () => {
 
   describe('applyGreyscale', () => {
     it('converts pure red to its grayscale equivalent', () => {
-      expect(applyGreyscale('#ff0000')).toBe('rgb(54, 54, 54)');
+      expect(applyGreyscale('#ff0000')).toBe('#363636');
     });
   
     it('converts pure green to its grayscale equivalent', () => {
-      expect(applyGreyscale('#00ff00')).toBe('rgb(182, 182, 182)');
+      expect(applyGreyscale('#00ff00')).toBe('#b6b6b6');
     });
   
     it('converts pure blue to its grayscale equivalent', () => {
-      expect(applyGreyscale('#0000ff')).toBe('rgb(18, 18, 18)');
+      expect(applyGreyscale('#0000ff')).toBe('#121212');
     });
   
     it('retains a gray color as is', () => {
