@@ -1,6 +1,8 @@
 import { blendColors } from '../src/blend-colors';
 import { blendMultipleColors } from '../src/blend-multiple-colors';
 import { adjustBrightness } from '../src/adjust-brightness';
+import { adjustHue } from '../src/adjust-hue';
+import { oppositeColor } from '../src/opposite-color';
 import { adjustSaturation } from '../src/adjust-saturation';
 import { invertColor } from '../src/invert-color';
 import { applySepia } from '../src/apply-sepia';
@@ -47,6 +49,48 @@ describe('manipulations', () => {
     });
   });
 
+  describe('adjustHue Function', () => {
+    test('should adjust the hue of a color by the specified amount and wrap around 360 degrees', () => {
+      expect(adjustHue('#00ff00', 30)).toBe('#00ff80');
+      expect(adjustHue('#ff0000', 45)).toBe('#ffbf00');
+    });
+  
+    test('should handle negative hue adjustments and correctly wrap around', () => {
+      expect(adjustHue('#ff0000', -45)).toBe('#ff00bf');
+      expect(adjustHue('hsl(10, 100%, 50%)', -20)).toBe('hsl(350, 100%, 50%)');
+    });
+  
+    test('should maintain the correct format of the input color', () => {
+      expect(adjustHue('rgb(255, 0, 0)', 60)).toBe('rgb(255, 255, 0)');
+      expect(adjustHue('#00ff00', -120)).toBe('#ff0000');
+    });
+  
+    test('should throw an error for an invalid color format', () => {
+      expect(() => adjustHue('invalidColor', 30)).toThrow('Invalid color format');
+    });
+  });
+  
+  describe('oppositeColor Function', () => {
+    test('should return the opposite color by adjusting the hue by 180 degrees', () => {
+      expect(oppositeColor('#00ff00')).toBe('#ff00ff');
+      expect(oppositeColor('#ff0000')).toBe('#00ffff');
+    });
+  
+    test('should maintain the correct format of the input color', () => {
+      expect(oppositeColor('rgb(255, 0, 0)')).toBe('rgb(0, 255, 255)');
+      expect(oppositeColor('hsl(180, 100%, 50%)')).toBe('hsl(0, 100%, 50%)');
+    });
+  
+    test('should handle the edge case where hue adjustment wraps around 360 degrees', () => {
+      expect(oppositeColor('hsl(10, 100%, 50%)')).toBe('hsl(190, 100%, 50%)');
+      expect(oppositeColor('hsl(350, 100%, 50%)')).toBe('hsl(170, 100%, 50%)');
+    });
+  
+    test('should throw an error for an invalid color format', () => {
+      expect(() => oppositeColor('invalidColor')).toThrow('Invalid color format');
+    });
+  });
+  
   describe('adjustBrightness', () => {
     it('should increase the brightness of a color', () => {
       const brighter = adjustBrightness('hsl(120, 50%, 50%)', 20);
