@@ -141,6 +141,10 @@ const MenuItems = [
         url: Routes.FunctionCalculateContrast,
       },
       {
+        name: 'calculateSimilarity',
+        url: Routes.FunctionCalculateSimilarity,
+      },
+      {
         name: 'Types',
         isGroup: true,
       },

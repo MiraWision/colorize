@@ -31,6 +31,7 @@ enum Routes {
   FunctionIsLight = '/function-is-light',
   FunctionIsDark = '/function-is-dark',
   FunctionCalculateContrast = '/function-calculate-contrast',
+  FunctionCalculateSimilarity = '/function-calculate-similarity',
   
   EnumColorFormat = '/enum-color-format',
 }

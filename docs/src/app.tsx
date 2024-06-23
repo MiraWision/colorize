@@ -9,6 +9,7 @@ import { MenuList } from './components/menu/menu-list';
 import { IntroductionPage } from './pages/introduction';
 import { Button } from 'primereact/button';
 import DocumentTitle from './components/common/dynamic-title';
+import { ClassColorPage } from './pages/class-color';
 import { FunctionGetColorFormatPage } from './pages/function-get-color-format';
 import { FunctionConvertColorPage } from './pages/function-convert-color';
 import { FunctionIsValidColorPage } from './pages/function-is-valid-color';
@@ -19,7 +20,6 @@ import { FunctionAdjustSaturationPage } from './pages/function-adjust-saturation
 import { FunctionInvertColorPage } from './pages/function-invert-color';
 import { FunctionApplySepiaPage } from './pages/function-apply-sepia';
 import { FunctionChangeOpacityPage } from './pages/function-change-opacity';
-import { EnumColorFormatPage } from './pages/enum-color-format';
 import { FunctionExtractOpacityPage } from './pages/function-extract-opacity';
 import { FunctionParseColorNumbersPage } from './pages/function-parse-color-numbers';
 import { FunctionGenerateMultiSteppedGradientPage } from './pages/function-generate-multi-stepped-gradient';
@@ -34,7 +34,8 @@ import { FunctionBlendMultipleColorsPage } from './pages/function-blend-multiple
 import { FunctionAdjustHuePage } from './pages/function-adjust-hue';
 import { FunctionRandomColorPage } from './pages/function-random-color';
 import { FunctionOppositeColorPage } from './pages/function-opposite-color';
-import { ClassColorPage } from './pages/class-color';
+import { FunctionCalculateSimilarityPage } from './pages/function-calculate-similarity';
+import { EnumColorFormatPage } from './pages/enum-color-format';
 
 const App: React.FC = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
@@ -125,6 +126,7 @@ const App: React.FC = () => {
             <Route path={Routes.FunctionIsLight} component={FunctionIsLightPage} />
             <Route path={Routes.FunctionIsDark} component={FunctionIsDarkPage} />
             <Route path={Routes.FunctionCalculateContrast} component={FunctionCalculateContrastPage} />
+            <Route path={Routes.FunctionCalculateSimilarity} component={FunctionCalculateSimilarityPage} />
             
             <Route path={Routes.EnumColorFormat} component={EnumColorFormatPage} />
           </StyledSwitch>

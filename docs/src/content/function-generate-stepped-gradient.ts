@@ -3,8 +3,8 @@ The \`generateSteppedGradient\` function generates an array of color strings rep
 
 ## Arguments
 
-- \`fromColor\` (string): The starting color of the gradient in a valid color format.
-- \`toColor\` (string): The ending color of the gradient in a valid color format.
+- \`fromColor\` (Color | string): The starting color of the gradient in a valid color format.
+- \`toColor\` (Color | string): The ending color of the gradient in a valid color format.
 - \`count\` (number): The number of intermediate colors to generate. The actual number of colors in the returned array will be \`count\` plus two for the start and end colors.
 
 ## Returns

@@ -3,8 +3,8 @@ The \`blendColors\` function blends two colors together based on a specified wei
 
 ## Arguments
 
-- \`fromColor\` (string): The starting color in a valid color format.
-- \`toColor\` (string): The ending color in a valid color format.
+- \`fromColor\` (Color | string): The starting color in a valid color format.
+- \`toColor\` (Color | string): The ending color in a valid color format.
 - \`weight\` (number): A value between 0 and 1 that determines the weight of the blend. A weight of 0 will result in the first color, while a weight of 1 will result in the second color.
 
 ## Returns

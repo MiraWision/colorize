@@ -3,8 +3,8 @@ The \`blendMultipleColors\` function blends multiple colors together based on th
 
 ## Arguments
 
-- \`colorWeights\` (Array<{ color: string, weight: number }>): An array of objects, each containing:
-  - \`color\` (string): The color to blend in a recognized color format (e.g., HEX, RGB, HSL).
+- \`colorWeights\` (Array<{ color: Color | string, weight: number }>): An array of objects, each containing:
+  - \`color\` (Color | string): The color to blend in a recognized color format (e.g., HEX, RGB, HSL).
   - \`weight\` (number): A positive number that determines the contribution of this color to the final blend. Weights are normalized internally so they don't need to sum to 1.
 
 ## Returns

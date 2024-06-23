@@ -3,7 +3,7 @@ The \`generateMultiSteppedGradient\` function creates a complex gradient based o
 
 ## Arguments
 
-- ...\`colorSteps\` ([string, number, string, ...]): An list of arguments where each color (except the last one) is followed by a number indicating the steps to the next color.
+- ...\`colorSteps\` ([Color | string, number, Color | string, ...]): An list of arguments where each color (except the last one) is followed by a number indicating the steps to the next color.
 
 ## Returns
 

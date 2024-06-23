@@ -6,6 +6,7 @@ export * from './apply-sepia';
 export * from './blend-colors';
 export * from './blend-multiple-colors';
 export * from './calculate-contrast';
+export * from './calculate-similarity';
 export * from './change-opacity';
 export * from './color';
 export * from './convert-color';
