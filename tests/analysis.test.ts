@@ -2,8 +2,43 @@ import { getLuminance } from '../src/get-luminance';
 import { isLight } from '../src/is-light';
 import { isDark } from '../src/is-dark';
 import { calculateContrast } from '../src/calculate-contrast';
+import { calculateSimilarity } from '../src/calculate-similarity';
+import { Color } from '../src/color';
 
 describe('analysis', () => {
+  describe('calculateSimilarity Function', () => {
+    test('should return 100% for identical colors (string input)', () => {
+      const similarity = calculateSimilarity('#ff0000', '#ff0000');
+      expect(similarity).toBe(100);
+    });
+  
+    test('should return 100% for identical colors (Color instance input)', () => {
+      const color1 = new Color('#ff0000');
+      const color2 = new Color('#ff0000');
+      const similarity = calculateSimilarity(color1, color2);
+      expect(similarity).toBe(100);
+    });
+  
+    test('should return 0% for completely different colors (red and green)', () => {
+      const similarity = calculateSimilarity('#ff0000', '#00ff00');
+      expect(similarity).toBeLessThan(30);
+    });
+  
+    test('should return a similarity percentage for colors that are similar (red and slightly different red)', () => {
+      const similarity = calculateSimilarity('#ff0000', '#ff0101');
+      expect(similarity).toBeGreaterThan(99);
+    });
+  
+    test('should handle conversion from different color formats', () => {
+      const similarity = calculateSimilarity('rgb(255, 0, 0)', 'hsl(0, 100%, 50%)');
+      expect(similarity).toBe(100);
+    });
+  
+    test('should handle invalid color format gracefully', () => {
+      expect(() => calculateSimilarity('invalidColor', '#00ff00')).toThrow('Invalid color format');
+    });
+  });
+
   describe('getLuminance', () => {
     it('calculates the luminance of white', () => {
       expect(getLuminance('#FFFFFF')).toBeCloseTo(1, 5);
