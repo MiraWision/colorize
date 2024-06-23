@@ -1,3 +1,4 @@
+import { Color } from './color';
 import { generateSteppedGradient } from './generate-stepped-gradient';
 
 /**
@@ -19,7 +20,7 @@ import { generateSteppedGradient } from './generate-stepped-gradient';
  * // Returns an array including "#ff0000", three intermediate colors to "#ffff00",
  * // "#ffff00" itself, four intermediate colors to "#0000ff", and "#0000ff".
  */
-const generateMultiSteppedGradient = (...args: (string | number)[]): string[] => {
+const generateMultiSteppedGradient = (...args: (Color | string | number)[]): string[] => {
   if (args.length < 3 || args.length % 2 === 0) {
     throw new Error('Function must be called with at least one color and one step count, in an interleaved manner.');
   }
@@ -27,20 +28,20 @@ const generateMultiSteppedGradient = (...args: (string | number)[]): string[] =>
   let gradientColors: string[] = [];
 
   for (let i = 0; i < args.length - 2; i += 2) {
-    const fromColor = args[i];
+    const fromColor: Color = typeof args[i] === 'string' ? new Color(args[i] as string) : args[i] as Color;
     const steps = args[i + 1];
-    const toColor = args[i + 2];
+    const toColor: Color = typeof args[i + 2] === 'string' ? new Color(args[i + 2] as string) : args[i + 2] as Color;
 
-    if (typeof fromColor !== 'string' || typeof steps !== 'number' || typeof toColor !== 'string') {
+    if (typeof steps !== 'number') {
       throw new Error('Arguments must follow the pattern [color, steps, color, ..., color].');
     }
 
     const gradientSegment = generateSteppedGradient(fromColor, toColor, steps as number);
     if (i === 0) {
-      gradientColors.push(fromColor);
+      gradientColors.push(fromColor.get());
     }
     gradientColors.push(...gradientSegment);
-    gradientColors.push(toColor);
+    gradientColors.push(toColor.get());
   }
 
   return gradientColors;

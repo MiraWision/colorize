@@ -69,6 +69,15 @@ class Color {
 
   /**
    * Converts the current color to HEX format.
+   * @param {ColorFormat} format - The format to convert.
+   * @returns {string} The color in converted format.
+   */
+  convert(format: ColorFormat): string {
+    return convertColor(this.currentColor, format);
+  }
+
+  /**
+   * Converts the current color to HEX format.
    * @returns {string} The color in HEX format.
    */
   hex(): string {

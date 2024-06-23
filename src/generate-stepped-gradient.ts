@@ -1,5 +1,5 @@
+import { Color } from './color';
 import { convertColor } from './convert-color';
-import { getColorFormat } from './get-color-format';
 
 import { ColorFormat } from './types';
 
@@ -8,10 +8,10 @@ import { ColorFormat } from './types';
  * This function creates a series of intermediate colors that form a gradient
  * from a starting color to an ending color, with the number of steps.
  * 
- * @param {string} fromColor - The color string representing the start color of the gradient.
- *   This color should be in a format recognized by the `getColorFormat` and `convertColor` functions.
- * @param {string} toColor - The color string representing the end color of the gradient.
- *   This color should also be in a recognized format.
+ * @param {Color | string} fromColor - The color string representing the start color of the gradient.
+ *   This color should be the object of Color class or a string in format recognized by the `getColorFormat` and `convertColor` functions.
+ * @param {Color | string} toColor - The color string representing the end color of the gradient.
+ *   his color should be the object of Color class or a string in format recognized by the `getColorFormat` and `convertColor` functions.
  * @param {number} count - The number of intermediate colors to generate in the gradient.
  *   The total number of colors in the returned array will be equal to this count.
  * 
@@ -23,16 +23,21 @@ import { ColorFormat } from './types';
  * Example usage:
  * generateSteppedGradient('#FF0000', '#00FF00', 5); // returns an array of 5 intermediate colors in hexadecimal format between red and green.
  */
-const generateSteppedGradient = (fromColor: string, toColor: string, count: number): string[] => {
-  const fromColorFormat = getColorFormat(fromColor);
-  const toColorFormat = getColorFormat(toColor);
+const generateSteppedGradient = (fromColor: Color | string, toColor: Color | string, count: number): string[] => {
+  if (typeof fromColor === 'string') {
+    fromColor = new Color(fromColor);
+  }
 
-  if (!fromColorFormat || !toColorFormat) {
+  if (typeof toColor === 'string') {
+    toColor = new Color(toColor);
+  }
+
+  if (!fromColor.format() || !toColor.format()) {
     throw new Error('Invalid color format');
   }
 
-  const fromRGBA = convertColor(fromColor, ColorFormat.RGBA).match(/\d+(\.\d+)?/g)!.map(Number);
-  const toRGBA = convertColor(toColor, ColorFormat.RGBA).match(/\d+(\.\d+)?/g)!.map(Number);
+  const fromRGBA = fromColor.rgba().match(/\d+(\.\d+)?/g)!.map(Number);
+  const toRGBA = toColor.rgba().match(/\d+(\.\d+)?/g)!.map(Number);
   const step = 1 / (count + 1);
 
   let intermediateColors = [];
@@ -46,7 +51,7 @@ const generateSteppedGradient = (fromColor: string, toColor: string, count: numb
         : (start + (end - start) * step * i).toFixed(2);
     });
 
-    intermediateColors.push(convertColor(`rgba(${interpolatedColor.join(', ')})`, fromColorFormat));
+    intermediateColors.push(convertColor(`rgba(${interpolatedColor.join(', ')})`, fromColor.format() as ColorFormat));
   }
 
   return intermediateColors;

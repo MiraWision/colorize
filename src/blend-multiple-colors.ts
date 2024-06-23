@@ -1,9 +1,9 @@
+import { Color } from './color';
 import { convertColor } from './convert-color';
-import { getColorFormat } from './get-color-format';
 import { ColorFormat } from './types';
 
 interface ColorWeight {
-  color: string;
+  color: Color | string;
   weight: number;
 }
 
@@ -11,7 +11,7 @@ interface ColorWeight {
  * Blends multiple colors together based on their specified weights, producing a new color.
  * Each color's weight determines its contribution to the resulting blend.
  * 
- * @param {ColorWeight[]} colorWeights - An array of objects, each containing a `color` string in a recognized color format and a `weight` number.
+ * @param {ColorWeight[]} colorWeights - An array of objects, each containing a `color` which is the object of Color class or string in a recognized color format and a `weight` number.
  *   The weights determine the contribution of each color to the final blend.
  * 
  * @returns {string} - The blended color in the same format as the first color in the array.
@@ -26,12 +26,14 @@ const blendMultipleColors = (colorWeights: ColorWeight[]): string => {
     throw new Error('The array of color weights must not be empty.');
   }
 
-  const firstColorFormat = getColorFormat(colorWeights[0].color);
-  if (!firstColorFormat) {
+  let colors: { color: Color, weight: number }[] = colorWeights
+    .map(({ color, weight }) => ({ color: typeof color === 'string' ? new Color(color) : color, weight }));
+
+  if (!colors[0].color.format()) {
     throw new Error('Invalid color format in the first color.');
   }
 
-  const totalWeight = colorWeights.reduce((sum, cw) => sum + cw.weight, 0);
+  const totalWeight = colors.reduce((sum, cw) => sum + cw.weight, 0);
 
   if (totalWeight <= 0) {
     throw new Error('Total weight must be greater than zero.');
@@ -39,13 +41,12 @@ const blendMultipleColors = (colorWeights: ColorWeight[]): string => {
 
   const blendedRGB = [0, 0, 0];
 
-  colorWeights.forEach(({ color, weight }) => {
-    const colorFormat = getColorFormat(color);
-    if (!colorFormat) {
+  colors.forEach(({ color, weight }) => {
+    if (!color.format()) {
       throw new Error(`Invalid color format for color: ${color}`);
     }
 
-    const rgb = convertColor(color, ColorFormat.RGB).match(/\d+/g)!.map(Number);
+    const rgb = color.rgb().match(/\d+/g)!.map(Number);
     const normalizedWeight = weight / totalWeight;
 
     [0, 1, 2].forEach((i) => {
@@ -55,7 +56,7 @@ const blendMultipleColors = (colorWeights: ColorWeight[]): string => {
 
   const [r, g, b] = blendedRGB.map(Math.round);
 
-  return convertColor(`rgb(${[r, g, b].join(', ')})`, firstColorFormat);
+  return convertColor(`rgb(${[r, g, b].join(', ')})`, colors[0].color.format() as ColorFormat);
 };
 
 export { blendMultipleColors };
