@@ -22,12 +22,14 @@ A comprehensive color manipulation library for TypeScript, `@mirawision/colorize
 ### Manipulations
 - **Brightness Adjustment**: Increase or decrease the brightness of a color to fit your design needs.
 - **Saturation Adjustment**: Modify the saturation of a color, allowing for more vibrant or subdued variations.
+- **Hue Adjustment**: Change the hue of a color to any specified degree, enabling creative color transformations.
 - **Opacity Change**: Adjust the opacity of a color, useful for transparency effects and layering.
 - **Color Inversion**: Invert colors to create striking visual effects or highlight contrasts.
 - **Tinting and Shading**: Create tints by mixing colors with white and shades by mixing with black, ideal for theme generation and UI design.
-- **Color Blending**: Blend two or more colors together with specified weights for nuanced color mixing.
 - **Sepia Effect**: Apply a sepia tone to give colors a warm, vintage feel.
 - **Greyscale Application**: Apply greyscale, maintaining luminance while removing hue and saturation.
+- **Opposite Color**: Calculate the complementary color by adjusting the hue by 180 degrees, useful for design contrast and harmony.
+- **Random Color Generation**: Generate a random color in any specified format (HEX, HEXA, RGB, RGBA, HSL, HSLA, HSV, CMYK).
 
 ### Analysis
 - **Luminance Calculation**: Get the luminance of a color, understanding its perceived brightness.
@@ -58,6 +60,24 @@ yarn add @mirawision/colorize
 
 Here's a quick overview of how to use some of the core functionalities of @mirawision/colorize:
 
+### Basic Example with the Color Class
+
+```javascript
+import { Color } from '@mirawision/colorize';
+
+// Initialize a Color object with a HEX color
+const myColor = new Color('#3498db');
+
+console.log(myColor.get()); // Outputs: '#3498db'
+console.log(myColor.rgb()); // Returns color in RGB format: 'rgb(52, 152, 219)'
+console.log(myColor.hsl()); // Returns color in HSL format: 'hsl(204, 70%, 53%)'
+
+// Apply some manipulations
+console.log(myColor.applyBrightness(20)); // Brightens the color: '#60aef1'
+console.log(myColor.applyInvert()); // Inverts the color: '#cb6734'
+console.log(myColor.applyGrayscale()); // Applies grayscale effect: '#a1a1a1'
+```
+
 ### Convert Colors
 
 ```javascript
@@ -83,6 +103,16 @@ import { getColorFormat } from '@mirawision/colorize/get-color-format';
 
 const format = getColorFormat('rgba(255, 0, 0, 0.5)');
 console.log(format); // Output: 'rgba'
+```
+
+### Generate Random Color
+
+```javascript
+import { randomColor } from '@mirawision/colorize';
+
+console.log(randomColor()); // Outputs: a random color in HEX format
+console.log(randomColor('rgb')); // Outputs: a random color in RGB format
+console.log(randomColor('hsl')); // Outputs: a random color in HSL format
 ```
 
 ### Generate Gradient
