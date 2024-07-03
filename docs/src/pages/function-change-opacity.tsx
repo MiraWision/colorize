@@ -7,7 +7,7 @@ import { getRandomNumber } from '../utils/get-random-number';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -29,13 +29,15 @@ const FunctionChangeOpacityPage: React.FC<Props> = ({}) => {
     <div>
       <h1>changeOpacity function</h1>
 
-      <Row>
-        <ColorBox color={colorToChangeOpacity} />
-        
-        <InputText 
-          value={colorToChangeOpacity}
-          onChange={(e) => setColorToChangeOpacity(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToChangeOpacity} />
+          
+          <InputText 
+            value={colorToChangeOpacity}
+            onChange={(e) => setColorToChangeOpacity(e.target.value)}
+          />
+        </Row>
 
         <InputNumber 
           min={0}
@@ -46,10 +48,12 @@ const FunctionChangeOpacityPage: React.FC<Props> = ({}) => {
           onChange={(e) => setOpacity(Number(e.value))}
         />
 
-        <ColorBox color={opacityAdjustedColor} />
+        <Row>
+          <ColorBox color={opacityAdjustedColor} />
 
-        <Result>{opacityAdjustedColor}</Result>
-      </Row>
+          <Result>{opacityAdjustedColor}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

@@ -46,6 +46,10 @@ const Container = styled.div`
   pre {
     max-width: 702px;
     border-radius: 8px;
+
+    @media (max-width: 768px) {
+      max-width: calc(100vw - 48px);
+    }
   }
 
   a {

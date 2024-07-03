@@ -7,7 +7,7 @@ import { getRandomNumber } from '../utils/get-random-number';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -27,23 +27,31 @@ const FunctionAdjustSaturationPage: React.FC<Props> = ({}) => {
     <div>
       <h1>adjustSaturation function</h1>
 
-      <Row>
-        <ColorBox color={colorToAdjustSaturation} />
-        
-        <InputText 
-          value={colorToAdjustSaturation}
-          onChange={(e) => setColorToAdjustSaturation(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToAdjustSaturation} />
+          
+          <InputText 
+            value={colorToAdjustSaturation}
+            onChange={(e) => setColorToAdjustSaturation(e.target.value)}
+          />
+        </Row>
 
         <InputNumber 
           value={saturationLevel}
           onChange={(e) => setSaturationLevel(Number(e.value))}
+          showButtons
+          min={-100}
+          max={100}
+          step={1}
         />
 
-        <ColorBox color={adjustedSaturationColor} />
+        <Row>
+          <ColorBox color={adjustedSaturationColor} />
 
-        <Result>{adjustedSaturationColor}</Result>
-      </Row>
+          <Result>{adjustedSaturationColor}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+const FlexibleContainer = styled.div`
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 12px;
+  row-gap: 12px;
+
+  @media (max-width: 768px) {
+    flex-flow: column;
+  }
+`;
+
 const Column = styled.div`
   display: flex;
   align-items: center;
@@ -25,6 +38,7 @@ const ColorBox = styled.div<{ color: string }>`
 `;
 
 export {
+  FlexibleContainer,
   Column,
   Row,
   Result,

@@ -5,7 +5,7 @@ import { content } from '../content/function-opposite-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {}
 
@@ -24,18 +24,22 @@ const FunctionOppositeColorPage: React.FC<Props> = ({}) => {
     <div>
       <h1>oppositeColor function</h1>
 
-      <Row>
-        <ColorBox color={colorToFindOpposite} />
-        
-        <InputText 
-          value={colorToFindOpposite}
-          onChange={(e) => setColorToFindOpposite(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToFindOpposite} />
+          
+          <InputText 
+            value={colorToFindOpposite}
+            onChange={(e) => setColorToFindOpposite(e.target.value)}
+          />
+        </Row>
 
-        <ColorBox color={oppositeColorValue} />
+        <Row>
+          <ColorBox color={oppositeColorValue} />
 
-        <Result>{oppositeColorValue}</Result>
-      </Row>
+          <Result>{oppositeColorValue}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

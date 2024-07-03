@@ -7,7 +7,7 @@ import { getRandomNumber } from '../utils/get-random-number';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {}
 
@@ -28,23 +28,27 @@ const FunctionAdjustHuePage: React.FC<Props> = ({}) => {
     <div>
       <h1>adjustHue function</h1>
 
-      <Row>
-        <ColorBox color={colorToAdjustHue} />
-        
-        <InputText 
-          value={colorToAdjustHue}
-          onChange={(e) => setColorToAdjustHue(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToAdjustHue} />
+          
+          <InputText 
+            value={colorToAdjustHue}
+            onChange={(e) => setColorToAdjustHue(e.target.value)}
+          />
+        </Row>
 
         <InputNumber 
           value={hueShift}
           onChange={(e) => setHueShift(Number(e.value))}
         />
 
-        <ColorBox color={adjustedHueColor} />
+        <Row>
+          <ColorBox color={adjustedHueColor} />
 
-        <Result>{adjustedHueColor}</Result>
-      </Row>
+          <Result>{adjustedHueColor}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

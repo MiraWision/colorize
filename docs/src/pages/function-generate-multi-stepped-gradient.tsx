@@ -6,7 +6,7 @@ import { content } from '../content/function-generate-multi-stepped-gradient';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -25,18 +25,20 @@ const FunctionGenerateMultiSteppedGradientPage: React.FC<Props> = ({}) => {
     <div>
       <h1>generateMultiSteppedGradient function</h1>
 
-      <Row>
+      <FlexibleContainer>
         <InputTextBig 
           value={gradientConfig}
           onChange={(e) => setGradientConfig(e.target.value)}
         />
 
-        {gradientConfig.split(',').filter((item) => isValidColor(item.trim())).map((color) => (
-          <ColorBox color={color} />
-        ))}
-      </Row>
+        <Row>
+          {gradientConfig.split(',').filter((item) => isValidColor(item.trim())).map((color) => (
+            <ColorBox color={color} />
+          ))}
+        </Row>
+      </FlexibleContainer>
     
-      <Grid>
+      <FlexibleContainer>
         {steppedGradient.map((color) => (
           <Row key={color}>
             <ColorBox color={color} />
@@ -44,7 +46,7 @@ const FunctionGenerateMultiSteppedGradientPage: React.FC<Props> = ({}) => {
             <Result>{color}</Result>
           </Row>
         ))}
-      </Grid>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>
@@ -60,6 +62,10 @@ const Grid = styled.div`
 
 const InputTextBig = styled(InputText)`
   width: 400px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export { FunctionGenerateMultiSteppedGradientPage };

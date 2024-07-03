@@ -9,7 +9,7 @@ import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
 import { Button } from 'primereact/button';
-import { ColorBox, Column, Result, Row } from '../components/styles';
+import { ColorBox, Column, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -56,30 +56,34 @@ const FunctionBlendMultipleColorsPage: React.FC<Props> = ({}) => {
 
       <Column>
         {colors.map((colorObj, index) => (
-          <Row key={index}>
-            <ColorBox color={colorObj.color} />
+          <FlexibleContainer key={index}>
+            <Row>
+              <ColorBox color={colorObj.color} />
 
-            <InputText 
-              value={colorObj.color}
-              onChange={(e) => updateColor(index, e.target.value)}
-            />
+              <InputText 
+                value={colorObj.color}
+                onChange={(e) => updateColor(index, e.target.value)}
+              />
+            </Row>
 
-            <InputNumberMini
-              min={1}
-              max={100}
-              step={1}
-              value={colorObj.weight}
-              showButtons
-              onChange={(e) => updateWeight(index, Number(e.value))}
-            />
+            <Row>
+              <InputNumberMini
+                min={1}
+                max={100}
+                step={1}
+                value={colorObj.weight}
+                showButtons
+                onChange={(e) => updateWeight(index, Number(e.value))}
+              />
 
-            <ButtonStyled 
-              onClick={() => removeColor(index)} 
-              disabled={colors.length <= 2}
-            >
-              Remove
-            </ButtonStyled>
-          </Row>
+              <ButtonStyled 
+                onClick={() => removeColor(index)} 
+                disabled={colors.length <= 2}
+              >
+                Remove
+              </ButtonStyled>
+            </Row>
+          </FlexibleContainer>
         ))}
 
         <RowSpaced>
@@ -108,6 +112,10 @@ const ButtonStyled = styled(Button)`
 const RowSpaced = styled(Row)`
   justify-content: space-between;
   width: 460px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const InputNumberMini = styled(InputNumber)`

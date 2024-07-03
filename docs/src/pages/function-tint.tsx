@@ -7,7 +7,7 @@ import { getRandomNumber } from '../utils/get-random-number';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -27,13 +27,15 @@ const FunctionTintPage: React.FC<Props> = ({}) => {
     <div>
       <h1>tint function</h1>
    
-      <Row>
-        <ColorBox color={colorToTint} />
-        
-        <InputText 
-          value={colorToTint}
-          onChange={(e) => setColorToTint(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToTint} />
+          
+          <InputText 
+            value={colorToTint}
+            onChange={(e) => setColorToTint(e.target.value)}
+          />
+        </Row>
 
         <InputNumber 
           value={tintPercentage}
@@ -44,10 +46,12 @@ const FunctionTintPage: React.FC<Props> = ({}) => {
           step={0.05} 
         />
 
-        <ColorBox color={tintedColor} />
+        <Row>
+          <ColorBox color={tintedColor} />
 
-        <Result>{tintedColor}</Result>
-      </Row>
+          <Result>{tintedColor}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

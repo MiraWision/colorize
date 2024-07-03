@@ -5,7 +5,7 @@ import { content } from '../content/function-invert-color';
 
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -24,18 +24,22 @@ const FunctionInvertColorPage: React.FC<Props> = ({}) => {
     <div>
       <h1>invertColor function</h1>
    
-      <Row>
-        <ColorBox color={colorToInvert} />
-        
-        <InputText 
-          value={colorToInvert}
-          onChange={(e) => setColorToInvert(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToInvert} />
+          
+          <InputText 
+            value={colorToInvert}
+            onChange={(e) => setColorToInvert(e.target.value)}
+          />
+        </Row>
 
-        <ColorBox color={invertedColor} />
+        <Row>
+          <ColorBox color={invertedColor} />
 
-        <Result>{invertedColor}</Result>
-      </Row>
+          <Result>{invertedColor}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

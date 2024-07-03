@@ -6,7 +6,7 @@ import { content } from '../content/function-convert-color';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -37,13 +37,15 @@ const FunctionConvertColorPage: React.FC<Props> = ({}) => {
     <div>
       <h1>convertColor function</h1>
     
-      <Row>
-        <ColorBox color={colorToConvert} />
-        
-        <InputText 
-          value={colorToConvert}
-          onChange={(e) => setColorToConvert(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToConvert} />
+          
+          <InputText 
+            value={colorToConvert}
+            onChange={(e) => setColorToConvert(e.target.value)}
+          />
+        </Row>
 
         <Dropdown 
           value={colorFormatToConvert}
@@ -54,10 +56,12 @@ const FunctionConvertColorPage: React.FC<Props> = ({}) => {
           className='w-full md:w-14rem'
         />
 
-        <ColorBox color={convertedColor} />
+        <Row>
+          <ColorBox color={convertedColor} />
 
-        <Result>{convertedColor}</Result>
-      </Row>
+          <Result>{convertedColor}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

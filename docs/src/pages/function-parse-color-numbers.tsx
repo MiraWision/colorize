@@ -6,7 +6,7 @@ import { content } from '../content/function-parse-color-numbers';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -40,13 +40,15 @@ const FunctionParseColorNumbersPage: React.FC<Props> = ({}) => {
     <div>
       <h1>parseColorNumbers function</h1>
 
-      <Row>
-        <ColorBox color={colorToParseNumbers} />
-        
-        <InputText 
-          value={colorToParseNumbers}
-          onChange={(e) => setColorToParseNumbers(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToParseNumbers} />
+          
+          <InputText 
+            value={colorToParseNumbers}
+            onChange={(e) => setColorToParseNumbers(e.target.value)}
+          />
+        </Row>
 
         <Dropdown 
           value={colorFormatToParse}
@@ -62,7 +64,7 @@ const FunctionParseColorNumbersPage: React.FC<Props> = ({}) => {
             ? Object.entries(result).map(([key, value]) => `${key}: ${value}`).join(', ') 
             : 'Invalid color format'}
         </Result>
-      </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

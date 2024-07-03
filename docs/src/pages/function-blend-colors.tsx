@@ -8,7 +8,7 @@ import { getRandomNumber } from '../utils/get-random-number';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -30,20 +30,24 @@ const FunctionBlendColorsPage: React.FC<Props> = ({}) => {
     <div>
       <h1>blendColors function</h1>
 
-      <Row>
-        <ColorBox color={baseColorForBlend} />
-        
-        <InputText 
-          value={baseColorForBlend}
-          onChange={(e) => setBaseColorForBlend(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={baseColorForBlend} />
+          
+          <InputText 
+            value={baseColorForBlend}
+            onChange={(e) => setBaseColorForBlend(e.target.value)}
+          />
+        </Row>
 
-        <ColorBox color={blendColor} />
-        
-        <InputText 
-          value={blendColor}
-          onChange={(e) => setBlendColor(e.target.value)}
-        />
+        <Row>
+          <ColorBox color={blendColor} />
+          
+          <InputText 
+            value={blendColor}
+            onChange={(e) => setBlendColor(e.target.value)}
+          />
+        </Row>
 
         <InputNumberMini
           min={0}
@@ -54,10 +58,12 @@ const FunctionBlendColorsPage: React.FC<Props> = ({}) => {
           onChange={(e) => setBlendFactor(Number(e.value))}
         />
 
-        <ColorBox color={blendedColor} />
+        <Row>
+          <ColorBox color={blendedColor} />
 
-        <Result>{blendedColor}</Result>
-      </Row>
+          <Result>{blendedColor}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

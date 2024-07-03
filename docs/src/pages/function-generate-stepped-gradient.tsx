@@ -7,7 +7,7 @@ import { content } from '../content/function-generate-stepped-gradient';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -28,13 +28,15 @@ const FunctionGenerateSteppedGradientPage: React.FC<Props> = ({}) => {
     <div>
       <h1>generateSteppedGradient function</h1>
 
-      <Row>
-        <ColorBox color={colorToGradientOne} />
-          
-        <InputText 
-          value={colorToGradientOne}
-          onChange={(e) => setColorToGradientOne(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToGradientOne} />
+            
+          <InputText 
+            value={colorToGradientOne}
+            onChange={(e) => setColorToGradientOne(e.target.value)}
+          />
+        </Row>
 
         <InputNumber 
           value={stepsForGradient} 
@@ -44,15 +46,17 @@ const FunctionGenerateSteppedGradientPage: React.FC<Props> = ({}) => {
           max={25} 
         />
 
-        <InputText 
-          value={colorToGradientTwo}
-          onChange={(e) => setColorToGradientTwo(e.target.value)}
-        />
+        <Row>
+          <InputText 
+            value={colorToGradientTwo}
+            onChange={(e) => setColorToGradientTwo(e.target.value)}
+          />
 
-        <ColorBox color={colorToGradientTwo} />
-      </Row>
+          <ColorBox color={colorToGradientTwo} />
+        </Row>
+      </FlexibleContainer>
     
-      <Grid>
+      <FlexibleContainer>
         {steppedGradient.map((color) => (
           <Row key={color}>
             <ColorBox color={color} />
@@ -60,7 +64,7 @@ const FunctionGenerateSteppedGradientPage: React.FC<Props> = ({}) => {
             <Result>{color}</Result>
           </Row>
         ))}
-      </Grid>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

@@ -7,7 +7,7 @@ import { getRandomNumber } from '../utils/get-random-number';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -27,13 +27,15 @@ const FunctionShadePage: React.FC<Props> = ({}) => {
     <div>
       <h1>shade function</h1>
    
-      <Row>
-        <ColorBox color={colorToShade} />
-        
-        <InputText 
-          value={colorToShade}
-          onChange={(e) => setColorToShade(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToShade} />
+          
+          <InputText 
+            value={colorToShade}
+            onChange={(e) => setColorToShade(e.target.value)}
+          />
+        </Row>
 
         <InputNumber 
           value={shadePercentage}
@@ -44,10 +46,12 @@ const FunctionShadePage: React.FC<Props> = ({}) => {
           step={0.05} 
         />
 
-        <ColorBox color={shadedColor} />
+        <Row>
+          <ColorBox color={shadedColor} />
 
-        <Result>{shadedColor}</Result>
-      </Row>
+          <Result>{shadedColor}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

@@ -7,7 +7,7 @@ import { getRandomNumber } from '../utils/get-random-number';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { InputNumber } from 'primereact/inputnumber';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -27,13 +27,15 @@ const FunctionAdjustBrightnessPage: React.FC<Props> = ({}) => {
     <div>
       <h1>adjustBrightness function</h1>
 
-      <Row>
-        <ColorBox color={colorToAdjustBrightness} />
-        
-        <InputText 
-          value={colorToAdjustBrightness}
-          onChange={(e) => setColorToAdjustBrightness(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToAdjustBrightness} />
+          
+          <InputText 
+            value={colorToAdjustBrightness}
+            onChange={(e) => setColorToAdjustBrightness(e.target.value)}
+          />
+        </Row>
 
         <InputNumber 
           value={brightnessLevel}
@@ -44,10 +46,12 @@ const FunctionAdjustBrightnessPage: React.FC<Props> = ({}) => {
           step={1} 
         />
 
-        <ColorBox color={adjustedBrightnessColor} />
+        <Row>
+          <ColorBox color={adjustedBrightnessColor} />
 
-        <Result>{adjustedBrightnessColor}</Result>
-      </Row>
+          <Result>{adjustedBrightnessColor}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

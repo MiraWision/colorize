@@ -6,7 +6,7 @@ import { content } from '../content/function-random-color';
 import Markdown from '../components/common/markdown';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {}
 
@@ -34,7 +34,7 @@ const FunctionRandomColorPage: React.FC<Props> = ({}) => {
     <div>
       <h1>randomColor function</h1>
 
-      <Row>
+      <FlexibleContainer>
         <Dropdown 
           value={selectedFormat} 
           options={colorFormats} 
@@ -44,10 +44,12 @@ const FunctionRandomColorPage: React.FC<Props> = ({}) => {
 
         <Button onClick={generateRandomColor}>Generate</Button>
 
-        <ColorBox color={randomColorValue} />
+        <Row>
+          <ColorBox color={randomColorValue} />
 
-        <Result>{randomColorValue}</Result>
-      </Row>
+          <Result>{randomColorValue}</Result>
+        </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

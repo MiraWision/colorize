@@ -6,7 +6,7 @@ import { content } from '../content/function-is-valid-color';
 import Markdown from '../components/common/markdown';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 
 interface Props {
 }
@@ -51,13 +51,15 @@ const FunctionIsValidColorPage: React.FC<Props> = ({}) => {
     <div>
       <h1>isValidColor function & subfunctions</h1>
    
-      <Row>
-        <ColorBox color={colorToValidate} />
-        
-        <InputText 
-          value={colorToValidate}
-          onChange={(e) => setColorToConvert(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={colorToValidate} />
+          
+          <InputText 
+            value={colorToValidate}
+            onChange={(e) => setColorToConvert(e.target.value)}
+          />
+        </Row>
 
         <Dropdown 
           value={colorFormatToValidate}
@@ -69,7 +71,7 @@ const FunctionIsValidColorPage: React.FC<Props> = ({}) => {
         />
 
         <Result>{isValid ? 'Valid Color' : 'Invalid Color'}</Result>
-      </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>

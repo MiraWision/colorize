@@ -4,7 +4,7 @@ import { calculateSimilarity, randomColor } from '@mirawision/colorize';
 import { content } from '../content/function-calculate-similarity';
 
 import { InputText } from 'primereact/inputtext';
-import { ColorBox, Result, Row } from '../components/styles';
+import { ColorBox, FlexibleContainer, Result, Row } from '../components/styles';
 import Markdown from '../components/common/markdown';
 
 interface Props {}
@@ -25,23 +25,27 @@ const FunctionCalculateSimilarityPage: React.FC<Props> = ({}) => {
     <div>
       <h1>calculateSimilarity function</h1>
 
-      <Row>
-        <ColorBox color={color1} />
-        
-        <InputText 
-          value={color1}
-          onChange={(e) => setColor1(e.target.value)}
-        />
+      <FlexibleContainer>
+        <Row>
+          <ColorBox color={color1} />
+          
+          <InputText 
+            value={color1}
+            onChange={(e) => setColor1(e.target.value)}
+          />
+        </Row>
 
-        <ColorBox color={color2} />
-        
-        <InputText 
-          value={color2}
-          onChange={(e) => setColor2(e.target.value)}
-        />
+        <Row>
+          <ColorBox color={color2} />
+          
+          <InputText 
+            value={color2}
+            onChange={(e) => setColor2(e.target.value)}
+          />
+        </Row>  
 
         <Result>{similarity}</Result>
-      </Row>
+      </FlexibleContainer>
 
       <Markdown markdownText={content} />
     </div>
