@@ -145,6 +145,10 @@ const MenuItems = [
         url: Routes.FunctionCalculateSimilarity,
       },
       {
+        name: 'getTemperature',
+        url: Routes.FunctionGetTemperature,
+      },
+      {
         name: 'Types',
         isGroup: true,
       },

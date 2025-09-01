@@ -29,6 +29,8 @@ const titles: { [K in Routes]?: string } = {
   [Routes.FunctionIsLight]: 'Analysis: Is Light - Colorize by MiraWision',
   [Routes.FunctionIsDark]: 'Analysis: Is Dark - Colorize by MiraWision',
   [Routes.FunctionCalculateContrast]: 'Analysis: Calculate Contrast - Colorize by MiraWision',
+  [Routes.FunctionCalculateSimilarity]: 'Analysis: Calculate Similarity - Colorize by MiraWision',
+  [Routes.FunctionGetTemperature]: 'Analysis: Get Temperature - Colorize by MiraWision',
   
   [Routes.EnumColorFormat]: 'Types: Color Format - Colorize by MiraWision',
 };

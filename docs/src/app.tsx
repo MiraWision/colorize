@@ -35,6 +35,7 @@ import { FunctionAdjustHuePage } from './pages/function-adjust-hue';
 import { FunctionRandomColorPage } from './pages/function-random-color';
 import { FunctionOppositeColorPage } from './pages/function-opposite-color';
 import { FunctionCalculateSimilarityPage } from './pages/function-calculate-similarity';
+import { FunctionGetTemperaturePage } from './pages/function-get-temperature';
 import { EnumColorFormatPage } from './pages/enum-color-format';
 
 const App: React.FC = () => {
@@ -127,6 +128,7 @@ const App: React.FC = () => {
             <Route path={Routes.FunctionIsDark} component={FunctionIsDarkPage} />
             <Route path={Routes.FunctionCalculateContrast} component={FunctionCalculateContrastPage} />
             <Route path={Routes.FunctionCalculateSimilarity} component={FunctionCalculateSimilarityPage} />
+            <Route path={Routes.FunctionGetTemperature} component={FunctionGetTemperaturePage} />
             
             <Route path={Routes.EnumColorFormat} component={EnumColorFormatPage} />
           </StyledSwitch>
