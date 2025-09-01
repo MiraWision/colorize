@@ -39,6 +39,27 @@ console.log(result); // { h: 30, s: 100, l: 50 }
 const result = parseColorNumbers('hsla(30, 100%, 50%, 0.5)', ColorFormat.HSLA);
 console.log(result); // { h: 30, s: 100, l: 50, a: 0.5 }
 \`\`\`
+
+### Handling Invalid Color Formats
+
+The function handles invalid color formats gracefully by using white as a fallback.
+
+\`\`\`typescript
+const result = parseColorNumbers('invalidColor', ColorFormat.RGB);
+console.log(result); // { r: 255, g: 255, b: 255 } (white values)
+\`\`\`
+
+### Error Handling
+
+The function throws an error if an invalid format is specified.
+
+\`\`\`typescript
+try {
+  const result = parseColorNumbers('rgb(255, 87, 51)', 'invalidFormat' as any);
+} catch (error) {
+  console.error(error); // Output: Error: Invalid format specified
+}
+\`\`\`
 `;
 
 export { content };

@@ -13,11 +13,7 @@ interface Props {
 const FunctionInvertColorPage: React.FC<Props> = ({}) => {
   const [colorToInvert, setColorToInvert] = useState(randomColor());
   const invertedColor = useMemo(() => {
-    try {
-      return invertColor(colorToInvert);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return invertColor(colorToInvert);
   }, [colorToInvert]);
 
   return (

@@ -34,19 +34,16 @@ console.log(similarity);
 // Output: A percentage indicating how similar red and green are
 \`\`\`
 
-### Error Handling
+### Handling Invalid Color Formats
 
-The function throws an error if the input color format is invalid.
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const color1 = "invalidColor";
-  const color2 = "#00ff00";
+const color1 = "invalidColor";
+const color2 = "#00ff00";
   
-  const similarity = calculateSimilarity(color1, color2);
-} catch (error) {
-  console.error(error); // Output: Error: Invalid color format
-}
+const similarity = calculateSimilarity(color1, color2);
+console.log(similarity); // Uses white as fallback for the first color
 \`\`\`
 `;
 

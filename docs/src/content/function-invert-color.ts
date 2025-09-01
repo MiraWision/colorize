@@ -20,18 +20,15 @@ console.log(invertedColor);
 // Output: "rgb(155, 105, 55)" - the inverted color
 \`\`\`
 
-### Error Handling
+### Handling Invalid Color Formats
 
-The function throws an error if the input color is in an invalid format.
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const color = "invalidColor";
+const color = "invalidColor";
   
-  const invertedColor = invertColor(color);
-} catch (error) {
-  console.error(error); // Output: Error: Invalid color format
-}
+const invertedColor = invertColor(color);
+console.log(invertedColor); // Uses white as fallback and inverts it
 \`\`\`
 `;
 

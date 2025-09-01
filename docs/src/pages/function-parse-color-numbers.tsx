@@ -29,11 +29,7 @@ const FunctionParseColorNumbersPage: React.FC<Props> = ({}) => {
   const [colorFormatToParse, setColorFormatToParse] = useState<ColorFormatItem>(colorFormats[0]);
   
   const result = useMemo(() => {
-    try {
-      return parseColorNumbers(colorToParseNumbers, colorFormatToParse.code);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return parseColorNumbers(colorToParseNumbers, colorFormatToParse.code);
   }, [colorToParseNumbers, colorFormatToParse]);
 
   return (
@@ -60,9 +56,7 @@ const FunctionParseColorNumbersPage: React.FC<Props> = ({}) => {
         />
 
         <Result>
-          {result !== 'Invalid color format' 
-            ? Object.entries(result).map(([key, value]) => `${key}: ${value}`).join(', ') 
-            : 'Invalid color format'}
+          {Object.entries(result).map(([key, value]) => `${key}: ${value}`).join(', ')}
         </Result>
       </FlexibleContainer>
 

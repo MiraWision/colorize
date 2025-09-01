@@ -25,20 +25,17 @@ console.log(blendedColor);
 // Output: rgb(128, 0, 128) - a purple color
 \`\`\`
 
-### Error Handling
+### Handling Invalid Color Formats
 
-The function throws an error if either \`fromColor\` or \`toColor\` is in an invalid color format.
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const fromColor = "invalidColor";
-  const toColor = "rgb(0, 0, 255)";
-  const weight = 0.5;
+const fromColor = "invalidColor";
+const toColor = "rgb(0, 0, 255)";
+const weight = 0.5;
   
-  const blendedColor = blendColors(fromColor, toColor, weight);
-} catch (error) {
-  console.error(error); // Output: Error: Invalid color format
-}
+const blendedColor = blendColors(fromColor, toColor, weight);
+console.log(blendedColor); // Uses white as fallback for the first color
 \`\`\`
 `;
 

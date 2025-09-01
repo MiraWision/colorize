@@ -13,11 +13,7 @@ interface Props {
 const FunctionIsDarkPage: React.FC<Props> = ({}) => {
   const [colorToCalculate, setColorToCalculate] = useState(randomColor());
   const results = useMemo(() => {
-    try {
-      return isDark(colorToCalculate);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return isDark(colorToCalculate);
   }, [colorToCalculate]);
 
   return (

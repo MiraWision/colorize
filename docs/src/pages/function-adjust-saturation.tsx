@@ -16,11 +16,7 @@ const FunctionAdjustSaturationPage: React.FC<Props> = ({}) => {
   const [colorToAdjustSaturation, setColorToAdjustSaturation] = useState(randomColor());
   const [saturationLevel, setSaturationLevel] = useState(getRandomNumber(-50, 50, 1));
   const adjustedSaturationColor = useMemo(() => {
-    try {
-      return adjustSaturation(colorToAdjustSaturation, saturationLevel);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return adjustSaturation(colorToAdjustSaturation, saturationLevel);
   }, [colorToAdjustSaturation, saturationLevel]);
 
   return (

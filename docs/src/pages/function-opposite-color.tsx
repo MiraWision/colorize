@@ -13,11 +13,7 @@ const FunctionOppositeColorPage: React.FC<Props> = ({}) => {
   const [colorToFindOpposite, setColorToFindOpposite] = useState(randomColor());
   
   const oppositeColorValue = useMemo(() => {
-    try {
-      return oppositeColor(colorToFindOpposite);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return oppositeColor(colorToFindOpposite);
   }, [colorToFindOpposite]);
 
   return (

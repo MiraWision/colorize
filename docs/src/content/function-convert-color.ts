@@ -30,16 +30,14 @@ const cmykColor = convertColor(rgbColor, ColorFormat.CMYK);
 console.log(cmykColor); // Output: "cmyk(0%, 66%, 80%, 0%)"
 \`\`\`
 
-### Error Handling
-If the input color is in an invalid or unrecognized format, the function will throw an error.
+### Handling Invalid Color Formats
+
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const invalidColor = "invalidColor";
-  const convertedColor = convertColor(invalidColor, ColorFormat.HEX);
-} catch (error) {
-  console.error(error); // Output: Error: Invalid color format
-}
+const invalidColor = "invalidColor";
+const convertedColor = convertColor(invalidColor, ColorFormat.HEX);
+console.log(convertedColor); // Output: "#FFFFFF" (white as fallback)
 \`\`\`
 `;
 

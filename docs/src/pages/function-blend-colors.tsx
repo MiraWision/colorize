@@ -19,11 +19,7 @@ const FunctionBlendColorsPage: React.FC<Props> = ({}) => {
   const [blendFactor, setBlendFactor] = useState(getRandomNumber(0.05, 0.95, 0.05));
 
   const blendedColor = useMemo(() => {
-    try {
-      return blendColors(baseColorForBlend, blendColor, blendFactor);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return blendColors(baseColorForBlend, blendColor, blendFactor);
   }, [baseColorForBlend, blendColor, blendFactor]);
 
   return (

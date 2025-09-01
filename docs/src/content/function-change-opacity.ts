@@ -23,19 +23,16 @@ console.log(translucentColor);
 // Output: "rgba(255, 0, 0, 0.5)" - a semi-transparent red
 \`\`\`
 
-### Error Handling
+### Handling Invalid Color Formats
 
-The function throws an error if the input color is in an invalid format.
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const color = "invalidColor";
-  const opacity = 0.5;
+const color = "invalidColor";
+const opacity = 0.5;
   
-  const translucentColor = changeOpacity(color, opacity);
-} catch (error) {
-  console.error(error); // Output: Error: Invalid color format
-}
+const translucentColor = changeOpacity(color, opacity);
+console.log(translucentColor); // Uses white as fallback and adjusts its opacity
 \`\`\`
 `;
 

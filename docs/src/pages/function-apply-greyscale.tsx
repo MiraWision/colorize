@@ -13,11 +13,7 @@ interface Props {
 const FunctionApplyGreyscalePage: React.FC<Props> = ({}) => {
   const [colorToApplyGreyscale, setColorToApplyGreyscale] = useState(randomColor());
   const greyscaleColor = useMemo(() => {
-    try {
-      return applyGreyscale(colorToApplyGreyscale);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return applyGreyscale(colorToApplyGreyscale);
   }, [colorToApplyGreyscale]);
   
   return (

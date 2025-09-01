@@ -16,11 +16,7 @@ const FunctionShadePage: React.FC<Props> = ({}) => {
   const [colorToShade, setColorToShade] = useState(randomColor());
   const [shadePercentage, setShadePercentage] = useState(getRandomNumber(0.05, 0.95, 0.05));
   const shadedColor = useMemo(() => {
-    try {
-      return shade(colorToShade, shadePercentage);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return shade(colorToShade, shadePercentage);
   }, [colorToShade, shadePercentage]);
 
   return (

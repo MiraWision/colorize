@@ -13,11 +13,7 @@ interface Props {
 const FunctionIsLightPage: React.FC<Props> = ({}) => {
   const [colorToCalculate, setColorToCalculate] = useState(randomColor());
   const results = useMemo(() => {
-    try {
-      return isLight(colorToCalculate);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return isLight(colorToCalculate);
   }, [colorToCalculate]);
 
   return (

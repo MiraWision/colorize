@@ -14,11 +14,7 @@ const FunctionExtractOpacityPage: React.FC<Props> = ({}) => {
   const [colorToExtractOpacity, setColorToExtractOpacity] = useState(randomColor(ColorFormat.HEXA));
 
   const result = useMemo(() => {
-    try {
-      return extractOpacity(colorToExtractOpacity);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return extractOpacity(colorToExtractOpacity);
   }, [colorToExtractOpacity]);
 
   return (
@@ -36,9 +32,9 @@ const FunctionExtractOpacityPage: React.FC<Props> = ({}) => {
         </Row>
 
         <Row>
-          <ColorBox color={result !== 'Invalid color format' ? result.color : 'transparent'} />
+          <ColorBox color={result.color} />
 
-          <Result>{result !== 'Invalid color format' ? `Color: ${result.color}, Opacity: ${Math.round(result.opacity * 100) / 100}` : 'Invalid color format'}</Result>
+          <Result>{`Color: ${result.color}, Opacity: ${Math.round(result.opacity * 100) / 100}`}</Result>
         </Row>
       </FlexibleContainer>
 

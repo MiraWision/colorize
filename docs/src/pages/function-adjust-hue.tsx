@@ -17,11 +17,7 @@ const FunctionAdjustHuePage: React.FC<Props> = ({}) => {
   const [hueShift, setHueShift] = useState(getRandomNumber(-180, 180, 1));
   
   const adjustedHueColor = useMemo(() => {
-    try {
-      return adjustHue(colorToAdjustHue, hueShift);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return adjustHue(colorToAdjustHue, hueShift);
   }, [colorToAdjustHue, hueShift]);
 
   return (

@@ -14,11 +14,7 @@ const FunctionCalculateContrastPage: React.FC<Props> = ({}) => {
   const [colorToCalculateContrast1, setColorToCalculateContrast1] = useState(randomColor());
   const [colorToCalculateContrast2, setColorToCalculateContrast2] = useState(randomColor());
   const contrast = useMemo(() => {
-    try {
-      return Math.round(calculateContrast(colorToCalculateContrast1, colorToCalculateContrast2) * 100) / 100;
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return Math.round(calculateContrast(colorToCalculateContrast1, colorToCalculateContrast2) * 100) / 100;
   }, [colorToCalculateContrast1, colorToCalculateContrast2]);
 
   return (

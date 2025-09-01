@@ -25,20 +25,17 @@ console.log(gradient);
 // Output: ["rgb(191, 0, 64)", "rgb(128, 0, 128)", "rgb(64, 0, 191)"]
 \`\`\`
 
-### Error Handling
+### Handling Invalid Color Formats
 
-The function throws an error if either \`fromColor\` or \`toColor\` is in an invalid color format.
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const fromColor = "invalidColor";
-  const toColor = "rgb(0, 0, 255)";
-  const count = 3;
+const fromColor = "invalidColor";
+const toColor = "rgb(0, 0, 255)";
+const count = 3;
   
-  const gradient = generateSteppedGradient(fromColor, toColor, count);
-} catch (error) {
-  console.error(error); // Output: Error: Invalid color format
-}
+const gradient = generateSteppedGradient(fromColor, toColor, count);
+console.log(gradient); // Uses white as fallback for the first color
 \`\`\`
 `;
 

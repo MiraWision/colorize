@@ -17,6 +17,27 @@ const gradient = generateMultiSteppedGradient(["#FF0000", 1, "#00FF00", 1, "#000
 console.log(gradient);
 // Outputs: ["#FF0000", "#808000", "#00FF00", "#008080", "#0000FF"]
 \`\`\`
+
+### Handling Invalid Color Formats
+
+The function handles invalid color formats gracefully by using white as a fallback.
+
+\`\`\`typescript
+const gradient = generateMultiSteppedGradient(["invalidColor", 1, "#00FF00", 1, "#0000FF"]);
+console.log(gradient); // Uses white as fallback for invalid color
+\`\`\`
+
+### Error Handling
+
+The function throws an error if the arguments don't follow the correct pattern.
+
+\`\`\`typescript
+try {
+  const gradient = generateMultiSteppedGradient(["#FF0000", 1, "#00FF00"]); // Missing last color
+} catch (error) {
+  console.error(error); // Output: Error: Function must be called with at least one color and one step count, in an interleaved manner.
+}
+\`\`\`
 `;
 
 export { content };

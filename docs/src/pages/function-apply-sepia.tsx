@@ -13,11 +13,7 @@ interface Props {
 const FunctionApplySepiaPage: React.FC<Props> = ({}) => {
   const [colorToApplySepia, setColorToApplySepia] = useState(randomColor());
   const sepiaColor = useMemo(() => {
-    try {
-      return applySepia(colorToApplySepia);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return applySepia(colorToApplySepia);
   }, [colorToApplySepia]);
   
   return (

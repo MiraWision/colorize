@@ -18,11 +18,7 @@ const FunctionChangeOpacityPage: React.FC<Props> = ({}) => {
   const [opacity, setOpacity] = useState(getRandomNumber(0.05, 0.95, 0.05));
 
   const opacityAdjustedColor = useMemo(() => {
-    try {
-      return changeOpacity(colorToChangeOpacity, opacity);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return changeOpacity(colorToChangeOpacity, opacity);
   }, [colorToChangeOpacity, opacity]);
 
   return (

@@ -26,11 +26,7 @@ const FunctionConvertColorPage: React.FC<Props> = ({}) => {
   const [colorToConvert, setColorToConvert] = useState(randomColor());
   const [colorFormatToConvert, setColorFormatToConvert] = useState<{ name: string; code: ColorFormat}>({ name: 'RGB', code: ColorFormat.RGB });
   const convertedColor = useMemo(() => {
-    try {
-      return convertColor(colorToConvert, colorFormatToConvert.code);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return convertColor(colorToConvert, colorFormatToConvert.code);
   }, [colorToConvert, colorFormatToConvert]);
 
   return (

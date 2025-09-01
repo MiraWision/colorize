@@ -13,11 +13,7 @@ interface Props {
 const FunctionGetLuminancePage: React.FC<Props> = ({}) => {
   const [colorToCalculate, setColorToCalculate] = useState(randomColor());
   const luminance = useMemo(() => {
-    try {
-      return Math.round(getLuminance(colorToCalculate) * 10000) / 10000;
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return Math.round(getLuminance(colorToCalculate) * 10000) / 10000;
   }, [colorToCalculate]);
 
   return (

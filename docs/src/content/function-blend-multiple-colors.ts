@@ -57,9 +57,10 @@ console.log(blendedColor);
 
 The function throws an error if:
 - The \`colorWeights\` array is empty.
-- Any \`color\` in the \`colorWeights\` array is in an invalid format.
 - Any \`weight\` in the \`colorWeights\` array is not a positive number.
 - The sum of the weights is zero or negative.
+
+Invalid color formats are handled gracefully by using white as a fallback.
 
 \`\`\`typescript
 try {
@@ -69,8 +70,9 @@ try {
   ];
 
   const blendedColor = blendMultipleColors(colors);
+  console.log(blendedColor); // Uses white as fallback for invalid color
 } catch (error) {
-  console.error(error); // Output: Error: Invalid color format for color: invalidColor
+  console.error(error); // Output: Error for empty array or invalid weights
 }
 
 try {

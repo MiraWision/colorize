@@ -17,11 +17,7 @@ const FunctionGenerateSteppedGradientPage: React.FC<Props> = ({}) => {
   const [colorToGradientTwo, setColorToGradientTwo] = useState(randomColor());
   const [stepsForGradient, setStepsForGradient] = useState(6);
   const steppedGradient = useMemo<string[]>(() => {
-    try {
-      return generateSteppedGradient(colorToGradientOne, colorToGradientTwo, stepsForGradient);
-    } catch (e) {
-      return [];
-    }
+    return generateSteppedGradient(colorToGradientOne, colorToGradientTwo, stepsForGradient);
   }, [colorToGradientOne, colorToGradientTwo, stepsForGradient]);
   
   return (

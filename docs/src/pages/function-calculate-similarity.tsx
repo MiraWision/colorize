@@ -14,11 +14,7 @@ const FunctionCalculateSimilarityPage: React.FC<Props> = ({}) => {
   const [color2, setColor2] = useState(randomColor());
   
   const similarity = useMemo(() => {
-    try {
-      return calculateSimilarity(color1, color2).toFixed(2) + '%';
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return calculateSimilarity(color1, color2).toFixed(2) + '%';
   }, [color1, color2]);
 
   return (

@@ -16,11 +16,7 @@ const FunctionAdjustBrightnessPage: React.FC<Props> = ({}) => {
   const [colorToAdjustBrightness, setColorToAdjustBrightness] = useState(randomColor());
   const [brightnessLevel, setBrightnessLevel] = useState(getRandomNumber(-50, 50, 1));
   const adjustedBrightnessColor = useMemo(() => {
-    try {
-      return adjustBrightness(colorToAdjustBrightness, brightnessLevel);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return adjustBrightness(colorToAdjustBrightness, brightnessLevel);
   }, [colorToAdjustBrightness, brightnessLevel]);
   
   return (

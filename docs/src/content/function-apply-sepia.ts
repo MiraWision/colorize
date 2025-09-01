@@ -20,18 +20,15 @@ console.log(sepiaColor);
 // Output: "rgb(192, 171, 123)" - the sepia-toned color
 \`\`\`
 
-### Error Handling
+### Handling Invalid Color Formats
 
-The function throws an error if the input color is in an invalid format.
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const color = "invalidColor";
+const color = "invalidColor";
   
-  const sepiaColor = applySepia(color);
-} catch (error) {
-  console.error(error); // Output: Error: Invalid color format
-}
+const sepiaColor = applySepia(color);
+console.log(sepiaColor); // Uses white as fallback and applies sepia effect
 \`\`\`
 `;
 

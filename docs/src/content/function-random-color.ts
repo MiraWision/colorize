@@ -35,16 +35,13 @@ console.log(color);
 // Output: "hsl(240, 100%, 50%)" - a random color in HSL format
 \`\`\`
 
-### Error Handling
+### Handling Invalid Color Formats
 
-The function throws an error if the input format is not supported.
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const color = randomColor('unsupportedFormat');
-} catch (error) {
-  console.error(error); // Output: Error: Invalid color format
-}
+const color = randomColor('unsupportedFormat');
+console.log(color); // Uses white as fallback in the specified format
 \`\`\`
 `;
 

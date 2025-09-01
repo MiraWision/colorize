@@ -16,11 +16,7 @@ const FunctionTintPage: React.FC<Props> = ({}) => {
   const [colorToTint, setColorToTint] = useState(randomColor());
   const [tintPercentage, setTintPercentage] = useState(getRandomNumber(0.05, 0.95, 0.05));
   const tintedColor = useMemo(() => {
-    try {
-      return tint(colorToTint, tintPercentage);
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return tint(colorToTint, tintPercentage);
   }, [colorToTint, tintPercentage]);
 
   return (

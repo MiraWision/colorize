@@ -13,11 +13,7 @@ interface Props {
 const FunctionGetTemperaturePage: React.FC<Props> = ({}) => {
   const [colorToGetTemperature, setColorToGetTemperature] = useState(randomColor());
   const temperature = useMemo(() => {
-    try {
-      return Math.round(getTemperature(colorToGetTemperature));
-    } catch (e) {
-      return 'Invalid color format';
-    }
+    return Math.round(getTemperature(colorToGetTemperature));
   }, [colorToGetTemperature]);
 
   return (
@@ -32,7 +28,7 @@ const FunctionGetTemperaturePage: React.FC<Props> = ({}) => {
           onChange={(e) => setColorToGetTemperature(e.target.value)}
         />
 
-        <Result>{temperature !== 'Invalid color format' ? `${temperature}K` : temperature}</Result>
+        <Result>{`${temperature}K`}</Result>
       </Row>
       
       <Markdown markdownText={content} />

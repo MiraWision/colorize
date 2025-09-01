@@ -18,15 +18,13 @@ const luminance = getLuminance('#FF0000');
 console.log(luminance); // Outputs the luminance of red.
 \`\`\`
 
-### Handling an invalid color format
+### Handling invalid color formats
+
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const luminance = getLuminance('invalidColor');
-  console.log(luminance);
-} catch (error) {
-  console.error(error); // Outputs the error message
-}
+const luminance = getLuminance('invalidColor');
+console.log(luminance); // Outputs the luminance of white (fallback)
 \`\`\`
 `;
 

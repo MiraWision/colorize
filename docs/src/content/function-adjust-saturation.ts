@@ -34,19 +34,16 @@ console.log(lessVividColor);
 // Output: "hsl(0, 50%, 50%)" - a less vivid red
 \`\`\`
 
-### Error Handling
+### Handling Invalid Color Formats
 
-The function throws an error if the input color is in an invalid format.
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const color = "invalidColor";
-  const amount = 20;
+const color = "invalidColor";
+const amount = 20;
   
-  const adjustedColor = adjustSaturation(color, amount);
-} catch (error) {
-  console.error(error); // Output: Error: Invalid color format
-}
+const adjustedColor = adjustSaturation(color, amount);
+console.log(adjustedColor); // Uses white as fallback and adjusts its saturation
 \`\`\`
 `;
 

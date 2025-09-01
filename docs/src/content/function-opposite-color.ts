@@ -21,18 +21,15 @@ console.log(opposite);
 // Output: "#db9834" - an orange color, which is the opposite of blue
 \`\`\`
 
-### Error Handling
+### Handling Invalid Color Formats
 
-The function throws an error if the input color is in an invalid format.
+The function handles invalid color formats gracefully by using white as a fallback.
 
 \`\`\`typescript
-try {
-  const color = "invalidColor";
+const color = "invalidColor";
   
-  const opposite = oppositeColor(color);
-} catch (error) {
-  console.error(error); // Output: Error: Invalid color format
-}
+const opposite = oppositeColor(color);
+console.log(opposite); // Uses white as fallback and finds its opposite
 \`\`\`
 `;
 
