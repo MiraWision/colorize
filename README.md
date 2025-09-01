@@ -36,6 +36,7 @@ A comprehensive color manipulation library for TypeScript, `@mirawision/colorize
 - **Color Lightness Detection**: Determine if a color is considered light or dark, aiding in accessibility and readability decisions.
 - **Contrast Calculation**: Calculate the contrast ratio between two colors, essential for designing accessible and legible interfaces.
 - **Color Similarity Calculation**: Calculate the similarity percentage between two colors, useful for finding colors that are visually close.
+- **Color Temperature**: Convert colors to correlated color temperature (CCT) in Kelvin, useful for lighting design and color analysis.
 
 ### Supported Color Formats:
 

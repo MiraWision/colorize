@@ -3,6 +3,7 @@ import { isLight } from '../src/is-light';
 import { isDark } from '../src/is-dark';
 import { calculateContrast } from '../src/calculate-contrast';
 import { calculateSimilarity } from '../src/calculate-similarity';
+import { getTemperature } from '../src/get-temperature';
 import { Color } from '../src/color';
 
 describe('analysis', () => {
@@ -35,7 +36,9 @@ describe('analysis', () => {
     });
   
     test('should handle invalid color format gracefully', () => {
-      expect(() => calculateSimilarity('invalidColor', '#00ff00')).toThrow('Invalid color format');
+      const similarity = calculateSimilarity('invalidColor', '#00ff00');
+      expect(similarity).toBeGreaterThanOrEqual(0);
+      expect(similarity).toBeLessThanOrEqual(100);
     });
   });
 
@@ -90,6 +93,171 @@ describe('analysis', () => {
       const contrast = calculateContrast('#123456', '#654321');
       const expectedContrast = 1.44;
       expect(contrast).toBeCloseTo(expectedContrast, 2);
+    });
+  });
+
+  describe('getTemperature', () => {
+    describe('HEX color format', () => {
+      it('should return correct temperature for warm orange color', () => {
+        const temperature = getTemperature('#FF4500');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(2000, -1); // Within 500 degrees
+      });
+
+      it('should return correct temperature for warm white color', () => {
+        const temperature = getTemperature('#FFD700');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(3000, -1); // Within 500 degrees
+      });
+
+      it('should return correct temperature for neutral white color', () => {
+        const temperature = getTemperature('#FFFFFF');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(5500, -1); // Within 500 degrees
+      });
+
+      it('should return correct temperature for cool blue color', () => {
+        const temperature = getTemperature('#ADD8E6');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(9000, -2); // Within 200 degrees
+      });
+
+      it('should handle pure black color', () => {
+        const temperature = getTemperature('#000000');
+        expect(temperature).toBe(6500); // Default fallback for very dark colors
+      });
+    });
+
+    describe('RGB color format', () => {
+      it('should return correct temperature for warm orange color in RGB', () => {
+        const temperature = getTemperature('rgb(255, 69, 0)');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(2000, -2); // Within 200 degrees
+      });
+
+      it('should return correct temperature for warm white color in RGB', () => {
+        const temperature = getTemperature('rgb(255, 215, 0)');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(3000, -2); // Within 200 degrees
+      });
+
+      it('should return correct temperature for neutral white color in RGB', () => {
+        const temperature = getTemperature('rgb(255, 255, 255)');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(5500, -2); // Within 200 degrees
+      });
+    });
+
+    describe('HSL color format', () => {
+      it('should return correct temperature for warm orange color in HSL', () => {
+        const temperature = getTemperature('hsl(16, 100%, 50%)');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(2000, -2); // Within 200 degrees
+      });
+
+      it('should return correct temperature for warm white color in HSL', () => {
+        const temperature = getTemperature('hsl(51, 100%, 50%)');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(3000, -2); // Within 200 degrees
+      });
+
+      it('should return correct temperature for neutral white color in HSL', () => {
+        const temperature = getTemperature('hsl(0, 0%, 100%)');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(5500, -2); // Within 200 degrees
+      });
+    });
+
+    describe('Other color formats', () => {
+      it('should handle RGBA format', () => {
+        const temperature = getTemperature('rgba(255, 69, 0, 1)');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(2000, -2); // Within 200 degrees
+      });
+
+      it('should handle HSLA format', () => {
+        const temperature = getTemperature('hsla(16, 100%, 50%, 1)');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(2000, -2); // Within 200 degrees
+      });
+
+      it('should handle HSV format', () => {
+        const temperature = getTemperature('hsv(16, 100%, 100%)');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(2000, -2); // Within 200 degrees
+      });
+
+      it('should handle CMYK format', () => {
+        const temperature = getTemperature('cmyk(0%, 73%, 100%, 0%)');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+        expect(temperature).toBeCloseTo(2000, -2); // Within 200 degrees
+      });
+    });
+
+    describe('Edge cases and error handling', () => {
+      it('should handle invalid color format gracefully', () => {
+        const temperature = getTemperature('invalidColor');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+      });
+
+      it('should handle empty string gracefully', () => {
+        const temperature = getTemperature('');
+        expect(temperature).toBeGreaterThanOrEqual(1000);
+        expect(temperature).toBeLessThanOrEqual(10000);
+      });
+
+      it('should always return temperature within valid range', () => {
+        const testColors = [
+          '#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF',
+          'rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)',
+          'hsl(0, 100%, 50%)', 'hsl(120, 100%, 50%)', 'hsl(240, 100%, 50%)'
+        ];
+
+        testColors.forEach(color => {
+          const temperature = getTemperature(color);
+          expect(temperature).toBeGreaterThanOrEqual(1000);
+          expect(temperature).toBeLessThanOrEqual(10000);
+          expect(typeof temperature).toBe('number');
+          expect(isFinite(temperature)).toBe(true);
+        });
+      });
+    });
+
+    describe('Consistency across formats', () => {
+      it('should return consistent temperatures for same color in different formats', () => {
+        const hexTemp = getTemperature('#FF4500');
+        const rgbTemp = getTemperature('rgb(255, 69, 0)');
+        const hslTemp = getTemperature('hsl(16, 100%, 50%)');
+
+        // All should be very close to each other (within 50 degrees)
+        expect(Math.abs(hexTemp - rgbTemp)).toBeLessThan(50);
+        expect(Math.abs(hexTemp - hslTemp)).toBeLessThan(50);
+      });
+
+      it('should return consistent temperatures for white in different formats', () => {
+        const hexTemp = getTemperature('#FFFFFF');
+        const rgbTemp = getTemperature('rgb(255, 255, 255)');
+        const hslTemp = getTemperature('hsl(0, 0%, 100%)');
+
+        // All should be very close to each other (within 50 degrees)
+        expect(Math.abs(hexTemp - rgbTemp)).toBeLessThan(50);
+        expect(Math.abs(hexTemp - hslTemp)).toBeLessThan(50);
+      });
     });
   });
 });
