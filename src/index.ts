@@ -15,6 +15,7 @@ export * from './generate-multi-stepped-gradient';
 export * from './generate-stepped-gradient';
 export * from './get-color-format';
 export * from './get-luminance';
+export * from './get-temperature';
 export * from './invert-color';
 export * from './is-dark';
 export * from './is-light';

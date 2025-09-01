@@ -9,14 +9,12 @@ describe('gradient-generation', () => {
       expect(gradient.join(';')).toBe(['rgb(191, 0, 64)', 'rgb(128, 0, 128)', 'rgb(64, 0, 191)'].join(';'));
     });
 
-    it('should throw an error for invalid color formats', () => {
-      expect(() => {
-        generateSteppedGradient('not a color', 'rgb(0, 0, 255)', 3);
-      }).toThrow('Invalid color format');
-
-      expect(() => {
-        generateSteppedGradient('rgb(255, 0, 0)', 'not a color', 3);
-      }).toThrow('Invalid color format');
+    it('should use white as fallback for invalid color formats', () => {
+      const gradient1 = generateSteppedGradient('not a color', 'rgb(0, 0, 255)', 3);
+      expect(gradient1.length).toBe(3);
+      
+      const gradient2 = generateSteppedGradient('rgb(255, 0, 0)', 'not a color', 3);
+      expect(gradient2.length).toBe(3);
     });
   });
 

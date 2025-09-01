@@ -8,9 +8,11 @@ import { ColorFormat, HSL, HSLA, RGB, RGBA } from './types';
  * The function supports conversion to RGB, RGBA, HSL, or HSLA format.
  * 
  * @param {string} color - The color string to parse.
+ *                          If an invalid color format is provided, white (#FFFFFF) will be used as a fallback.
  * @param {ColorFormat.RGB | ColorFormat.RGBA | ColorFormat.HSL | ColorFormat.HSLA} format - The desired format for the output.
  * 
  * @returns {RGB | RGBA | HSL | HSLA} An object containing the numerical values of the color components.
+ *                                     If the input color format was invalid, returns white color values in the specified format.
  */
 const parseColorNumbers = (color: string, format: ColorFormat.RGB | ColorFormat.RGBA | ColorFormat.HSL | ColorFormat.HSLA): RGB | RGBA | HSL | HSLA => {
   if (![ColorFormat.RGB, ColorFormat.RGBA, ColorFormat.HSL, ColorFormat.HSLA].some((colorFormat) => colorFormat === format)) {
@@ -19,12 +21,11 @@ const parseColorNumbers = (color: string, format: ColorFormat.RGB | ColorFormat.
   
   const colorFormat = getColorFormat(color);
 
-  if (!colorFormat) {
-    throw new Error('Invalid color format');
-  }
+  // Use white as fallback if color format is invalid
+  const validColor = colorFormat ? color : '#FFFFFF';
 
   
-  let convertedColor = convertColor(color, format);
+  let convertedColor = convertColor(validColor, format);
   let matches = convertedColor.match(/\d+(\.\d+)?/g);
 
   if (!matches) {

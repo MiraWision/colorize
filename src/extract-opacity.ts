@@ -8,20 +8,22 @@ import { ColorFormat } from './types';
  * Supports HEXA, RGBA, and HSLA color formats.
  * 
  * @param {string} color - The color string to extract opacity from.
+ *                          If an invalid color format is provided, white (#FFFFFF) will be used as a fallback.
  * 
  * @returns {{ color: string, opacity: number }} An object containing the color without opacity and the opacity value.
- * 
- * @throws {Error} - If the input color is in an unrecognized or invalid format, an error is thrown.
+ *                                               If the input color format was invalid, returns white with opacity 1.
  * 
  * Example usage:
  * extractOpacity('#ff000080'); // Returns { color: "#ff0000", opacity: 0.5 }.
+ * extractOpacity('invalidColor'); // Returns { color: "#FFFFFF", opacity: 1 }.
  */
 const extractOpacity = (color: string): { color: string; opacity: number } => {
   const colorFormat = getColorFormat(color);
   let opacity = 1;
 
+  // Use white as fallback if color format is invalid
   if (!colorFormat) {
-    throw new Error('Invalid color format');
+    return { color: '#FFFFFF', opacity: 1 };
   }
 
   switch (colorFormat) {

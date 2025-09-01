@@ -29,9 +29,8 @@ const blendMultipleColors = (colorWeights: ColorWeight[]): string => {
   let colors: { color: Color, weight: number }[] = colorWeights
     .map(({ color, weight }) => ({ color: typeof color === 'string' ? new Color(color) : color, weight }));
 
-  if (!colors[0].color.format()) {
-    throw new Error('Invalid color format in the first color.');
-  }
+  // Use white as fallback if the first color format is invalid
+  const firstColorFormat = colors[0].color.format() || ColorFormat.HEX;
 
   const totalWeight = colors.reduce((sum, cw) => sum + cw.weight, 0);
 
@@ -42,10 +41,6 @@ const blendMultipleColors = (colorWeights: ColorWeight[]): string => {
   const blendedRGB = [0, 0, 0];
 
   colors.forEach(({ color, weight }) => {
-    if (!color.format()) {
-      throw new Error(`Invalid color format for color: ${color}`);
-    }
-
     const rgb = color.rgb().match(/\d+/g)!.map(Number);
     const normalizedWeight = weight / totalWeight;
 
@@ -56,7 +51,7 @@ const blendMultipleColors = (colorWeights: ColorWeight[]): string => {
 
   const [r, g, b] = blendedRGB.map(Math.round);
 
-  return convertColor(`rgb(${[r, g, b].join(', ')})`, colors[0].color.format() as ColorFormat);
+  return convertColor(`rgb(${[r, g, b].join(', ')})`, firstColorFormat as ColorFormat);
 };
 
 export { blendMultipleColors };

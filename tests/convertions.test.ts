@@ -147,10 +147,9 @@ describe('convertions', () => {
       expect(opacity).toBe(0.5);
     });
 
-    it('should throw an error for invalid color format', () => {
-      expect(() => {
-        extractOpacity('invalidColor');
-      }).toThrow('Invalid color format');
+    it('should return white as fallback for invalid color format', () => {
+      const result = extractOpacity('invalidColor');
+      expect(result).toEqual({ color: '#FFFFFF', opacity: 1 });
     });
   });
 
@@ -175,10 +174,9 @@ describe('convertions', () => {
       expect(result).toEqual({ h: 30, s: 100, l: 50, a: 0.5 });
     });
   
-    it('should throw an error for invalid color format', () => {
-      expect(() => {
-        parseColorNumbers('invalidColor', ColorFormat.RGB);
-      }).toThrow('Invalid color format');
+    it('should return white values as fallback for invalid color format', () => {
+      const result = parseColorNumbers('invalidColor', ColorFormat.RGB);
+      expect(result).toEqual({ r: 255, g: 255, b: 255 });
     });
   
     it('should throw an error for invalid format specified', () => {
@@ -379,10 +377,9 @@ describe('convertions', () => {
       expect(result).toBe(color);
     });
     
-    it('should throw an error for invalid color format', () => {
-      expect(() => {
-        convertColor('invalid color', ColorFormat.HEX);
-      }).toThrow('Invalid color format');
+    it('should return white as fallback for invalid color format', () => {
+      const result = convertColor('invalid color', ColorFormat.HEX);
+      expect(result).toBe('#FFFFFF');
     });
   });
 });
