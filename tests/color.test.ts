@@ -111,6 +111,16 @@ describe('Color Class', () => {
       expect(color.get()).toBe('#3498db');
     });
 
+    test('should handle brightness adjustment for colors that convert to hue 360', () => {
+      // Test the specific edge case where #ae0001 converts to hsl(360, 100%, 34%)
+      const redColor = new Color('#ae0001');
+      expect(redColor.withBrightness(10)).toBe('#e00000');
+      expect(redColor.withBrightness(-10)).toBe('#7a0000');
+      
+      // Ensure the original color is not modified
+      expect(redColor.get()).toBe('#ae0001');
+    });
+
     test('should apply and return new saturation', () => {
       expect(color.applySaturation(-20)).toBe('#4b93c3');
       expect(color.get()).toBe('#4b93c3');

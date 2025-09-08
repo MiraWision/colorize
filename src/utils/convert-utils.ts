@@ -56,6 +56,8 @@ const hslToRGBA = (color: string): string => {
     r = x; g = 0; b = c;
   } else if (300 <= h && h < 360) {
     r = c; g = 0; b = x;
+  } else if (h === 360) {
+    r = c; g = 0; b = x;
   }
 
   r = Math.round((r + m) * 255);
@@ -91,6 +93,8 @@ const hslaToRGBA = (color: string): string => {
   } else if (240 <= h && h < 300) {
     r = x; g = 0; b = c;
   } else if (300 <= h && h < 360) {
+    r = c; g = 0; b = x;
+  } else if (h === 360) {
     r = c; g = 0; b = x;
   }
 
@@ -230,7 +234,7 @@ const rgbaToHSL = (rgba: string): string => {
     h /= 6;
   }
 
-  return `hsl(${Math.round(h * 360)}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
+  return `hsl(${Math.round(h * 360) % 360}, ${Math.round(s * 100)}%, ${Math.round(l * 100)}%)`;
 };
 
 const rgbaToHSLA = (rgba: string): string => {

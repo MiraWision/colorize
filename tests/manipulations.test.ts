@@ -108,6 +108,20 @@ describe('manipulations', () => {
       expect(tooBright).toBe('hsl(120, 50%, 100%)');
     });
 
+    it('should handle colors that convert to hue 360 correctly', () => {
+      // This test specifically covers the bug where #ae0001 converts to hsl(360, 100%, 34%)
+      // and was previously returning black due to hue 360 not being handled properly
+      const color = '#ae0001';
+      const brighter = adjustBrightness(color, 10);
+      const darker = adjustBrightness(color, -10);
+      
+      // Should return proper red colors, not black
+      expect(brighter).toBe('#e00000');
+      expect(darker).toBe('#7a0000');
+      expect(brighter).not.toBe('#000000');
+      expect(darker).not.toBe('#000000');
+    });
+
     it('should use white as fallback for invalid color formats', () => {
       const result = adjustBrightness('not a color', 20);
       expect(result).toBeDefined();
